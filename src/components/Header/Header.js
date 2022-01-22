@@ -4,18 +4,19 @@ import { useState } from 'react';
 
 function Header() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  // const [isLightTheme, setIsLightTheme] = useState(false);
 
   const toggleMobileNavMenu = () => {
     setIsMobileNavOpen(!isMobileNavOpen);
   };
 
   return (
-    <header className="header">
+    <header className={isMobileNavOpen ? 'header header_open' : 'header'}>
       <div className="header__mobile-container">
         <p className="header__logo">NewsExplorer</p>
         <button
           type="button"
-          className="header__menu"
+          className={isMobileNavOpen ? 'header__menu header__menu_open' : 'header__menu'}
           onClick={toggleMobileNavMenu}
         />
       </div>

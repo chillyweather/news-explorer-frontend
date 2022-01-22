@@ -113,7 +113,10 @@
     padding: 0;
     flex-direction: column;
     box-shadow: none;
-    background-color: #1A1B22;
+  }
+
+  .header_open {
+    background-color: #1a1b22;
     border-radius: 0 0 16px 16px;
   }
 

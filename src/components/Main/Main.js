@@ -1,7 +1,11 @@
+import About from '../About/About';
+import SearchForm from '../SearchForm/SearchForm';
+
 function Main() {
   return (
     <div className="Main">
-      <p>Here will be something</p>
+      <SearchForm />
+      <About />
     </div>
   );
 }

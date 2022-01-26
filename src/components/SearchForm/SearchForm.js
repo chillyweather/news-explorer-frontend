@@ -6,7 +6,7 @@ function SearchForm() {
         Find the latest news on any topic and save them in your personal account.
       </p>
       <div className="search">
-        <input type="text" className="search-field" />
+        <input type="text" className="search-field" placeholder="Enter topic" />
         <button className="search-button" type="submit">
           Search
         </button>

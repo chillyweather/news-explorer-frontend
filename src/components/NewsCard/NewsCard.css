@@ -1,0 +1,131 @@
+.newscard {
+  position: relative;
+  background-color: white;
+  max-width: 400px;
+  height: 576px;
+  border-radius: 15px;
+}
+
+.newscard__image {
+  height: 272px;
+  border-radius: 15px 15px 0 0;
+  background: no-repeat center
+    url(https://images.unsplash.com/photo-1611056083634-5cac142017ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80);
+  background-size: cover;
+}
+
+.newscard__tag {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  height: 40px;
+  width: fit-content;
+  max-width: 40%;
+  border-radius: 8px;
+}
+
+.newscard__tag p {
+  margin: auto;
+  padding: 0 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.newscard__add-remove-tip {
+  position: absolute;
+  top: 24px;
+  right: 69px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  height: 40px;
+  width: fit-content;
+  /* max-width: 40%; */
+  border-radius: 8px;
+}
+
+.newscard__add-remove-tip p {
+  margin: auto;
+  padding: 0 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.newscard__add-remove-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  height: 40px;
+  width: 40px;
+  background-image: url(../../images/svg/delete-active.svg);
+  cursor: pointer;
+}
+
+.newscard__content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.newscard__date {
+  margin: 0;
+  color: rgba(182, 188, 191, 1);
+  font-family: Source Sans Pro, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.newscard__title {
+  margin: 12px 0 16px;
+  height: 60px;
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 30px;
+  color: #1a1b22;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.newscard__text {
+  margin: 0;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1a1b22;
+  max-height: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.newscard__source {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #b6bcbf;
+}

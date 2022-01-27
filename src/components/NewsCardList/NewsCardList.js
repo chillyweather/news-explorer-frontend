@@ -4,6 +4,7 @@ function NewsCardList() {
   return (
     <section className="newsCardList__container">
       <NewsCard />
+      <NewsCard />
     </section>
   );
 }

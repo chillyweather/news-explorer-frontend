@@ -1,0 +1,38 @@
+.notFound {
+  padding: 80px 0 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notFound__icon {
+  width: 96px;
+  height: 96px;
+  background-image: url(../../images/svg/not-found_v1.svg);
+  margin-bottom: 24px;
+}
+
+.notFound__title {
+  margin: 0;
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 30px;
+  text-align: center;
+  color: #1a1b22;
+}
+
+.notFound__text {
+  margin: 16px 0 0;
+  box-sizing: border-box;
+  padding: 0 50px;
+  max-width: 356px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #b6bcbf;
+}

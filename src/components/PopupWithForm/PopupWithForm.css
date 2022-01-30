@@ -1,0 +1,47 @@
+.modal {
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #000000;
+  opacity: 0.5;
+}
+
+.popup {
+  position: relative;
+  width: 430px;
+  /* min-height: 380px; */
+  background-color: white;
+  border-radius: 16px;
+  padding: 34px 36px;
+  z-index: 10;
+}
+
+.popup__close-button {
+  position: absolute;
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  background-image: url(../../images/svg/close.svg);
+  top: -46px;
+  right: -46px;
+  cursor: pointer;
+}
+
+.modal-active {
+  visibility: visible;
+}

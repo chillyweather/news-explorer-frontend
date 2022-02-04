@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable prettier/prettier */
 import { useState } from 'react';
 
-function Header() {
+function Header({ togglePopup }) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   // const [isLightTheme, setIsLightTheme] = useState(false);
 
@@ -30,7 +31,11 @@ function Header() {
         >
           Saved Articles
         </button>
-        <button type="submit" className="header__button header__login-button">
+        <button
+          type="submit"
+          className="header__button header__login-button"
+          onClick={togglePopup}
+        >
           Sign In
         </button>
       </div>

@@ -5,30 +5,42 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
+// import Popup from '../Popup/Popup';
+import SignUpPopup from '../SignUpPopup/SignUpPopup';
 
 function App() {
+  // const [isFormPopupOpen, setIsFormPopupOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(true);
+  // const [isResultsPopupOpen, setIsResultsPopupOpen] = useState(false);
+
   const [isRegistered, setIsRegistered] = useState(false);
 
-  const toggleRegistered = () => {
-    setIsRegistered(!isRegistered);
+  const closeAllPopups = () => {
+    setIsPopupOpen(false);
+    // setIsResultsPopupOpen(false);
+    // setIsFormPopupOpen(false);
   };
 
   const togglePopup = () => {
-    setIsPopupOpen(!isPopupOpen);
+    setIsPopupOpen(true);
   };
 
   return (
     <div className="page">
-      <Header />
+      <Header
+        togglePopup={togglePopup}
+      />
       <Main />
       <Footer />
       <PopupWithForm
+        closePopups={closeAllPopups}
         isOpen={isPopupOpen}
-        togglePopup={togglePopup}
         isRegistered={isRegistered}
-        toggleRegistered={toggleRegistered}
-      />
+        toggleRegistered={setIsRegistered}
+      >
+
+        <SignUpPopup />
+      </PopupWithForm>
     </div>
   );
 }

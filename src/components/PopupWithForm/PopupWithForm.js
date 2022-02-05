@@ -1,22 +1,30 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
+
+import { useEffect, useRef } from 'react';
+
 /* eslint-disable jsx-a11y/control-has-associated-label */
 function PopupWithForm({ isOpen, closePopups, children }) {
-  // const title = 'Registration successfully completed!';
+  const popupRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener('mousedown', (e) => {
+      if (!popupRef.current.contains(e.target)) {
+        closePopups();
+      }
+    });
+  });
+
   return (
     <div className={isOpen ? 'modal modal-active' : 'modal'}>
       <div className="background" />
-      <div className="popup">
+      <div ref={popupRef} className="popup">
         <button
           type="button"
           onClick={closePopups}
           className="popup__close-button"
         />
         {children}
-        {/* <h2 className="popup__title">{title}</h2>
-        <button className="popup__choose-form-button" type="button">
-          Sign In
-        </button> */}
       </div>
     </div>
   );

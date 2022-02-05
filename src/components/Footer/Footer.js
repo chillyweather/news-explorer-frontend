@@ -2,7 +2,7 @@
 function Footer() {
   return (
     <div className="footer">
-      <p className="copyright">© 2020 Supersite, Powered by News API</p>
+      <p className="copyright">© 2022 Dmitri Dmitriev</p>
       <div className="footer__nav-container">
         <ul className="footer__navigation">
           <li className="footer__navigation-item">

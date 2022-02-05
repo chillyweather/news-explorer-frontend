@@ -10,10 +10,11 @@
 @import url(./components/NewsCard/NewsCard.css);
 @import url(./components/NewsCardList/NewsCardList.css);
 @import url(./components/PopupWithForm/PopupWithForm.css);
-@import url(./components/Preloader/Preloader.css);
+@import url(./components/Preloader/preloader.css);
 @import url(./components/SavedNews/SavedNews.css);
 @import url(./components/SavedNewsHeader/SavedNewsHeader.css);
 @import url(./components/SearchForm/SearchForm.css);
 @import url(./components/NotFound/NotFound.css);
 @import url(./components/SignInPopup/SignInPopup.css);
 @import url(./components/SignUpPopup/SignUpPopup.css);
+@import url(./components/SuccessPopup/SuccessPopup.css);

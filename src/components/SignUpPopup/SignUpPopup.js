@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import { useState } from 'react';
-import validator from 'validator';
+import { checkEmail, checkPassword, checkUsername } from '../../utils/inputValidation';
 
 /* eslint-disable react/prop-types */
 function SignUpPopup({ name, handleRegister }) {
@@ -23,43 +24,6 @@ function SignUpPopup({ name, handleRegister }) {
     e.preventDefault();
     handleRegister(email, password, username);
   };
-
-  function checkEmail(mail) {
-    if (!mail) {
-      return <span className="input-error input-error-active">Email is required</span>;
-    }
-    if (!validator.isEmail(mail)) {
-      return <span className="input-error input-error-active">Invalid email</span>;
-    }
-    return <span className="input-error" />;
-  }
-
-  // eslint-disable-next-line no-shadow
-  // function inputsValidation(email, password, username) {
-  //   const errors = {};
-
-  //   if (!email) {
-  //     errors.email = 'Email is required';
-  //   } else if (!validator.isEmail(email)) {
-  //     errors.email = 'Invalid email';
-  //   }
-
-  //   if (!password) {
-  //     errors.password = 'Password is a required';
-  //   } else if (!validator.isStrongPassword(password, { minSymbols: 6 })) {
-  //     errors.password = 'Password must be at least 6 characters';
-  //   }
-
-  //   if (!username) {
-  //     errors.username = 'Username is a required';
-  //   } else if (username.length < 5) {
-  //     errors.username = 'Username must be at least 6 characters';
-  //   }
-
-  //   return errors;
-  // }
-
-  // inputsValidation();
 
   return (
     <>
@@ -89,7 +53,7 @@ function SignUpPopup({ name, handleRegister }) {
             required
             value={password}
           />
-          <span className="input-error input-error-active">Invalid Password</span>
+          {checkPassword(password)}
         </label>
         <label className="form__label form__label_username" htmlFor="register-username">
           Username
@@ -103,9 +67,7 @@ function SignUpPopup({ name, handleRegister }) {
             value={username}
           />
         </label>
-        <span className="input-error input-error-active input-error-username">
-          This username is not available
-        </span>
+        {checkUsername(username)}
         <button type="submit" className="form__submit-button">
           Sign Up
         </button>

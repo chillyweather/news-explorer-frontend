@@ -18,6 +18,10 @@
   /* border: 1px solid greenyellow; */
 }
 
+a {
+  text-decoration: none;
+}
+
 .header__mobile-container {
   height: 80px;
   display: flex;
@@ -59,8 +63,12 @@
   line-height: 24px;
 }
 
+.header__logo_dark {
+  color: #1a1b22;
+}
+
 .header_dark {
-  color: rgba(26, 27, 34, 1);
+  box-shadow: inset 0px -1px 0px #D1D2D6;
 }
 
 .header__button {
@@ -75,6 +83,10 @@
   font-size: 18px;
   line-height: 24px;
   cursor: pointer;
+}
+
+.header__button_dark {
+  color:rgba(26, 27, 34, 1)
 }
 
 .header__login-button {
@@ -94,6 +106,7 @@
 
 .header__nav-button_active {
   border-bottom: 3px solid white;
+  margin-bottom: -3px;
 }
 
 .header__nav-button_dark {

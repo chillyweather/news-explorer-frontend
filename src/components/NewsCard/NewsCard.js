@@ -1,4 +1,5 @@
-function NewsCard() {
+/* eslint-disable react/prop-types */
+function NewsCard({ isCardSaved }) {
   return (
     <article className="newscard">
       <div className="newscard__image" />
@@ -6,9 +7,9 @@ function NewsCard() {
         <p>Nature</p>
       </div>
       <div className="newscard__add-remove-tip">
-        <p>Remove saved</p>
+        <p>{isCardSaved ? 'Remove saved' : 'Sign In to save articles'}</p>
       </div>
-      <div className="newscard__add-remove-button" />
+      <div className={isCardSaved ? 'newscard__save-button' : 'newscard__remove-button'} />
       <div className="newscard__content">
         <p className="newscard__date">February 19, 2019</p>
         <h2 className="newscard__title">Nature makes you better</h2>

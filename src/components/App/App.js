@@ -1,36 +1,108 @@
 /* eslint-disable prettier/prettier */
 import './App.css';
 import { useState } from 'react/cjs/react.development';
+import { Routes, Route } from 'react-router-dom';
+
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
-// import Popup from '../Popup/Popup';
 import SignUpPopup from '../SignUpPopup/SignUpPopup';
+import SignInPopup from '../SignInPopup/SignInPopup';
+import SuccessPopup from '../SuccessPopup/SuccessPopup';
+import FailurePopup from '../../FailurePopup/FailurePopup';
+import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import SavedNews from '../SavedNews/SavedNews';
+
+import useKeypress from '../../utils/useKeypress';
 
 function App() {
-  // const [isFormPopupOpen, setIsFormPopupOpen] = useState(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(true);
-  // const [isResultsPopupOpen, setIsResultsPopupOpen] = useState(false);
+  // popup
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const [isRegistered, setIsRegistered] = useState(false);
+  // choose popup content
+  const [isSignInPopupOpen, setIsSignInPopupOpen] = useState(false);
+  const [isSignUpPopupOpen, setIsSignUpPopupOpen] = useState(false);
+  const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
+  const [isFailurePopupOpen, setIsFailurePopupOpen] = useState(false);
+
+  //  registration success
+  const [isRegistered, setIsRegistered] = useState(true);
+
+  //  cards state
+  const [isCardSaved, setIsCardSaved] = useState(false);
 
   const closeAllPopups = () => {
     setIsPopupOpen(false);
-    // setIsResultsPopupOpen(false);
-    // setIsFormPopupOpen(false);
+    setIsSignInPopupOpen(false);
+    setIsSignUpPopupOpen(false);
+    setIsSuccessPopupOpen(false);
+    setIsFailurePopupOpen(false);
   };
 
-  const togglePopup = () => {
+  // escape key handling
+  useKeypress('Escape', closeAllPopups);
+
+  const toggleSignUpPopup = () => {
     setIsPopupOpen(true);
+    setIsSignUpPopupOpen(true);
   };
+
+  const toggleSignInPopup = () => {
+    setIsPopupOpen(true);
+    setIsSignInPopupOpen(true);
+  };
+
+  const toggleSaveCard = () => {
+    setIsCardSaved(true);
+  };
+
+  // const toggleDarkHeader = () => {
+  //   setIsSavedNewsOpen(true);
+  // };
 
   return (
     <div className="page">
-      <Header
-        togglePopup={togglePopup}
-      />
-      <Main />
+      <Routes>
+        <Route
+          path="/"
+          element={(
+            <>
+              <Header
+                isRegistered={isRegistered}
+                toggleSignUpPopup={toggleSignUpPopup}
+                toggleSignInPopup={toggleSignInPopup}
+                isSavedNewsOpen={false}
+              />
+              <Main
+                isCardSaved={isCardSaved}
+                toggleSaveCard={toggleSaveCard}
+              />
+            </>
+)}
+        />
+        <Route
+          path="/saved-news"
+          element={(
+            <>
+              <Header
+                isRegistered={isRegistered}
+                toggleSignUpPopup={toggleSignUpPopup}
+                toggleSignInPopup={toggleSignInPopup}
+                isSavedNewsOpen
+              />
+              <SavedNewsHeader />
+              <SavedNews
+                isCardSaved
+                toggleSaveCard={toggleSaveCard}
+                isSavedNewsOpen
+              />
+            </>
+
+          )}
+        />
+      </Routes>
+
       <Footer />
       <PopupWithForm
         closePopups={closeAllPopups}
@@ -38,8 +110,16 @@ function App() {
         isRegistered={isRegistered}
         toggleRegistered={setIsRegistered}
       >
-
+        {isSignUpPopupOpen && (
         <SignUpPopup />
+        )}
+        {isSignInPopupOpen && (
+        <SignInPopup />
+        )}
+        {isSuccessPopupOpen && (
+        <SuccessPopup />
+        )}
+        {isFailurePopupOpen && (<FailurePopup />)}
       </PopupWithForm>
     </div>
   );

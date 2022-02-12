@@ -19,6 +19,13 @@ function Header({
 
   const headerShadow = () => (isSavedNewsOpen ? ' header_dark' : '');
 
+  const toggleMobileMenuColor = () => {
+    if (isSavedNewsOpen) {
+      return 'header__menu header__menu_dark header__menu_open';
+    }
+    return 'header__menu header__menu_open';
+  };
+
   return (
     <header className={
       isMobileNavOpen
@@ -39,7 +46,9 @@ function Header({
         </Link>
         <button
           type="button"
-          className={isMobileNavOpen ? 'header__menu header__menu_open' : 'header__menu'}
+          className={isMobileNavOpen
+            ? toggleMobileMenuColor()
+            : 'header__menu'}
           onClick={toggleMobileNavMenu}
         />
       </div>

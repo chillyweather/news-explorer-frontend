@@ -2,6 +2,7 @@
   padding: 40px 104px 56px;
   display: flex;
   flex-direction: column;
+  background-color: white;
 }
 
 .saved-header__section-name {

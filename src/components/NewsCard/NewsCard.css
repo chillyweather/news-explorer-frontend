@@ -138,7 +138,7 @@
 }
 
 .newscard__source {
-  width: 192px;
+  width: calc(100% - 32px);
   position: absolute;
   bottom: 10px;
   left: 24px;
@@ -174,7 +174,12 @@
     height: 150px;
   }
 
-  .newscard__add-remove-button {
+  .newscard__save-button {
+    top: 8px;
+    right: 8px;
+  }
+
+  .newscard__remove-button {
     top: 8px;
     right: 8px;
   }
@@ -206,7 +211,7 @@
   }
 
   .newscard__source {
-    max-width: 192px;
+    width: calc(100% - 32px);
     bottom: 0px;
     left: 16px;
   }
@@ -214,7 +219,7 @@
 
 @media screen and (max-width: 600px) {
   .newscard {
-    height: 430px;
+    height: 440px;
     max-width: 100%;
   }
 
@@ -225,10 +230,19 @@
   .newscard__add-remove-tip {
   }
 
-  .newscard__add-remove-button {
+  .newscard__save-button {
+    top: 16px;
+    right: 16px;
+  }
+
+  .newscard__remove-button {
+    top: 16px;
+    right: 16px;
   }
 
   .newscard__tag {
+    top: 16px;
+    left: 16px;
   }
 
   .newscard__content {
@@ -252,8 +266,27 @@
 
   .newscard__text-container p {
     max-width: 100%;
+    margin-bottom: 8px;
   }
 
   .newscard__source {
+    width: calc(100% - 32px);
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .newscard__content {
+    box-sizing: border-box;
+  }
+  .newscard__source {
+    position: relative;
+    margin-bottom: 16px;
+    bottom: 0px;
+    left: 0px;
+  }
+
+  .newscard__source p {
+    margin: 0;
+    padding: 0;
   }
 }

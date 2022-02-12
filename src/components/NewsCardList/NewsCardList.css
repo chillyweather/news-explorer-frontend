@@ -20,6 +20,13 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 900px) {
+  .cardList__container {
+    padding: 32px 40px;
+    gap: 8px;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .cardList__container {
     max-width: 100%;

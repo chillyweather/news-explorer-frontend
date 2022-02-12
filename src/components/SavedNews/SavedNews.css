@@ -8,8 +8,15 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
   padding: 62px 102px;
+  background-color: #F5F6F7;
 }
 
+@media screen and (max-width: 900px) {
+  .saved-news__container {
+    padding: 32px 40px;
+    gap: 8px;
+  }
+}
 @media screen and (max-width: 600px) {
   .saved-news__container {
     max-width: 100%;

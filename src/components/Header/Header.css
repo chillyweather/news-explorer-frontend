@@ -69,6 +69,7 @@ a {
 
 .header_dark {
   box-shadow: inset 0px -1px 0px #D1D2D6;
+  background-color: white;
 }
 
 .header__button {
@@ -90,6 +91,7 @@ a {
 }
 
 .header__login-button {
+  min-width: 176px;
   height: 48px;
   border: 1px solid white;
   border-radius: 100px;

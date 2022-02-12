@@ -18,7 +18,7 @@
   position: absolute;
   top: 24px;
   left: 24px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -43,7 +43,7 @@
   display: none;
   position: absolute;
   right: 45px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -113,7 +113,7 @@
 .newscard__title {
   margin: 12px 0 16px;
   height: 60px;
-  font-family: Roboto Slab;
+  font-family: Roboto Slab, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 26px;
@@ -129,7 +129,7 @@
 .newscard__text-container {
   display: inline-block;
   margin: 0;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -152,7 +152,7 @@
   position: absolute;
   bottom: 10px;
   left: 24px;
-  font-family: Roboto Slab;
+  font-family: Roboto Slab, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -183,14 +183,19 @@
     height: 150px;
   }
 
-  .newscard__save-button {
+  .newscard__button-container {
     top: 8px;
     right: 8px;
   }
 
+  .newscard__save-button {
+    top: 0px;
+    right: 0px;
+  }
+
   .newscard__remove-button {
-    top: 8px;
-    right: 8px;
+    top: 0px;
+    right: 0px;
   }
 
   .newscard__tag {
@@ -240,7 +245,7 @@
 
   .newscard__button-container {
     top: 16px;
-    right: 16jpx;
+    right: 16px;
   }
 
   .newscard__save-button {

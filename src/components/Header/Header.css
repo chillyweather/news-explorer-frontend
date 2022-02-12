@@ -56,7 +56,7 @@ a {
 
 .header__logo {
   color: white;
-  font-family: Roboto Slab;
+  font-family: Roboto Slab, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
@@ -68,7 +68,7 @@ a {
 }
 
 .header_dark {
-  box-shadow: inset 0px -1px 0px #D1D2D6;
+  box-shadow: inset 0px -1px 0px #d1d2d6;
   background-color: white;
 }
 
@@ -78,7 +78,7 @@ a {
   color: white;
   background-color: transparent;
   border: none;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -87,7 +87,7 @@ a {
 }
 
 .header__button_dark {
-  color:rgba(26, 27, 34, 1)
+  color: rgba(26, 27, 34, 1);
 }
 
 .header__login-button {
@@ -119,6 +119,13 @@ a {
   border-bottom: 3px solid rgba(26, 27, 34, 1);
 }
 
+.header__mobile-nav-menu-text {
+  color: white;
+}
+.header__mobile-nav-menu-button-border {
+  border: 1px solid white;
+}
+
 @media screen and (max-width: 900px) {
   .header {
     padding: 2px 40px 0;
@@ -137,6 +144,7 @@ a {
     padding: 0;
     flex-direction: column;
     box-shadow: none;
+    min-height: 56px;
   }
 
   .header_open {

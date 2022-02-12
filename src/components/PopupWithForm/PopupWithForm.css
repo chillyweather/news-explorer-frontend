@@ -49,7 +49,7 @@
 
 .popup__title {
   margin: 0 0 22px;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
@@ -138,7 +138,7 @@
   border: none;
   width: 100%;
   height: 65px;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -162,4 +162,32 @@
   background-color: transparent;
   border: none;
   color: #2f71e5;
+}
+
+@media screen and (max-width: 600px) {
+  .modal {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .popup {
+    margin-top: 56px;
+    min-height: 100%;
+    width: 100%;
+    padding: 16px 17px;
+  }
+
+  .popup__title {
+    
+  }
+
+  .popup__close-button {
+    width: 24px;
+    height: 24px;
+    background-size:contain;
+    background-position: center;
+    right: 16px;
+    top: -40px;
+
+  }
 }

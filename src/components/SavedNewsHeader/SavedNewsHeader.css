@@ -7,7 +7,7 @@
 
 .saved-header__section-name {
   margin: 0;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -17,7 +17,7 @@
 
 .saved-header__title {
   margin: 28px 0 30px;
-  font-family: Roboto Slab;
+  font-family: Roboto Slab, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 40px;
@@ -27,7 +27,7 @@
 
 .saved-header__tag-line {
   margin: 0;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;

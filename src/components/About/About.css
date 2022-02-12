@@ -40,7 +40,7 @@
 .about__info-content {
   max-width: 600px;
   margin: 0 0 128px;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -66,13 +66,13 @@
   .about__info-title {
     margin-top: 0;
     margin-bottom: 16px;
-    font-family: Roboto Slab;
+    font-family: Roboto Slab, Arial, Helvetica, sans-serif;
     font-size: 30px;
     line-height: 40px;
   }
 
   .about__info-content {
-    font-family: Roboto;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
     font-size: 18px;
     line-height: 24px;
   }

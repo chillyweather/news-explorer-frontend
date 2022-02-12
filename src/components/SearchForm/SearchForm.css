@@ -15,7 +15,7 @@
   padding: 0;
   margin: 0;
   color: white;
-  font-family: Roboto Slab;
+  font-family: Roboto Slab, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 60px;
@@ -26,7 +26,7 @@
   max-width: 608px;
   margin: 32px 0 0;
   color: white;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -44,7 +44,7 @@
   border: none;
   border-radius: 100px;
   width: 608px;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -64,7 +64,7 @@
   margin-left: -168px;
   width: 168px;
   height: 65px;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -116,7 +116,7 @@
   }
 
   .search-form__title {
-    font-family: Roboto Slab;
+    font-family: Roboto Slab, Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 36px;

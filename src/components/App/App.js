@@ -20,6 +20,13 @@ function App() {
   // popup
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  // mobile popup
+  const [isMobilePopupOpen, setIsMobilePopupOpen] = useState(false);
+
+  const toggleMobilePopupState = () => {
+    setIsMobilePopupOpen(!isMobilePopupOpen);
+  };
+
   // choose popup content
   const [isSignInPopupOpen, setIsSignInPopupOpen] = useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = useState(false);
@@ -27,7 +34,7 @@ function App() {
   const [isFailurePopupOpen, setIsFailurePopupOpen] = useState(false);
 
   //  registration success
-  const [isRegistered, setIsRegistered] = useState(true);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   //  cards state
   const [isCardSaved, setIsCardSaved] = useState(false);
@@ -73,6 +80,8 @@ function App() {
                 toggleSignUpPopup={toggleSignUpPopup}
                 toggleSignInPopup={toggleSignInPopup}
                 isSavedNewsOpen={false}
+                isMobilePopupOpen={isMobilePopupOpen}
+                toggleMobilePopup={toggleMobilePopupState}
               />
               <Main
                 isCardSaved={isCardSaved}
@@ -109,6 +118,8 @@ function App() {
         isOpen={isPopupOpen}
         isRegistered={isRegistered}
         toggleRegistered={setIsRegistered}
+        isMobilePopupOpen={isMobilePopupOpen}
+        toggleMobilePopup={toggleMobilePopupState}
       >
         {isSignUpPopupOpen && (
         <SignUpPopup />

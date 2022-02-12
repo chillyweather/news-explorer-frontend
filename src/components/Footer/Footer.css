@@ -7,6 +7,7 @@
   height: 80px;
   padding: 30px 104px;
   color: #1a1b22;
+  background-color: white;
 }
 
 .copyright {
@@ -79,11 +80,20 @@
   border: none;
 }
 
-
 @media screen and (max-width: 900px) {
   .footer {
+    box-sizing: border-box;
+    padding: 24px 40px 18px;
+    height: 64px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer {
+    box-sizing: border-box;
     flex-direction: column-reverse;
-    padding: 0px 16px 0px;
+    padding: 20px 16px 0px;
+    height: 176px;
   }
 
   .copyright {

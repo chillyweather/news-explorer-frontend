@@ -4,12 +4,14 @@
   align-items: center;
 }
 .saved-news__container {
-  width: calc(100% - 80px);
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
   gap: 16px;
   padding: 62px 102px;
   background-color: #f5f6f7;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 900px) {

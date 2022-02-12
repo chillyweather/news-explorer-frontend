@@ -26,6 +26,7 @@
   color: #1A1B22;
   opacity: 1;
   transition: opacity ease 0.5s ;
+  margin-bottom: 80px;
 }
 
 .cardList__button:hover {
@@ -47,5 +48,6 @@
     gap: 10px;
     align-items: stretch;
     padding: 16px 24px;
+    margin-bottom: 0;
   }
 }

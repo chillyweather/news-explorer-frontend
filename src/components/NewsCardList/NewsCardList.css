@@ -18,6 +18,18 @@
   border: none;
   margin-top: 2px;
   cursor: pointer;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1A1B22;
+  opacity: 1;
+  transition: opacity ease 0.5s ;
+}
+
+.cardList__button:hover {
+  opacity: 0.9;
 }
 
 @media screen and (max-width: 900px) {

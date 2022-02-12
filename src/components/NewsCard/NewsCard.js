@@ -6,10 +6,12 @@ function NewsCard({ isCardSaved }) {
       <div className="newscard__tag">
         <p>Nature</p>
       </div>
-      <div className="newscard__add-remove-tip">
-        <p>{isCardSaved ? 'Remove saved' : 'Sign In to save articles'}</p>
+      <div className="newscard__button-container">
+        <div className="newscard__add-remove-tip">
+          <p>{isCardSaved ? 'Remove from saved' : 'Sign In to save articles'}</p>
+        </div>
+        <div className={isCardSaved ? 'newscard__remove-button' : 'newscard__save-button'} />
       </div>
-      <div className={isCardSaved ? 'newscard__save-button' : 'newscard__remove-button'} />
       <div className="newscard__content">
         <p className="newscard__date">February 19, 2019</p>
         <h2 className="newscard__title">Nature makes you better</h2>

@@ -58,8 +58,8 @@ function Header({
             type="button"
             className={
           isSavedNewsOpen
-            ? 'header__button header__nav-button header__home-button header__button_dark '
-            : 'header__button header__nav-button header__home-button header__nav-button_active'
+            ? 'header__button header__nav-button header__button_dark '
+            : 'header__button header__nav-button header__nav-button_active'
 }
           >
 
@@ -70,14 +70,16 @@ function Header({
           <button
             type="button"
             className={
-            isSavedNewsOpen
-              ? 'header__button header__nav-button header__nav-button_active header__nav-button header__articles-button header__button_dark header__nav-button_active_dark'
-              : 'header__button header__nav-button header__nav-button header__articles-button header_dark'
+          isSavedNewsOpen
+            ? 'header__button header__nav-button header__nav-button_active header__nav-button  header__button_dark header__nav-button_active_dark'
+            : 'header__button header__nav-button '
 }
           >
+
             Saved Articles
           </button>
         </Link>
+
         <button
           type="submit"
           className={isSavedNewsOpen ? 'header__button header__login-button header__login-button_dark' : 'header__button header__login-button'}

@@ -4,22 +4,24 @@
   align-items: center;
 }
 .saved-news__container {
+  width: calc(100% - 80px);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
   padding: 62px 102px;
-  background-color: #F5F6F7;
+  background-color: #f5f6f7;
 }
 
 @media screen and (max-width: 900px) {
   .saved-news__container {
+    margin-bottom: 110px;
     padding: 32px 40px;
     gap: 8px;
   }
 }
 @media screen and (max-width: 600px) {
   .saved-news__container {
-    max-width: 100%;
+    width: calc(100% - 32px);
     display: flex;
     flex-direction: column;
     gap: 10px;

@@ -1,7 +1,7 @@
 .newscard {
   position: relative;
   background-color: white;
-  max-width: 400px;
+  max-width: 100%;
   height: 576px;
   border-radius: 15px;
 }
@@ -40,44 +40,54 @@
 }
 
 .newscard__add-remove-tip {
+  display: none;
   position: absolute;
-  top: 24px;
-  right: 69px;
+  right: 45px;
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
-  display: flex;
   align-items: center;
   background-color: white;
   height: 40px;
-  width: fit-content;
-  /* max-width: 40%; */
+  /* width: fit-content; */
+  max-width: 170px;
   border-radius: 8px;
 }
 
 .newscard__add-remove-tip p {
   margin: auto;
   padding: 0 22px;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.newscard__remove-button {
+.newscard__button-container {
   position: absolute;
   top: 24px;
   right: 24px;
+  height: 40px;
+  width: 40px;
+}
+
+.newscard__remove-button {
+  position: absolute;
+  
   height: 40px;
   width: 40px;
   background-image: url(../../images/svg/delete-active.svg);
   cursor: pointer;
 }
 
+.newscard__button-container:hover .newscard__add-remove-tip {
+  display:flex;
+}
+
 .newscard__save-button {
   position: absolute;
-  top: 24px;
-  right: 24px;
+  
   height: 40px;
   width: 40px;
   background-image: url(../../images/svg/bookmark-not-saved.svg);
@@ -166,7 +176,6 @@
 
 @media screen and (max-width: 900px) {
   .newscard {
-    max-width: 224px;
     height: 420px;
   }
 
@@ -220,7 +229,6 @@
 @media screen and (max-width: 600px) {
   .newscard {
     height: 440px;
-    max-width: 100%;
   }
 
   .newscard__image {
@@ -230,14 +238,19 @@
   .newscard__add-remove-tip {
   }
 
-  .newscard__save-button {
+  .newscard__button-container {
     top: 16px;
-    right: 16px;
+    right: 16jpx;
+  }
+
+  .newscard__save-button {
+    top: 0px;
+    right: 0px;
   }
 
   .newscard__remove-button {
-    top: 16px;
-    right: 16px;
+    top: 0px;
+    right: 0px;
   }
 
   .newscard__tag {

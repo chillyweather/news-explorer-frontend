@@ -122,10 +122,16 @@ function App() {
 
       >
         {isSignUpPopupOpen && (
-        <SignUpPopup />
+          <SignUpPopup
+            closeSignUpPopup={setIsSignUpPopupOpen}
+            toggleSignInPopup={toggleSignInPopup}
+          />
         )}
         {isSignInPopupOpen && (
-        <SignInPopup />
+          <SignInPopup
+            toggleSignUpPopup={toggleSignUpPopup}
+            closeSignInPopup={setIsSignInPopupOpen}
+          />
         )}
         {isSuccessPopupOpen && (
           <SuccessPopup

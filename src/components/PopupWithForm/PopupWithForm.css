@@ -163,6 +163,7 @@
   background-color: transparent;
   border: none;
   color: #2f71e5;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {

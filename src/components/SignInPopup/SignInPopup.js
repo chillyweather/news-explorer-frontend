@@ -3,7 +3,12 @@ import { useState } from 'react';
 import { checkEmail } from '../../utils/inputValidation';
 
 /* eslint-disable react/prop-types */
-function SignInPopup({ name, handleLogin }) {
+function SignInPopup({
+  name,
+  handleLogin,
+  toggleSignUpPopup,
+  closeSignInPopup,
+}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -57,7 +62,14 @@ function SignInPopup({ name, handleLogin }) {
       </form>
       <p className="popup__choose-form-text">
         or
-        <button className="popup__choose-form-button" type="button">
+        <button
+          onClick={() => {
+            toggleSignUpPopup();
+            closeSignInPopup(false);
+          }}
+          className="popup__choose-form-button"
+          type="button"
+        >
           Sign Up
         </button>
       </p>

@@ -6,6 +6,8 @@ import { checkEmail, checkPassword, checkUsername } from '../../utils/inputValid
 function SignUpPopup({
   name,
   handleRegister,
+  closeSignUpPopup,
+  toggleSignInPopup,
   // toggleSuccessPopup,
   closePopups,
 }) {
@@ -83,7 +85,14 @@ function SignUpPopup({
       </form>
       <p className="popup__choose-form-text">
         or
-        <button className="popup__choose-form-button" type="button">
+        <button
+          onClick={() => {
+            closeSignUpPopup(false);
+            toggleSignInPopup();
+          }}
+          className="popup__choose-form-button"
+          type="button"
+        >
           Sign In
         </button>
       </p>

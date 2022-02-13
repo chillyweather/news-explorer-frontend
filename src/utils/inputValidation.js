@@ -3,17 +3,17 @@ import validator from 'validator';
 
 function checkEmail(mail) {
   if (!mail) {
-    return <span className="input-error input-error-active">Email required</span>;
+    return <span className="input-error input-error_active">Email required</span>;
   }
   if (!validator.isEmail(mail)) {
-    return <span className="input-error input-error-active">Invalid email</span>;
+    return <span className="input-error input-error_active">Invalid email</span>;
   }
   return null;
 }
 
 function checkPassword(pass) {
   if (!pass) {
-    return <span className="input-error input-error-active">Password required</span>;
+    return <span className="input-error input-error_active">Password required</span>;
   }
   if (
     !validator.isStrongPassword(pass, {
@@ -24,7 +24,7 @@ function checkPassword(pass) {
     })
   ) {
     return (
-      <span className="input-error input-error-active">
+      <span className="input-error input-error_active">
         At least 8 characters, capital letter, number and a symbol
       </span>
     );
@@ -34,11 +34,11 @@ function checkPassword(pass) {
 
 function checkUsername(name) {
   if (!name) {
-    return <span className="input-error input-error-active input-error-username">Username required</span>;
+    return <span className="input-error input-error_active input-error-username">Username required</span>;
   }
   if (name.length < 3) {
     return (
-      <span className="input-error input-error-active input-error-username">Username must be at least 3 characters</span>
+      <span className="input-error input-error_active input-error-username">Username must be at least 3 characters</span>
     );
   }
   return <span className="input-error" />;

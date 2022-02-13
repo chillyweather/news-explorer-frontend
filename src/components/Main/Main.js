@@ -5,12 +5,12 @@ import NotFound from '../NotFound/NotFound';
 
 function Main() {
   return (
-    <div className="Main">
+    <main className="Main">
       <SearchForm />
       <NotFound />
       <NewsCardList />
       <About />
-    </div>
+    </main>
   );
 }
 

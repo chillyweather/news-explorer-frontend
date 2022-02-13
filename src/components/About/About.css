@@ -39,12 +39,16 @@
 
 .about__info-content {
   max-width: 600px;
-  margin: 0 0 128px;
+  
   font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 24px;
+}
+
+.about__info-content:last-of-type {
+  margin: 0 0 128px;
 }
 
 @media screen and (max-width: 900px) {

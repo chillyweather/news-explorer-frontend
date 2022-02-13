@@ -9,7 +9,7 @@ function Header({
   toggleSignInPopup,
   isRegistered,
   isSavedNewsOpen,
-  isMobilePopupOpen,
+  // isMobilePopupOpen,
   toggleMobilePopup,
 }) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -33,7 +33,7 @@ function Header({
 }
     >
       {/* logo */}
-      {!isMobilePopupOpen && (
+
       <div className="header__mobile-container">
         <Link to="/">
           <p className={
@@ -54,35 +54,35 @@ function Header({
           onClick={toggleMobileNavMenu}
         />
       </div>
-      )}
+
       <div className={`header__navigation ${isMobileNavOpen && 'header__navigation_open'} `}>
-        <Link to="/">
-          <button
-            type="button"
-            onClick={() => { setIsMobileNavOpen(false); }}
-            className={
-          isSavedNewsOpen
-            ? `header__button header__nav-button header__button_dark ${mobileWhiteMenuText()}`
-            : 'header__button header__nav-button header__nav-button_active'
-}
-          >
-
-            Home
-          </button>
-        </Link>
-        <Link to="/saved-news">
-          <button
-            type="button"
-            onClick={() => { setIsMobileNavOpen(false); }}
-            className={
-          isSavedNewsOpen
-            ? `header__button header__nav-button header__nav-button_active header__nav-button  header__button_dark header__nav-button_active_dark ${mobileWhiteMenuText()}` : 'header__button header__nav-button '
-}
-          >
-
-            Saved Articles
-          </button>
-        </Link>
+        <nav className="header__navigation-links">
+          <Link to="/">
+            <button
+              type="button"
+              onClick={() => { setIsMobileNavOpen(false); }}
+              className={
+            isSavedNewsOpen
+              ? `header__button header__nav-button header__button_dark ${mobileWhiteMenuText()}`
+              : 'header__button header__nav-button header__nav-button_active'
+          }
+            >
+              Home
+            </button>
+          </Link>
+          <Link to="/saved-news">
+            <button
+              type="button"
+              onClick={() => { setIsMobileNavOpen(false); }}
+              className={
+            isSavedNewsOpen
+              ? `header__button header__nav-button header__nav-button_active header__nav-button  header__button_dark header__nav-button_active_dark ${mobileWhiteMenuText()}` : 'header__button header__nav-button '
+          }
+            >
+              Saved Articles
+            </button>
+          </Link>
+        </nav>
 
         <button
           type="submit"

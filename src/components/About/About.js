@@ -12,8 +12,8 @@ function About() {
             ullamcorper faucibus laoreet. Duis eu tellus sed odio congue dapibus. Mauris id porta
             lorem. Fusce iaculis lacinia tincidunt. Suspendisse dictum ac nisl id posuere. Nunc
             fermentum rutrum vulputate. Cras mollis sollicitudin nunc, ut congue turpis porttitor
-            <br />
-            <br />
+          </p>
+          <p className="about__info-content">
             Nam a turpis vel elit varius
             molestie. Curabitur ac metus lacus. Proin blandit dui vel eleifend consectetur. 
           </p>

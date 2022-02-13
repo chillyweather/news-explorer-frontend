@@ -1,4 +1,4 @@
-.search-form__container {
+.search-form {
   background-image: url(../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.png);
   background-position: center;
   background-size: cover;
@@ -37,7 +37,7 @@
   margin-top: 88px;
 }
 
-.search-field {
+.search__field {
   box-sizing: border-box;
   padding: 24px;
   height: 64px;
@@ -55,7 +55,7 @@
   color: rgba(182, 188, 191, 1);
 }
 
-.search-button {
+.search__button {
   color: white;
   background-color: rgba(47, 113, 229, 1);
   box-sizing: border-box;
@@ -81,7 +81,7 @@
 }
 
 @media screen and (max-width: 900px) {
-  .search-field {
+  .search__field {
     width: 452px;
   }
 
@@ -96,14 +96,14 @@
     max-width: 452px;
   }
 
-  .search-button {
+  .search__button {
     width: 160px;
     margin-left: -160px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .search-form__container {
+  .search-form {
     margin-top: -56px;
     padding: 86px 16px 32px;
   }
@@ -127,12 +127,12 @@
     margin: 16px 0 0;
   }
 
-  .search-field {
+  .search__field {
     /* min-width: 288px; */
     width: 100%;
   }
 
-  .search-button {
+  .search__button {
     width: 100%;
     margin-left: 0;
   }

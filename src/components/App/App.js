@@ -119,7 +119,7 @@ function App() {
         isRegistered={isRegistered}
         toggleRegistered={setIsRegistered}
         isMobilePopupOpen={isMobilePopupOpen}
-        toggleMobilePopup={toggleMobilePopupState}
+
       >
         {isSignUpPopupOpen && (
         <SignUpPopup />
@@ -128,7 +128,10 @@ function App() {
         <SignInPopup />
         )}
         {isSuccessPopupOpen && (
-        <SuccessPopup />
+          <SuccessPopup
+            closePopups={closeAllPopups}
+            toggleSuccessPopup={setIsSuccessPopupOpen}
+          />
         )}
         {isFailurePopupOpen && (<FailurePopup />)}
       </PopupWithForm>

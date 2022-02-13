@@ -8,6 +8,7 @@
   height: 100vh;
   top: 0;
   left: 0;
+  z-index: 100;
 }
 
 .background {
@@ -62,7 +63,7 @@
   flex-direction: column;
 }
 
-.form__label {
+.popup-form__label {
   height: 62px;
   display: flex;
   flex-direction: column;
@@ -75,11 +76,11 @@
   margin-bottom: 13px;
 }
 
-.form__label_username {
+.popup-form__label_username {
   margin-bottom: 2px;
 }
 
-.form__input {
+.popup-form__input {
   margin-top: 9px;
   background-color: transparent;
   border: none;
@@ -92,18 +93,18 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.form__input::placeholder {
+.popup-form__input::placeholder {
   color: rgba(0, 0, 0, 0.2);
 }
 
-.form__input:focus {
+.popup-form__input:focus {
   opacity: 1;
   border-bottom: 1px solid rgba(0, 0, 0, 1);
 
   /* color: rgba(0, 0, 0, 0.2); */
 }
 
-.form__input:focus-visible {
+.popup-form__input:focus-visible {
   outline: none;
 }
 
@@ -124,11 +125,11 @@
   align-self: center;
 }
 
-.input-error-active {
+.input-error_active {
   visibility: visible;
 }
 
-.form__submit-button {
+.popup-form__submit-button {
   margin: 8px 0 16px;
   color: white;
   align-self: center;
@@ -175,6 +176,11 @@
     min-height: 100%;
     width: 100%;
     padding: 16px 17px;
+  }
+
+  .background {
+    opacity: 1;
+    background-image: url(../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.png);
   }
 
   .popup__title {

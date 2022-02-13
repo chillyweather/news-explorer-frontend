@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 
 /* eslint-disable jsx-a11y/control-has-associated-label */
 function PopupWithForm({
-  isOpen, closePopups, children, toggleMobilePopup,
+  isOpen, closePopups, children,
 }) {
   const popupRef = useRef();
 
@@ -24,7 +24,6 @@ function PopupWithForm({
         <button
           type="button"
           onClick={() => {
-            toggleMobilePopup();
             closePopups();
           }}
           className="popup__close-button"

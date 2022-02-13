@@ -30,9 +30,6 @@
   width: fit-content;
   max-width: 40%;
   border-radius: 8px;
-}
-
-.newscard__tag p {
   margin: auto;
   padding: 0 22px;
   overflow: hidden;
@@ -54,15 +51,13 @@
   /* width: fit-content; */
   max-width: 170px;
   border-radius: 8px;
-}
-
-.newscard__add-remove-tip p {
   margin: auto;
   padding: 0 22px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 
 .newscard__button-container {
   position: absolute;
@@ -74,7 +69,8 @@
 
 .newscard__remove-button {
   position: absolute;
-  
+  border: none;
+  background-color: transparent;
   height: 40px;
   width: 40px;
   background-image: url(../../images/svg/delete-active.svg);
@@ -82,12 +78,13 @@
 }
 
 .newscard__button-container:hover .newscard__add-remove-tip {
-  display:flex;
+  display: flex;
 }
 
 .newscard__save-button {
   position: absolute;
-  
+  border: none;
+  background-color: transparent;
   height: 40px;
   width: 40px;
   background-image: url(../../images/svg/bookmark-not-saved.svg);
@@ -129,6 +126,10 @@
 .newscard__text-container {
   display: inline-block;
   margin: 0;
+  
+}
+
+.newscard__text {
   font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -136,9 +137,6 @@
   line-height: 22px;
   color: #1a1b22;
   max-height: 110px;
-}
-
-.newscard__text-container p {
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -160,9 +158,6 @@
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: #b6bcbf;
-}
-
-.newscard__source p {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -219,7 +214,7 @@
     margin: 12px 0 10px;
   }
 
-  .newscard__text-container p {
+  .newscard__text {
     max-width: 192px;
     max-height: 88px;
   }
@@ -238,9 +233,6 @@
 
   .newscard__image {
     height: 196px;
-  }
-
-  .newscard__add-remove-tip {
   }
 
   .newscard__button-container {
@@ -263,9 +255,6 @@
     left: 16px;
   }
 
-  .newscard__content {
-  }
-
   .newscard__date {
     margin: 0;
   }
@@ -278,11 +267,7 @@
     -webkit-line-clamp: 2;
     margin: 10px 0 14px;
   }
-
-  .newscard__text-container {
-  }
-
-  .newscard__text-container p {
+  .newscard__text {
     max-width: 100%;
     margin-bottom: 8px;
   }
@@ -303,7 +288,7 @@
     left: 0px;
   }
 
-  .newscard__source p {
+  .newscard__source {
     margin: 0;
     padding: 0;
   }

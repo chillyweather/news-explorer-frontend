@@ -3,7 +3,12 @@ import { useState } from 'react';
 import { checkEmail, checkPassword, checkUsername } from '../../utils/inputValidation';
 
 /* eslint-disable react/prop-types */
-function SignUpPopup({ name, handleRegister }) {
+function SignUpPopup({
+  name,
+  handleRegister,
+  // toggleSuccessPopup,
+  closePopups,
+}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -29,10 +34,10 @@ function SignUpPopup({ name, handleRegister }) {
     <>
       <h2 className="popup__title">Sign Up</h2>
       <form className="popup__content" name={`${name}`} action="#" onSubmit={handleSubmit}>
-        <label className="form__label" htmlFor="register-email">
+        <label className="popup-form__label" htmlFor="register-email">
           Email
           <input
-            className="form__input"
+            className="popup-form__input"
             type="email"
             id="register-email"
             placeholder="Enter your email"
@@ -42,10 +47,10 @@ function SignUpPopup({ name, handleRegister }) {
           />
           {checkEmail(email)}
         </label>
-        <label className="form__label" htmlFor="register-password">
+        <label className="popup-form__label" htmlFor="register-password">
           Password
           <input
-            className="form__input"
+            className="popup-form__input"
             type="password"
             id="register-password"
             placeholder="Enter your password"
@@ -55,10 +60,10 @@ function SignUpPopup({ name, handleRegister }) {
           />
           {checkPassword(password)}
         </label>
-        <label className="form__label form__label_username" htmlFor="register-username">
+        <label className="popup-form__label popup-form__label_username" htmlFor="register-username">
           Username
           <input
-            className="form__input"
+            className="popup-form__input"
             type="text"
             id="register-username"
             placeholder="Enter your username"
@@ -68,7 +73,11 @@ function SignUpPopup({ name, handleRegister }) {
           />
         </label>
         {checkUsername(username)}
-        <button type="submit" className="form__submit-button">
+        <button
+          type="submit"
+          className="popup-form__submit-button"
+          onClick={() => closePopups()}
+        >
           Sign Up
         </button>
       </form>

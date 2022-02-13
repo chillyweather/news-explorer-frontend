@@ -24,10 +24,10 @@ function SignInPopup({ name, handleLogin }) {
     <>
       <h2 className="popup__title">Sign In</h2>
       <form className="popup__content" name={`${name}`} action="#" onSubmit={handleSubmit}>
-        <label className="form__label" htmlFor="register-email">
+        <label className="popup-form__label" htmlFor="register-email">
           Email
           <input
-            className="form__input"
+            className="popup-form__input"
             type="email"
             id="register-email"
             placeholder="Enter your email"
@@ -37,10 +37,10 @@ function SignInPopup({ name, handleLogin }) {
           />
           {checkEmail(email)}
         </label>
-        <label className="form__label" htmlFor="register-password">
+        <label className="popup-form__label" htmlFor="register-password">
           Password
           <input
-            className="form__input"
+            className="popup-form__input"
             type="password"
             id="register-password"
             placeholder="Enter your password"
@@ -51,7 +51,7 @@ function SignInPopup({ name, handleLogin }) {
           {/* {checkPassword(password)} */}
         </label>
 
-        <button type="submit" className="form__submit-button">
+        <button type="submit" className="popup-form__submit-button">
           Sign In
         </button>
       </form>

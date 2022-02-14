@@ -39,6 +39,9 @@ function App() {
   //  cards state
   const [isCardSaved, setIsCardSaved] = useState(false);
 
+  //  cards section state
+  const [isSavedNewsOpen, setIsSavedNewsOpen] = useState(false);
+
   const closeAllPopups = () => {
     setIsPopupOpen(false);
     setIsSignInPopupOpen(false);
@@ -61,7 +64,7 @@ function App() {
   };
 
   const toggleSaveCard = () => {
-    setIsCardSaved(true);
+    setIsCardSaved(!isCardSaved);
   };
 
   // const toggleDarkHeader = () => {
@@ -82,10 +85,12 @@ function App() {
                 isSavedNewsOpen={false}
                 isMobilePopupOpen={isMobilePopupOpen}
                 toggleMobilePopup={toggleMobilePopupState}
+                toggleSavedNewsOpen={setIsSavedNewsOpen}
               />
               <Main
                 isCardSaved={isCardSaved}
                 toggleSaveCard={toggleSaveCard}
+                isSavedNewsOpen={isSavedNewsOpen}
               />
             </>
 )}
@@ -98,13 +103,14 @@ function App() {
                 isRegistered={isRegistered}
                 toggleSignUpPopup={toggleSignUpPopup}
                 toggleSignInPopup={toggleSignInPopup}
+                toggleSavedNewsOpen={setIsSavedNewsOpen}
                 isSavedNewsOpen
               />
               <SavedNewsHeader />
               <SavedNews
-                isCardSaved
+                isCardSaved={isCardSaved}
                 toggleSaveCard={toggleSaveCard}
-                isSavedNewsOpen
+                isSavedNewsOpen={isSavedNewsOpen}
               />
             </>
 
@@ -119,12 +125,12 @@ function App() {
         isRegistered={isRegistered}
         toggleRegistered={setIsRegistered}
         isMobilePopupOpen={isMobilePopupOpen}
-
       >
         {isSignUpPopupOpen && (
           <SignUpPopup
             closeSignUpPopup={setIsSignUpPopupOpen}
             toggleSignInPopup={toggleSignInPopup}
+            toggleSuccessPopup={setIsSuccessPopupOpen}
           />
         )}
         {isSignInPopupOpen && (
@@ -135,7 +141,9 @@ function App() {
         )}
         {isSuccessPopupOpen && (
           <SuccessPopup
+            toggleRegistered={setIsRegistered}
             closePopups={closeAllPopups}
+            toggleSignInPopup={toggleSignInPopup}
             toggleSuccessPopup={setIsSuccessPopupOpen}
           />
         )}

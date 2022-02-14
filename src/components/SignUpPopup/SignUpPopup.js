@@ -8,8 +8,8 @@ function SignUpPopup({
   handleRegister,
   closeSignUpPopup,
   toggleSignInPopup,
-  // toggleSuccessPopup,
-  closePopups,
+  toggleSuccessPopup,
+  // closePopups,
 }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -78,7 +78,10 @@ function SignUpPopup({
         <button
           type="submit"
           className="popup-form__submit-button"
-          onClick={() => closePopups()}
+          onClick={() => {
+            closeSignUpPopup(false);
+            toggleSuccessPopup(true);
+          }}
         >
           Sign Up
         </button>

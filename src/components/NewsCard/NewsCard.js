@@ -1,6 +1,12 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/control-has-associated-label */
+
+import { useState } from 'react';
+
 /* eslint-disable react/prop-types */
-function NewsCard({ isCardSaved }) {
+function NewsCard({ isCardSaved, toggleSaveCard, isSavedNewsOpen }) {
+  const [isCardMarked, setIsCardMarked] = useState(false);
+  const isMarked = () => (isCardMarked ? 'newscard__save-button_marked' : '');
   return (
     <article className="newscard">
       <div className="newscard__image" />
@@ -9,9 +15,18 @@ function NewsCard({ isCardSaved }) {
         <p className="newscard__add-remove-tip">
           {isCardSaved ? 'Remove from saved' : 'Sign In to save articles'}
         </p>
+
         <button
           type="button"
-          className={isCardSaved ? 'newscard__remove-button' : 'newscard__save-button'}
+          className={
+            isSavedNewsOpen
+              ? 'newscard__remove-button'
+              : `newscard__save-button ${isMarked()}`
+          }
+          onClick={() => {
+            setIsCardMarked(!isCardMarked);
+            toggleSaveCard();
+          }}
         />
       </div>
       <div className="newscard__content">

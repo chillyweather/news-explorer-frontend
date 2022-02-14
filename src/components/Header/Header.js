@@ -11,6 +11,7 @@ function Header({
   isSavedNewsOpen,
   // isMobilePopupOpen,
   toggleMobilePopup,
+  toggleSavedNewsOpen,
 }) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
@@ -60,7 +61,10 @@ function Header({
           <Link to="/">
             <button
               type="button"
-              onClick={() => { setIsMobileNavOpen(false); }}
+              onClick={() => {
+                toggleSavedNewsOpen(false);
+                setIsMobileNavOpen(false);
+              }}
               className={
             isSavedNewsOpen
               ? `header__button header__nav-button header__button_dark ${mobileWhiteMenuText()}`
@@ -73,7 +77,10 @@ function Header({
           <Link to="/saved-news">
             <button
               type="button"
-              onClick={() => { setIsMobileNavOpen(false); }}
+              onClick={() => {
+                toggleSavedNewsOpen(true);
+                setIsMobileNavOpen(false);
+              }}
               className={
             isSavedNewsOpen
               ? `header__button header__nav-button header__nav-button_active header__nav-button  header__button_dark header__nav-button_active_dark ${mobileWhiteMenuText()}` : 'header__button header__nav-button '

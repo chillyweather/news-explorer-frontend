@@ -58,7 +58,6 @@
   text-overflow: ellipsis;
 }
 
-
 .newscard__button-container {
   position: absolute;
   top: 24px;
@@ -89,6 +88,18 @@
   width: 40px;
   background-image: url(../../images/svg/bookmark-not-saved.svg);
   cursor: pointer;
+}
+
+.newscard__save-button:hover {
+  background-image: url(../../images/svg/bookmark-hover.svg);
+}
+
+.newscard__save-button_marked {
+  background-image: url(../../images/svg/bookmark-saved.svg);
+}
+
+.newscard__save-button_marked:hover {
+  background-image: url(../../images/svg/bookmark-saved.svg);
 }
 
 .newscard__content {
@@ -126,7 +137,6 @@
 .newscard__text-container {
   display: inline-block;
   margin: 0;
-  
 }
 
 .newscard__text {

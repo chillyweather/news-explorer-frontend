@@ -1,4 +1,6 @@
-function SearchForm() {
+/* eslint-disable prettier/prettier */
+/* eslint-disable react/prop-types */
+function SearchForm({ setIsSearching }) {
   return (
     <section className="search-form">
       <h2 className="search-form__title">What is going on in the world?</h2>
@@ -7,7 +9,14 @@ function SearchForm() {
       </p>
       <form className="search">
         <input type="text" className="search__field" placeholder="Enter topic" />
-        <button className="search__button" type="submit">
+        <button
+          className="search__button"
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault();
+            setIsSearching(true);
+          }}
+        >
           Search
         </button>
       </form>

@@ -42,6 +42,9 @@ function App() {
   //  cards section state
   const [isSavedNewsOpen, setIsSavedNewsOpen] = useState(false);
 
+  // preloader state
+  const [isSearching, setIsSearching] = useState(false);
+
   const closeAllPopups = () => {
     setIsPopupOpen(false);
     setIsSignInPopupOpen(false);
@@ -67,12 +70,9 @@ function App() {
     setIsCardSaved(!isCardSaved);
   };
 
-  // const toggleDarkHeader = () => {
-  //   setIsSavedNewsOpen(true);
-  // };
-
   return (
     <div className="page">
+
       <Routes>
         <Route
           path="/"
@@ -91,6 +91,8 @@ function App() {
                 isCardSaved={isCardSaved}
                 toggleSaveCard={toggleSaveCard}
                 isSavedNewsOpen={isSavedNewsOpen}
+                isSearching={isSearching}
+                setIsSearching={setIsSearching}
               />
             </>
 )}

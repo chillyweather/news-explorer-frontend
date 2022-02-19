@@ -67,7 +67,7 @@
   height: 62px;
   display: flex;
   flex-direction: column;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -84,7 +84,7 @@
   margin-top: 9px;
   background-color: transparent;
   border: none;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -112,7 +112,7 @@
   visibility: hidden;
   align-self: flex-start;
   margin-top: 3px;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -150,7 +150,7 @@
 
 .popup__choose-form-text {
   margin: 0;
-  font-family: Inter;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;

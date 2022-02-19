@@ -13,7 +13,7 @@
 .cardList__button {
   width: 288px;
   height: 64px;
-  background: #ffffff;
+  background-color: rgba(255, 255, 255, 1);
   border-radius: 80px;
   border: none;
   margin-top: 2px;
@@ -25,12 +25,13 @@
   line-height: 24px;
   color: #1a1b22;
   opacity: 1;
-  transition: opacity ease 0.5s;
+  transition: background-color ease 0.5s;
   margin-bottom: 80px;
 }
 
+/* 0.9 opacity is impossible to see on that background */
 .cardList__button:hover {
-  opacity: 90%;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 @media screen and (max-width: 900px) {

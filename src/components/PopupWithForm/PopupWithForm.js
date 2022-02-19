@@ -9,9 +9,10 @@ function PopupWithForm({
 }) {
   const popupRef = useRef();
 
+  //   couldn't replicate the error, so that's my 'best guess')))
   useEffect(() => {
     document.addEventListener('mousedown', (e) => {
-      if (!popupRef.current.contains(e.target)) {
+      if (popupRef.current && !popupRef.current.contains(e.target)) {
         closePopups();
       }
     });

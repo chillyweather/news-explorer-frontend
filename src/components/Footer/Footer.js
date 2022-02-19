@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <div className="footer">
+    <footer className="footer">
       <p className="copyright">© 2022 Dmitri Dmitriev</p>
       <div className="footer__nav-container">
         <ul className="footer__navigation">
@@ -35,7 +35,7 @@ function Footer() {
           </a>
         </ul>
       </div>
-    </div>
+    </footer>
   );
 }
 

@@ -2,7 +2,7 @@
 function FailurePopup() {
   return (
     <>
-      <h2 className="popup__title">Something wen wrong!</h2>
+      <h2 className="popup__title">Wrong username or password!</h2>
       <button className="popup__choose-form-button popup__confirm-prompt" type="button">
         Try again
       </button>

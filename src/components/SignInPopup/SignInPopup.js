@@ -7,6 +7,7 @@ function SignInPopup({
   name,
   handleLogin,
   toggleSignUpPopup,
+  toggleFailurePopup,
   closeSignInPopup,
 }) {
   const [email, setEmail] = useState('');
@@ -56,7 +57,14 @@ function SignInPopup({
           {/* {checkPassword(password)} */}
         </label>
 
-        <button type="submit" className="popup-form__submit-button">
+        <button
+          type="submit"
+          className="popup-form__submit-button"
+          onClick={() => {
+            closeSignInPopup(false);
+            toggleFailurePopup(true);
+          }}
+        >
           Sign In
         </button>
       </form>

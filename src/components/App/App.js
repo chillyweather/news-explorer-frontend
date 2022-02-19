@@ -139,6 +139,7 @@ function App() {
           <SignInPopup
             toggleSignUpPopup={toggleSignUpPopup}
             closeSignInPopup={setIsSignInPopupOpen}
+            toggleFailurePopup={setIsFailurePopupOpen}
           />
         )}
         {isSuccessPopupOpen && (

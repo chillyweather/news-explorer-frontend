@@ -10,7 +10,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import SignUpPopup from '../SignUpPopup/SignUpPopup';
 import SignInPopup from '../SignInPopup/SignInPopup';
 import SuccessPopup from '../SuccessPopup/SuccessPopup';
-import FailurePopup from '../../FailurePopup/FailurePopup';
+import FailurePopup from '../FailurePopup/FailurePopup';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedNews from '../SavedNews/SavedNews';
 

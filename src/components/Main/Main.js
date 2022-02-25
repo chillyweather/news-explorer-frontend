@@ -7,11 +7,14 @@ import NotFound from '../NotFound/NotFound';
 import Preloader from '../Preloader/Preloader';
 
 function Main({
-  isSearching, setIsSearching, isCardSaved, toggleSaveCard, isSavedNewsOpen,
+  isSearching, setIsSearching, isCardSaved, toggleSaveCard, isSavedNewsOpen, handleSearch,
 }) {
   return (
     <main className="Main">
-      <SearchForm setIsSearching={setIsSearching} />
+      <SearchForm
+        setIsSearching={setIsSearching}
+        handleSearch={handleSearch}
+      />
       {isSearching
         ? (
           <>

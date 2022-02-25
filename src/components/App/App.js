@@ -16,6 +16,8 @@ import SavedNews from '../SavedNews/SavedNews';
 
 import useKeypress from '../../utils/useKeypress';
 
+import newsApi from '../../utils/NewsApi';
+
 function App() {
   // popup
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -70,6 +72,10 @@ function App() {
     setIsCardSaved(!isCardSaved);
   };
 
+  const handleSearch = (keyword) => {
+    newsApi.find(keyword);
+  };
+
   return (
     <div className="page">
 
@@ -93,6 +99,7 @@ function App() {
                 isSavedNewsOpen={isSavedNewsOpen}
                 isSearching={isSearching}
                 setIsSearching={setIsSearching}
+                handleSearch={handleSearch}
               />
             </>
 )}

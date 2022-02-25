@@ -1,0 +1,139 @@
+.search-form {
+  background-image: url(../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.png);
+  background-position: center;
+  background-size: cover;
+  margin-top: -80px;
+  padding: 160px 0 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* z-index: -1; */
+}
+
+.search-form__title {
+  max-width: 608px;
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-family: Roboto Slab, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  line-height: 64px;
+}
+
+.search-form__subtitle {
+  max-width: 608px;
+  margin: 32px 0 0;
+  color: white;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.search {
+  margin-top: 88px;
+}
+
+.search__field {
+  box-sizing: border-box;
+  padding: 24px;
+  height: 64px;
+  border: none;
+  border-radius: 100px;
+  width: 608px;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.search-field::placeholder {
+  color: rgba(182, 188, 191, 1);
+}
+
+.search__button {
+  color: white;
+  background-color: rgba(47, 113, 229, 1);
+  box-sizing: border-box;
+  border-radius: 100px;
+  border: none;
+  margin-left: -168px;
+  width: 168px;
+  height: 65px;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: rgba(52, 126, 255, 1);
+}
+
+.search-button:active {
+  background-color: rgba(42, 101, 204, 1);
+}
+
+@media screen and (max-width: 900px) {
+  .search__field {
+    width: 452px;
+  }
+
+  .search-form__title {
+    max-width: 452px;
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .search-form__subtitle {
+    margin: 16px 0 0;
+    max-width: 452px;
+  }
+
+  .search__button {
+    width: 160px;
+    margin-left: -160px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search-form {
+    margin-top: -56px;
+    padding: 86px 16px 32px;
+  }
+
+  .search {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-form__title {
+    font-family: Roboto Slab, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .search-form__subtitle {
+    margin: 16px 0 0;
+  }
+
+  .search__field {
+    /* min-width: 288px; */
+    width: 100%;
+  }
+
+  .search__button {
+    width: 100%;
+    margin-left: 0;
+  }
+}

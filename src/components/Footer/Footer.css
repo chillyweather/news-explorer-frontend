@@ -1,0 +1,122 @@
+.footer {
+  box-sizing: border-box;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 30px 104px;
+  color: #1a1b22;
+  background-color: white;
+}
+
+.copyright {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #b6bcbf;
+  align-items: flex-end;
+}
+
+.footer__nav-container {
+  display: flex;
+  align-items: center;
+}
+
+.footer__navigation {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer__navigation-icons {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer__navigation-item {
+  color: rgba(26, 27, 34, 1);
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.footer__nav-text {
+  /* margin-right: 40px; */
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.footer__nav-logo-git {
+  width: 24px;
+  height: 24px;
+  margin: 0 13px 0;
+  background-image: url(../../images/svg/github.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.footer__nav-logo-fb {
+  width: 24px;
+  height: 24px;
+  background-image: url(../../images/svg/iconmonstr-facebook-6.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+@media screen and (max-width: 900px) {
+  .footer {
+    box-sizing: border-box;
+    padding: 24px 40px 18px;
+    height: 64px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer {
+    box-sizing: border-box;
+    flex-direction: column-reverse;
+    padding: 20px 16px 0px;
+    height: 176px;
+  }
+
+  .copyright {
+    margin-top: 6px;
+    margin-bottom: 22px;
+    width: 100%;
+  }
+
+  .footer__nav-container {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .footer__navigation {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer__navigation-icons {
+    align-self: flex-start;
+  }
+
+  .footer__nav-text {
+    margin-bottom: 32px;
+  }
+}

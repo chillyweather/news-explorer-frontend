@@ -73,7 +73,7 @@ function App() {
   };
 
   const handleSearch = (keyword) => {
-    newsApi.find(keyword);
+    console.log(newsApi.find(keyword));
   };
 
   return (

@@ -5,13 +5,29 @@ import { useState } from 'react';
 // import { useState } from 'react';
 
 /* eslint-disable react/prop-types */
-function SearchForm({ setIsSearching, handleSearch }) {
+function SearchForm({
+  setIsSearching,
+  handleSearch,
+  // newsCards,
+  setNewsCards,
+}) {
   const [searchText, setSearchText] = useState('');
   const handleChange = (e) => {
     setSearchText(e.target.value);
   };
   const [emptySearchError, setEmptySearchError] = useState(false);
   const errorText = 'Please enter a keyword';
+
+  function findNews(keyword) {
+    const newsResult = [];
+    setIsSearching(true);
+    handleSearch(keyword).then((res) => {
+      res.forEach((card) => newsResult.push(card));
+      setNewsCards(newsResult);
+      setIsSearching(false);
+    });
+  }
+
   return (
     <section className="search-form">
       <h2 className="search-form__title">What is going on in the world?</h2>
@@ -23,8 +39,7 @@ function SearchForm({ setIsSearching, handleSearch }) {
         onSubmit={(e) => {
           if (searchText !== '') {
             e.preventDefault();
-            setIsSearching(true);
-            handleSearch(searchText);
+            findNews(searchText);
           } else {
             e.preventDefault();
             setEmptySearchError(true);

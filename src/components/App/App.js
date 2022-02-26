@@ -72,9 +72,9 @@ function App() {
     setIsCardSaved(!isCardSaved);
   };
 
-  const handleSearch = (keyword) => {
-    console.log(newsApi.find(keyword));
-  };
+  const handleSearch = (keyword) => newsApi.find(keyword);
+
+  const downloadInitial = () => newsApi.downloadInitial();
 
   return (
     <div className="page">
@@ -100,6 +100,7 @@ function App() {
                 isSearching={isSearching}
                 setIsSearching={setIsSearching}
                 handleSearch={handleSearch}
+                downloadInitial={downloadInitial}
               />
             </>
 )}

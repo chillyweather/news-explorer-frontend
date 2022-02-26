@@ -5,10 +5,11 @@ import { checkEmail, checkPassword, checkUsername } from '../../utils/inputValid
 /* eslint-disable react/prop-types */
 function SignUpPopup({
   name,
-  handleRegister,
+  // handleRegister,
   closeSignUpPopup,
   toggleSignInPopup,
   toggleSuccessPopup,
+  registrationHandler,
   // closePopups,
 }) {
   const [email, setEmail] = useState('');
@@ -27,15 +28,23 @@ function SignUpPopup({
     setUsername(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleRegister(email, password, username);
+  const handleSubmit = () => {
+    registrationHandler(email, password, username);
+    closeSignUpPopup(false);
+    toggleSuccessPopup(true);
   };
 
   return (
     <>
       <h2 className="popup__title">Sign Up</h2>
-      <form className="popup__content" name={`${name}`} action="#" onSubmit={handleSubmit}>
+      <form
+        className="popup__content"
+        name={`${name}`}
+        action="#"
+        onSubmit={() => {
+          handleSubmit();
+        }}
+      >
         <label className="popup-form__label" htmlFor="register-email">
           Email
           <input
@@ -78,10 +87,6 @@ function SignUpPopup({
         <button
           type="submit"
           className="popup-form__submit-button"
-          onClick={() => {
-            closeSignUpPopup(false);
-            toggleSuccessPopup(true);
-          }}
         >
           Sign Up
         </button>

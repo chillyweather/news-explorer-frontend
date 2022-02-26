@@ -17,6 +17,7 @@ import SavedNews from '../SavedNews/SavedNews';
 import useKeypress from '../../utils/useKeypress';
 
 import newsApi from '../../utils/NewsApi';
+import mainApi from '../../utils/MainApi';
 
 function App() {
   // popup
@@ -35,7 +36,17 @@ function App() {
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [isFailurePopupOpen, setIsFailurePopupOpen] = useState(false);
 
-  //  registration success
+  //  registration handler
+  const registrationHandler = (
+    email,
+    password,
+    username,
+  ) => mainApi.register(email, password, username);
+
+  //  login handler
+  const loginHandler = (email, password) => mainApi.register(email, password);
+
+  //  registration state
   const [isRegistered, setIsRegistered] = useState(false);
 
   //  cards state
@@ -141,6 +152,7 @@ function App() {
             closeSignUpPopup={setIsSignUpPopupOpen}
             toggleSignInPopup={toggleSignInPopup}
             toggleSuccessPopup={setIsSuccessPopupOpen}
+            registrationHandler={registrationHandler}
           />
         )}
         {isSignInPopupOpen && (
@@ -148,6 +160,7 @@ function App() {
             toggleSignUpPopup={toggleSignUpPopup}
             closeSignInPopup={setIsSignInPopupOpen}
             toggleFailurePopup={setIsFailurePopupOpen}
+            loginHandler={loginHandler}
           />
         )}
         {isSuccessPopupOpen && (

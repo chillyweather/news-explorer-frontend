@@ -5,7 +5,7 @@ import { checkEmail } from '../../utils/inputValidation';
 /* eslint-disable react/prop-types */
 function SignInPopup({
   name,
-  handleLogin,
+  loginHandler,
   toggleSignUpPopup,
   toggleFailurePopup,
   closeSignInPopup,
@@ -23,13 +23,20 @@ function SignInPopup({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(email, password);
+    loginHandler(email, password);
+    closeSignInPopup(false);
+    toggleFailurePopup(true);
   };
 
   return (
     <>
       <h2 className="popup__title">Sign In</h2>
-      <form className="popup__content" name={`${name}`} action="#" onSubmit={handleSubmit}>
+      <form
+        className="popup__content"
+        name={`${name}`}
+        action="#"
+        onSubmit={handleSubmit()}
+      >
         <label className="popup-form__label" htmlFor="register-email">
           Email
           <input
@@ -60,10 +67,6 @@ function SignInPopup({
         <button
           type="submit"
           className="popup-form__submit-button"
-          onClick={() => {
-            closeSignInPopup(false);
-            toggleFailurePopup(true);
-          }}
         >
           Sign In
         </button>

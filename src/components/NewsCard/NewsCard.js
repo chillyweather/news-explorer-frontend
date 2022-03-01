@@ -7,6 +7,8 @@ import { useState } from 'react';
 function NewsCard({
   // key,
   // _id,
+  keyword,
+  card,
   date,
   title,
   source,
@@ -19,6 +21,14 @@ function NewsCard({
 }) {
   const [isCardMarked, setIsCardMarked] = useState(false);
   const isMarked = () => (isCardMarked ? 'newscard__save-button_marked' : '');
+
+  const cardKeyword = (word) => {
+    if (word) {
+      console.log(word);
+      return <p className="newscard__tag">{ word }</p>;
+    } return null;
+  };
+
   return (
 
     <div>
@@ -29,12 +39,12 @@ function NewsCard({
             style={{
               backgroundImage: `url(${image})`,
               backgroundPosition: 'center',
-              backgroundSize: 'cover',
+              backgroundSize: 'content',
               backgroundRepeat: 'no-repeat',
             }}
           />
         </a>
-        <p className="newscard__tag">Nature</p>
+        {cardKeyword(keyword)}
         <div className="newscard__button-container">
           <p className="newscard__add-remove-tip">
             {isCardSaved ? 'Remove from saved' : 'Sign In to save articles'}
@@ -48,7 +58,8 @@ function NewsCard({
               }
             onClick={() => {
               setIsCardMarked(!isCardMarked);
-              toggleSaveCard();
+              console.log(card);
+              toggleSaveCard(card);
             }}
           />
         </div>

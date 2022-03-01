@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import './App.css';
-import { useState } from 'react/cjs/react.development';
-import { Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -20,6 +20,8 @@ import newsApi from '../../utils/NewsApi';
 import mainApi from '../../utils/MainApi';
 
 function App() {
+  const navigate = useNavigate();
+
   // popup
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -36,18 +38,23 @@ function App() {
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [isFailurePopupOpen, setIsFailurePopupOpen] = useState(false);
 
-  //  registration handler
-  const registrationHandler = (
-    email,
-    password,
-    username,
-  ) => mainApi.register(email, password, username);
-
-  //  login handler
-  const loginHandler = (email, password) => mainApi.register(email, password);
+  // close popups
+  const closeAllPopups = () => {
+    setIsPopupOpen(false);
+    setIsSignInPopupOpen(false);
+    setIsSignUpPopupOpen(false);
+    setIsSuccessPopupOpen(false);
+    setIsFailurePopupOpen(false);
+  };
 
   //  registration state
   const [isRegistered, setIsRegistered] = useState(false);
+
+  //  login state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  //  header button text state
+  const [buttonText, setButtonText] = useState('Sign In');
 
   //  cards state
   const [isCardSaved, setIsCardSaved] = useState(false);
@@ -58,13 +65,8 @@ function App() {
   // preloader state
   const [isSearching, setIsSearching] = useState(false);
 
-  const closeAllPopups = () => {
-    setIsPopupOpen(false);
-    setIsSignInPopupOpen(false);
-    setIsSignUpPopupOpen(false);
-    setIsSuccessPopupOpen(false);
-    setIsFailurePopupOpen(false);
-  };
+  //  keyword state
+  const [keywords, setKeywords] = useState('');
 
   // escape key handling
   useKeypress('Escape', closeAllPopups);
@@ -79,13 +81,61 @@ function App() {
     setIsSignInPopupOpen(true);
   };
 
-  const toggleSaveCard = () => {
-    setIsCardSaved(!isCardSaved);
+  const toggleSaveCard = (article) => {
+    if (article) {
+      mainApi.saveArticle(article).then((res) => {
+        console.log(res);
+      });
+      setIsCardSaved(!isCardSaved);
+    } else {
+      throw new Error('No article added');
+    }
+  };
+
+  //  registration handler
+  const registrationHandler = (
+    email,
+    password,
+    username,
+  ) => mainApi.register(email, password, username);
+
+  //  login handler
+  const loginHandler = (email, password) => {
+    mainApi.login(email, password)
+      .then((data) => {
+        if (data.token) {
+          setIsLoggedIn(true);
+          closeAllPopups();
+        }
+      });
+  };
+
+  //  logout handler
+  const handleLogOut = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    setButtonText('Sign In');
+    navigate('/');
   };
 
   const handleSearch = (keyword) => newsApi.find(keyword);
 
   const downloadInitial = () => newsApi.downloadInitial();
+
+  useEffect(() => {
+    function handleTokenCheck() {
+      const token = localStorage.getItem('token');
+      if (token) {
+        mainApi.checkToken().then((data) => {
+          setIsLoggedIn(true);
+          const buttonName = data.data.name.split(' ')[0];
+          setButtonText(buttonName);
+        });
+      }
+    }
+
+    handleTokenCheck();
+  }, [isLoggedIn, buttonText]);
 
   return (
     <div className="page">
@@ -97,12 +147,16 @@ function App() {
             <>
               <Header
                 isRegistered={isRegistered}
+                isLoggedIn={isLoggedIn}
+                buttonText={buttonText}
+                setButtonText={setButtonText}
                 toggleSignUpPopup={toggleSignUpPopup}
                 toggleSignInPopup={toggleSignInPopup}
                 isSavedNewsOpen={false}
                 isMobilePopupOpen={isMobilePopupOpen}
                 toggleMobilePopup={toggleMobilePopupState}
                 toggleSavedNewsOpen={setIsSavedNewsOpen}
+                handleLogOut={handleLogOut}
               />
               <Main
                 isCardSaved={isCardSaved}
@@ -112,6 +166,8 @@ function App() {
                 setIsSearching={setIsSearching}
                 handleSearch={handleSearch}
                 downloadInitial={downloadInitial}
+                setKeywords={setKeywords}
+                keywords={keywords}
               />
             </>
 )}
@@ -122,10 +178,14 @@ function App() {
             <>
               <Header
                 isRegistered={isRegistered}
+                isLoggedIn={isLoggedIn}
+                buttonText={buttonText}
+                setButtonText={setButtonText}
                 toggleSignUpPopup={toggleSignUpPopup}
                 toggleSignInPopup={toggleSignInPopup}
                 toggleSavedNewsOpen={setIsSavedNewsOpen}
                 isSavedNewsOpen
+                handleLogOut={handleLogOut}
               />
               <SavedNewsHeader />
               <SavedNews

@@ -10,6 +10,8 @@ import Preloader from '../Preloader/Preloader';
 function Main({
   isSearching,
   setIsSearching,
+  setKeywords,
+  keywords,
   isCardSaved,
   toggleSaveCard,
   isSavedNewsOpen,
@@ -24,6 +26,7 @@ function Main({
         handleSearch={handleSearch}
         newsCards={newsCards}
         setNewsCards={setNewsCards}
+        setKeywords={setKeywords}
       />
       {isSearching
         ? (
@@ -40,6 +43,7 @@ function Main({
             toggleSaveCard={toggleSaveCard}
             isSavedNewsOpen={isSavedNewsOpen}
             downloadInitial={downloadInitial}
+            keywords={keywords}
           />
         )}
       <About />

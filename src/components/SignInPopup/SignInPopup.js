@@ -7,7 +7,7 @@ function SignInPopup({
   name,
   loginHandler,
   toggleSignUpPopup,
-  toggleFailurePopup,
+  // toggleFailurePopup,
   closeSignInPopup,
 }) {
   const [email, setEmail] = useState('');
@@ -21,11 +21,10 @@ function SignInPopup({
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     loginHandler(email, password);
-    closeSignInPopup(false);
-    toggleFailurePopup(true);
+    // closeSignInPopup(false);
+    // toggleFailurePopup(true);
   };
 
   return (
@@ -35,7 +34,7 @@ function SignInPopup({
         className="popup__content"
         name={`${name}`}
         action="#"
-        onSubmit={handleSubmit()}
+        onSubmit={() => handleSubmit()}
       >
         <label className="popup-form__label" htmlFor="register-email">
           Email

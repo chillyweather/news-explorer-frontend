@@ -1,9 +1,23 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
 class MainApi {
   constructor({ baseUrl, authToken }) {
     this._baseUrl = baseUrl;
     this._authToken = authToken;
+  }
+
+  _checkResponse(prom) {
+    const response = prom
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      })
+      .then((data) => data);
+    return response;
   }
 
   register(email, password, username) {
@@ -45,19 +59,72 @@ class MainApi {
     );
   }
 
-  getUserInfo() {
-    fetch(`${this._baseUrl}/users/me`, {
+  checkToken() {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Authorization: this._authToken,
       },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
 
-  // getCards() { }
-  //  saveCard(){}
-  // deleteCard()
+  getUserInfo() {
+    const userInfo = fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        Authorization: this._authToken,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return this._checkResponse(userInfo);
+  }
+
+  getArticles() {
+    const article = fetch(`${this._baseUrl}/articles`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: this._authToken,
+      },
+    });
+
+    return this._checkResponse(article);
+  }
+
+  saveArticle(article) {
+    const card = fetch(`${this._baseUrl}/articles`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: this._authToken,
+      },
+      body: JSON.stringify(article),
+    });
+
+    return this._checkResponse(card);
+  }
+
+  deleteArticle(articleId) {
+    const deletedArticle = fetch(`${this._baseUrl}/articles/${articleId}`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: this._authToken,
+      },
+      method: 'DELETE',
+    });
+
+    return this._checkResponse(deletedArticle);
+  }
 }
 
 const mainApi = new MainApi({

@@ -91,6 +91,9 @@ a {
 }
 
 .header__login-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-width: 176px;
   height: 48px;
   border: 1px solid white;
@@ -100,6 +103,23 @@ a {
 .header__login-button_dark {
   border: 1px solid rgba(26, 27, 34, 1);
   color: rgba(26, 27, 34, 1);
+}
+
+.header__logout-icon {
+  width: 24px;
+  height: 24px;
+  /* background-color: red; */
+  margin-left: 15px;
+  background-position: center;
+  background-size: cover;
+}
+
+.header__logout-icon_light {
+  background-image: url('../../images/svg/logout-light.svg');
+}
+
+.header__logout-icon_dark {
+  background-image: url('../../images/svg/logout-dark.svg');
 }
 
 .header__nav-button {

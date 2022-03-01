@@ -5,13 +5,16 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Header({
-  toggleSignUpPopup,
+  // toggleSignUpPopup,
   toggleSignInPopup,
-  isRegistered,
+  // isRegistered,
+  isLoggedIn,
+  handleLogOut,
   isSavedNewsOpen,
   // isMobilePopupOpen,
   toggleMobilePopup,
   toggleSavedNewsOpen,
+  buttonText,
 }) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
@@ -98,13 +101,19 @@ function Header({
               toggleMobilePopup();
             }
             setIsMobileNavOpen(false);
-            if (isRegistered) {
+            if (isLoggedIn) {
+              handleLogOut();
+            } else {
               toggleSignInPopup();
-            } else { toggleSignUpPopup(); }
+            }
           }}
           className={isSavedNewsOpen ? `header__button header__login-button header__login-button_dark ${mobileWhiteMenuText()} ${mobileWhiteMenuButtonBorder()}` : 'header__button header__login-button'}
         >
-          {isRegistered ? 'Sign In' : 'Sign Up'}
+          {buttonText}
+          {isLoggedIn && (
+            isSavedNewsOpen
+              ? <div className="header__logout-icon header__logout-icon_dark" />
+              : <div className="header__logout-icon header__logout-icon_light" />)}
         </button>
       </div>
     </header>

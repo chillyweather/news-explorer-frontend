@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable prettier/prettier */
 
 import { useState } from 'react';
@@ -10,6 +11,7 @@ function SearchForm({
   handleSearch,
   // newsCards,
   setNewsCards,
+  setKeywords,
 }) {
   const [searchText, setSearchText] = useState('');
   const handleChange = (e) => {
@@ -22,7 +24,18 @@ function SearchForm({
     const newsResult = [];
     setIsSearching(true);
     handleSearch(keyword).then((res) => {
-      res.forEach((card) => newsResult.push(card));
+      res.forEach((card) => {
+        const newCard = {
+          title: card.title,
+          text: card.content,
+          date: card.publishedAt,
+          source: card.source.name,
+          link: card.url,
+          image: card.urlToImage,
+          keyword: `${keyword}`,
+        };
+        newsResult.push(newCard);
+      });
       setNewsCards(newsResult);
       setIsSearching(false);
     });
@@ -39,6 +52,7 @@ function SearchForm({
         onSubmit={(e) => {
           if (searchText !== '') {
             e.preventDefault();
+            setKeywords(searchText);
             findNews(searchText);
           } else {
             e.preventDefault();

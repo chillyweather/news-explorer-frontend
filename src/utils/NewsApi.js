@@ -34,7 +34,7 @@ class NewsApi {
       + '/top-headlines?'
       + 'country=us&'
       + `apiKey=${this._apiKey}&`
-      + 'pageSize=3',
+      + 'pageSize=18',
     )
       .then((res) => (res.ok ? res.json() : Promise.reject(new Error('no news for you!'))))
       .then((data) => data.articles);

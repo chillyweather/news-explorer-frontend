@@ -3,7 +3,6 @@
 /* eslint-disable react/prop-types */
 import {
   useEffect,
-  // useState,
 } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import mainApi from '../../utils/MainApi';
@@ -19,7 +18,6 @@ function SavedNews({
   savedArticles,
   setSavedArticles,
 }) {
-  setIsSavedNewsOpen(true);
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -52,6 +50,8 @@ function SavedNews({
   };
 
   useEffect(() => {
+    setIsSavedNewsOpen(true);
+
     const articles = [];
     const keywords = [];
 
@@ -65,7 +65,7 @@ function SavedNews({
       setSavedKeywords(keywords);
       setSavedArticles(articles);
     });
-  }, []);
+  }, [isSavedNewsOpen]);
 
   return (
     <div className="saved-news">

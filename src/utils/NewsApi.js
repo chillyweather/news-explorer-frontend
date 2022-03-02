@@ -16,7 +16,7 @@ class NewsApi {
 
   find(keyword) {
     return fetch(
-      `${this._proxyUrl}`
+      `${this._newsUrl}`
       + '/everything?'
       + `q=${keyword}&`
       + `apiKey=${this._apiKey}&`
@@ -30,7 +30,7 @@ class NewsApi {
 
   downloadInitial() {
     return fetch(
-      `${this._proxyUrl}`
+      `${this._newsUrl}`
       + '/top-headlines?'
       + 'country=us&'
       + `apiKey=${this._apiKey}&`

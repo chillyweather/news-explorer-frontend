@@ -36,7 +36,6 @@ function NewsCardList({
         initialCards.push(newCard);
       });
       setNewsCards(initialCards);
-      console.log(initialCards);
     });
   };
 

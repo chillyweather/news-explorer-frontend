@@ -34,7 +34,10 @@ function SignInPopup({
         className="popup__content"
         name={`${name}`}
         action="#"
-        onSubmit={() => handleSubmit()}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
       >
         <label className="popup-form__label" htmlFor="register-email">
           Email

@@ -6,7 +6,7 @@ import { useState } from 'react';
 /* eslint-disable react/prop-types */
 function NewsCard({
   // key,
-  // _id,
+  cardId,
   keyword,
   card,
   date,
@@ -18,16 +18,18 @@ function NewsCard({
   isSavedNewsOpen,
   image,
   link,
+  handleDelete,
 }) {
   const [isCardMarked, setIsCardMarked] = useState(false);
   const isMarked = () => (isCardMarked ? 'newscard__save-button_marked' : '');
 
   const cardKeyword = (word) => {
     if (word) {
-      console.log(word);
       return <p className="newscard__tag">{ word }</p>;
     } return null;
   };
+
+  // console.log(cardId);
 
   return (
 
@@ -57,9 +59,12 @@ function NewsCard({
                   : `newscard__save-button ${isMarked()}`
               }
             onClick={() => {
-              setIsCardMarked(!isCardMarked);
-              console.log(card);
-              toggleSaveCard(card);
+              if (isSavedNewsOpen) {
+                handleDelete(cardId);
+              } else {
+                setIsCardMarked(!isCardMarked);
+                toggleSaveCard(card);
+              }
             }}
           />
         </div>

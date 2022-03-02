@@ -3,6 +3,7 @@
 /* eslint-disable prettier/prettier */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+// import { CurrentUserContext } from '../../contexts/currentUserContext';
 
 function Header({
   // toggleSignUpPopup,
@@ -16,6 +17,8 @@ function Header({
   toggleSavedNewsOpen,
   buttonText,
 }) {
+  // const currentUser = useContext(CurrentUserContext);
+
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   const toggleMobileNavMenu = () => {

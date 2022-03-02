@@ -1,30 +1,76 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
+import {
+  useEffect,
+  // useState,
+} from 'react';
 import NewsCard from '../NewsCard/NewsCard';
+import mainApi from '../../utils/MainApi';
 
-function SavedNews({ isCardSaved, toggleSaveCard, isSavedNewsOpen }) {
+function SavedNews({
+  isCardSaved,
+  toggleSaveCard,
+  isSavedNewsOpen,
+  convertTime,
+  setSavedKeywords,
+  handleDelete,
+  setIsSavedNewsOpen,
+  savedArticles,
+  setSavedArticles,
+}) {
+  setIsSavedNewsOpen(true);
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  // const keywordList = [];
+  // const [savedArticles, setSavedArticles] = useState([]);
+
+  const ifKeywordInKeywords = (arr, keyword) => arr.some((key) => key === keyword);
+
+  const renderArticles = (cards) => {
+    if (cards) {
+      return cards.map((card, key = card.url) => (
+        <NewsCard
+          key={key}
+          keyword={card.keyword}
+          card={card}
+          cardId={card._id || Math.random()}
+          date={convertTime(card.date)}
+          title={card.title}
+          description={card.text}
+          source={card.source}
+          isCardSaved={isCardSaved}
+          isSavedNewsOpen={isSavedNewsOpen}
+          toggleSaveCard={toggleSaveCard}
+          image={card.image}
+          link={card.link}
+          handleDelete={handleDelete}
+        />
+      ));
+    } return null;
+  };
+
+  useEffect(() => {
+    const articles = [];
+    const keywords = [];
+
+    mainApi.getArticles().then((cards) => {
+      cards.forEach((card) => {
+        articles.push(card);
+        if (!ifKeywordInKeywords(keywords, card.keyword)) {
+          keywords.push(capitalizeFirstLetter(card.keyword));
+        }
+      });
+      setSavedKeywords(keywords);
+      setSavedArticles(articles);
+    });
+  }, []);
+
   return (
     <div className="saved-news">
       <div className="saved-news__container">
-        <NewsCard
-          isCardSaved={isCardSaved}
-          toggleSaveCard={toggleSaveCard}
-          isSavedNewsOpen={isSavedNewsOpen}
-        />
-        <NewsCard
-          isCardSaved={isCardSaved}
-          toggleSaveCard={toggleSaveCard}
-          isSavedNewsOpen={isSavedNewsOpen}
-        />
-        <NewsCard
-          isCardSaved={isCardSaved}
-          toggleSaveCard={toggleSaveCard}
-          isSavedNewsOpen={isSavedNewsOpen}
-        />
-        <NewsCard
-          isCardSaved={isCardSaved}
-          toggleSaveCard={toggleSaveCard}
-          isSavedNewsOpen={isSavedNewsOpen}
-        />
+        {renderArticles(savedArticles)}
       </div>
     </div>
   );

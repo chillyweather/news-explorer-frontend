@@ -10,6 +10,7 @@ function SignUpPopup({
   toggleSignInPopup,
   toggleSuccessPopup,
   registrationHandler,
+  setUserName,
   // closePopups,
 }) {
   const [email, setEmail] = useState('');
@@ -30,6 +31,7 @@ function SignUpPopup({
 
   const handleSubmit = () => {
     registrationHandler(email, password, username);
+    setUserName(username);
     closeSignUpPopup(false);
     toggleSuccessPopup(true);
   };

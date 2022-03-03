@@ -211,10 +211,13 @@ function App() {
                   isSavedNewsOpen
                   handleLogOut={handleLogOut}
                 />
+                {isLoggedIn && (
                 <SavedNewsHeader
                   savedKeywords={savedKeywords}
                   savedArticles={savedArticles}
                 />
+                )}
+                {isLoggedIn && (
                 <SavedNews
                   convertTime={convertTime}
                   isCardSaved={isCardSaved}
@@ -226,6 +229,7 @@ function App() {
                   savedArticles={savedArticles}
                   setSavedArticles={setSavedArticles}
                 />
+                )}
               </>
 
           )}

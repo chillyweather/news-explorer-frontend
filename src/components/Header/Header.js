@@ -80,6 +80,7 @@ function Header({
               Home
             </button>
           </Link>
+          {isLoggedIn && (
           <Link to="/saved-news">
             <button
               type="button"
@@ -95,6 +96,7 @@ function Header({
               Saved Articles
             </button>
           </Link>
+          )}
         </nav>
 
         <button

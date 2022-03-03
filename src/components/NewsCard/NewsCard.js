@@ -13,12 +13,13 @@ function NewsCard({
   title,
   source,
   description,
-  isCardSaved,
+  // isCardSaved,
   toggleSaveCard,
-  isSavedNewsOpen,
   image,
   link,
   handleDelete,
+  isSavedNewsOpen,
+  isLoggedIn,
 }) {
   const [isCardMarked, setIsCardMarked] = useState(false);
   const isMarked = () => (isCardMarked ? 'newscard__save-button_marked' : '');
@@ -29,6 +30,17 @@ function NewsCard({
     } return null;
   };
 
+  //  choose save/delete button tip text based on which page is open
+  //  and if user logged in
+  const toolTipTex = () => {
+    if (isSavedNewsOpen) {
+      return 'Remove from saved';
+    }
+    if (isLoggedIn) {
+      return 'Add to saved';
+    }
+    return 'Sign In to save articles';
+  };
   // console.log(cardId);
 
   return (
@@ -46,10 +58,10 @@ function NewsCard({
             }}
           />
         </a>
-        {cardKeyword(keyword)}
+        {isSavedNewsOpen && cardKeyword(keyword)}
         <div className="newscard__button-container">
           <p className="newscard__add-remove-tip">
-            {isCardSaved ? 'Remove from saved' : 'Sign In to save articles'}
+            {toolTipTex()}
           </p>
           <button
             type="button"
@@ -61,7 +73,7 @@ function NewsCard({
             onClick={() => {
               if (isSavedNewsOpen) {
                 handleDelete(cardId);
-              } else {
+              } else if (isLoggedIn) {
                 setIsCardMarked(!isCardMarked);
                 toggleSaveCard(card);
               }

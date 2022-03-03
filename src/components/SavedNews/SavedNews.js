@@ -24,8 +24,6 @@ function SavedNews({
   // const keywordList = [];
   // const [savedArticles, setSavedArticles] = useState([]);
 
-  const ifKeywordInKeywords = (arr, keyword) => arr.some((key) => key === keyword);
-
   const renderArticles = (cards) => {
     if (cards) {
       return cards.map((card, key = card.url) => (
@@ -58,12 +56,10 @@ function SavedNews({
     mainApi.getArticles().then((cards) => {
       cards.forEach((card) => {
         articles.push(card);
-        if (!ifKeywordInKeywords(keywords, card.keyword)) {
-          keywords.push(capitalizeFirstLetter(card.keyword));
-        }
+        keywords.push(capitalizeFirstLetter(card.keyword));
       });
-      setSavedKeywords(keywords);
-      setSavedArticles(articles);
+      setSavedKeywords([...new Set(keywords)]);
+      setSavedArticles(articles.reverse());
     });
   }, [isSavedNewsOpen]);
 

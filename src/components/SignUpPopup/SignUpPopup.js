@@ -8,9 +8,10 @@ function SignUpPopup({
   // handleRegister,
   closeSignUpPopup,
   toggleSignInPopup,
-  toggleSuccessPopup,
+  // toggleSuccessPopup,
   registrationHandler,
-  setUserName,
+  // setUserName,
+  signUpPopupButtonText,
   // closePopups,
 }) {
   const [email, setEmail] = useState('');
@@ -31,9 +32,6 @@ function SignUpPopup({
 
   const handleSubmit = () => {
     registrationHandler(email, password, username);
-    setUserName(username);
-    closeSignUpPopup(false);
-    toggleSuccessPopup(true);
   };
 
   return (
@@ -43,7 +41,8 @@ function SignUpPopup({
         className="popup__content"
         name={`${name}`}
         action="#"
-        onSubmit={() => {
+        onSubmit={(e) => {
+          e.preventDefault();
           handleSubmit();
         }}
       >
@@ -90,7 +89,7 @@ function SignUpPopup({
           type="submit"
           className="popup-form__submit-button"
         >
-          Sign Up
+          {signUpPopupButtonText}
         </button>
       </form>
       <p className="popup__choose-form-text">

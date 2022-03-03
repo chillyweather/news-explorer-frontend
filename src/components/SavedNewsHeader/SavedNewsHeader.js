@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/currentUserContext';
 /* eslint-disable react/prop-types */
 function SavedNewsHeader({ savedKeywords }) {
+  console.log(savedKeywords);
   const currentUser = useContext(CurrentUserContext);
   const titleHandler = (arr, username) => `${username}, you have ${arr.length} saved articles`;
 

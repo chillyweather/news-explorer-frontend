@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
 import './App.css';
 import { useEffect, useState } from 'react';
@@ -38,6 +39,9 @@ function App() {
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = useState(false);
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [isFailurePopupOpen, setIsFailurePopupOpen] = useState(false);
+
+  //  sign up popup button
+  const [signUpPopupButtonText, setSignUpPopupButtonText] = useState('Sign Up');
 
   // close popups
   const closeAllPopups = () => {
@@ -107,7 +111,18 @@ function App() {
     email,
     password,
     username,
-  ) => mainApi.register(email, password, username);
+  ) => {
+    setSignUpPopupButtonText('Loading...');
+    mainApi.register(email, password, username).then((data) => {
+      if (data._id) {
+        setIsSignUpPopupOpen(false);
+        setIsSuccessPopupOpen(true);
+      } else {
+        setIsSignInPopupOpen(false);
+        setIsFailurePopupOpen(true);
+      }
+    }).finally(setSignUpPopupButtonText('Sign Up'));
+  };
 
   //  login handler
   const loginHandler = (email, password) => {
@@ -187,6 +202,7 @@ function App() {
                   toggleSaveCard={toggleSaveCard}
                   isSavedNewsOpen={isSavedNewsOpen}
                   isSearching={isSearching}
+                  isLoggedIn={isLoggedIn}
                   setIsSearching={setIsSearching}
                   handleSearch={handleSearch}
                   downloadInitial={downloadInitial}
@@ -251,6 +267,7 @@ function App() {
             toggleSuccessPopup={setIsSuccessPopupOpen}
             registrationHandler={registrationHandler}
             setUserName={setUserName}
+            signUpPopupButtonText={signUpPopupButtonText}
           />
           )}
           {isSignInPopupOpen && (

@@ -12,6 +12,7 @@ function NewsCardList({
   newsCards,
   downloadInitial,
   setNewsCards,
+  isLoggedIn,
 }) {
   const [showAll, setShowAll] = useState(false);
   // const [threeCards, setThreeCards] = useState([]);
@@ -35,7 +36,7 @@ function NewsCardList({
           source: card.source.name,
           link: card.url,
           image: card.urlToImage,
-          keyword: null,
+          keyword: 'Hot News',
         };
         initialCards.push(newCard);
       });
@@ -63,6 +64,8 @@ function NewsCardList({
           toggleSaveCard={toggleSaveCard}
           image={card.image}
           link={card.link}
+          isLoggedIn={isLoggedIn}
+
         />
       ));
     }
@@ -81,6 +84,8 @@ function NewsCardList({
         toggleSaveCard={toggleSaveCard}
         image={card.image}
         link={card.link}
+        isLoggedIn={isLoggedIn}
+
       />
     ));
   };

@@ -17,6 +17,7 @@ function Main({
   isSavedNewsOpen,
   handleSearch,
   downloadInitial,
+  isLoggedIn,
 }) {
   const [newsCards, setNewsCards] = useState([]);
   return (
@@ -43,6 +44,7 @@ function Main({
             toggleSaveCard={toggleSaveCard}
             isSavedNewsOpen={isSavedNewsOpen}
             downloadInitial={downloadInitial}
+            isLoggedIn={isLoggedIn}
             keywords={keywords}
           />
         )}

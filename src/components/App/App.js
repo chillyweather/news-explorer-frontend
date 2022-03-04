@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
 import './App.css';
@@ -103,9 +104,11 @@ function App() {
 
   const toggleSaveCard = (article) => {
     if (article) {
-      mainApi.saveArticle(article).then((res) => {
-        console.log(res);
-      });
+      mainApi.saveArticle(article)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
       setIsCardSaved(!isCardSaved);
     } else {
       throw new Error('No article added');
@@ -119,26 +122,52 @@ function App() {
     username,
   ) => {
     setSignUpPopupButtonText('Loading...');
-    mainApi.register(email, password, username).then((data) => {
-      if (data._id) {
-        setUserId({ _id: `${data._id}` });
+    setIsRegistered(false);
+    mainApi.register(email, password, username)
+      .then((data) => {
+        if (data._id) {
+          setUserId({ _id: `${data._id}` });
+          setIsSignUpPopupOpen(false);
+          setIsSuccessPopupOpen(true);
+          setIsRegistered(true);
+        }
+      })
+      .catch((err) => {
         setIsSignUpPopupOpen(false);
-        setIsSuccessPopupOpen(true);
-      } else {
-        setIsSignInPopupOpen(false);
+        setFailurePopupText('Registration failed');
         setIsFailurePopupOpen(true);
-      }
-    }).finally(setSignUpPopupButtonText('Sign Up'));
+        console.log(err);
+      })
+      .finally(setSignUpPopupButtonText('Sign Up'));
+  };
+
+  // registration form login
+  const resetRegistration = () => {
+    setIsFailurePopupOpen(false);
+    setIsSignUpPopupOpen(true);
+  };
+
+  // reset login
+  const resetLogin = () => {
+    setIsFailurePopupOpen(false);
+    setIsSignInPopupOpen(true);
   };
 
   //  login handler
   const loginHandler = (email, password) => {
+    setIsRegistered(true);
     mainApi.login(email, password)
       .then((data) => {
         if (data.token) {
           setIsLoggedIn(true);
           closeAllPopups();
         }
+      }).catch((err) => {
+        setIsSignInPopupOpen(false);
+        setFailurePopupText('Wrong username or password!');
+        setIsPopupOpen(true);
+        setIsFailurePopupOpen(true);
+        console.log(err);
       });
   };
 
@@ -182,12 +211,13 @@ function App() {
     function handleTokenCheck() {
       const token = localStorage.getItem('token');
       if (token) {
-        mainApi.checkToken().then((data) => {
-          setIsLoggedIn(true);
-          // const buttonName = data.data.name.split(' ')[0];
-          setUserName(data.data.name.split(' ')[0]);
-          setButtonText(userName);
-        });
+        mainApi.checkToken()
+          .then((data) => {
+            setIsLoggedIn(true);
+            setUserName(data.data.name.split(' ')[0]);
+            setButtonText(userName);
+          })
+          .catch((err) => console.log(err));
       }
     }
 
@@ -311,6 +341,9 @@ function App() {
           <FailurePopup
             failurePopupText={failurePopupText}
             isSavedNewsOpen={isSavedNewsOpen}
+            resetLogin={resetLogin}
+            resetRegistration={resetRegistration}
+            isRegistered={isRegistered}
           />
           )}
         </PopupWithForm>

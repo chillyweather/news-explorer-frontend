@@ -57,7 +57,6 @@ function SavedNews({
     const keywords = [];
 
     mainApi.getArticles().then((cards) => {
-      console.log(cards);
       cards.forEach((card) => {
         articles.push(card);
         keywords.push(capitalizeFirstLetter(card.keyword));

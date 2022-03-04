@@ -43,6 +43,9 @@ function App() {
   //  sign up popup button
   const [signUpPopupButtonText, setSignUpPopupButtonText] = useState('Sign Up');
 
+  //  failure popup text
+  const [failurePopupText, setFailurePopupText] = useState('');
+
   // close popups
   const closeAllPopups = () => {
     setIsPopupOpen(false);
@@ -154,9 +157,17 @@ function App() {
 
   //  handle article delete
   const handleDelete = (articleId) => {
-    mainApi.deleteArticle(articleId).then((res) => {
-      console.log(res);
-    });
+    mainApi.deleteArticle(articleId)
+      .then((res) => {
+        console.log(res);
+        setSavedArticles((state) => state.filter((c) => c._id !== articleId));
+      })
+      .catch((err) => {
+        setFailurePopupText('Only owner can delete this article');
+        setIsPopupOpen(true);
+        setIsFailurePopupOpen(true);
+        console.log(err);
+      });
   };
 
   // get and format time
@@ -296,7 +307,12 @@ function App() {
             toggleSuccessPopup={setIsSuccessPopupOpen}
           />
           )}
-          {isFailurePopupOpen && (<FailurePopup />)}
+          {isFailurePopupOpen && (
+          <FailurePopup
+            failurePopupText={failurePopupText}
+            isSavedNewsOpen={isSavedNewsOpen}
+          />
+          )}
         </PopupWithForm>
       </div>
     </CurrentUserContext.Provider>

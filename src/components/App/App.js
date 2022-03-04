@@ -184,12 +184,25 @@ function App() {
   //  download initial top news
   const downloadInitial = () => newsApi.downloadInitial();
 
+  //  capitalize first letter
+  const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+
+  //  refresh keyword list after delete
+  const refreshKeywords = (arr, elementToDelete) => {
+    const index = arr.findIndex((i) => i === elementToDelete);
+    arr.splice(index, 1);
+    return arr;
+  };
+
   //  handle article delete
-  const handleDelete = (articleId) => {
-    mainApi.deleteArticle(articleId)
+  const handleDelete = (article) => {
+    mainApi.deleteArticle(article)
       .then((res) => {
         console.log(res);
-        setSavedArticles((state) => state.filter((c) => c._id !== articleId));
+        setSavedArticles((state) => state.filter((c) => c._id !== article._id));
+        console.log(savedKeywords);
+        setSavedKeywords(refreshKeywords(savedKeywords, article.keyword));
+        console.log(savedKeywords);
       })
       .catch((err) => {
         setFailurePopupText('Only owner can delete this article');
@@ -290,11 +303,13 @@ function App() {
                   toggleSaveCard={toggleSaveCard}
                   isSavedNewsOpen={isSavedNewsOpen}
                   setIsSavedNewsOpen={setIsSavedNewsOpen}
+                  savedKeywords={savedKeywords}
                   setSavedKeywords={setSavedKeywords}
                   handleDelete={handleDelete}
-                  savedArticles={savedArticles}
                   userId={userId}
+                  savedArticles={savedArticles}
                   setSavedArticles={setSavedArticles}
+                  capitalizeFirstLetter={capitalizeFirstLetter}
                 />
                 )}
               </>

@@ -113,8 +113,8 @@ class MainApi {
     return this._checkResponse(card);
   }
 
-  deleteArticle(articleId) {
-    const deletedArticle = fetch(`${this._baseUrl}/articles/${articleId}`, {
+  deleteArticle(article) {
+    const deletedArticle = fetch(`${this._baseUrl}/articles/${article._id}`, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',

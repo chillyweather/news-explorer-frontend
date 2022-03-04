@@ -7,7 +7,7 @@ import { useState } from 'react';
 /* eslint-disable react/prop-types */
 function NewsCard({
   // key,
-  cardId,
+  // cardId,
   keyword,
   card,
   date,
@@ -74,7 +74,7 @@ function NewsCard({
               }
             onClick={() => {
               if (isSavedNewsOpen) {
-                handleDelete(cardId);
+                handleDelete(card);
               } else if (isLoggedIn) {
                 setIsCardMarked(!isCardMarked);
                 toggleSaveCard(card);

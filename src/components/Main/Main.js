@@ -18,6 +18,7 @@ function Main({
   handleSearch,
   downloadInitial,
   isLoggedIn,
+  userId,
 }) {
   const [newsCards, setNewsCards] = useState([]);
   return (
@@ -46,6 +47,8 @@ function Main({
             downloadInitial={downloadInitial}
             isLoggedIn={isLoggedIn}
             keywords={keywords}
+            userId={userId}
+
           />
         )}
       <About />

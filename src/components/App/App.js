@@ -58,6 +58,9 @@ function App() {
   //  login state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  //  user id state
+  const [userId, setUserId] = useState({});
+
   //  header button text state
   const [buttonText, setButtonText] = useState('Sign In');
 
@@ -115,6 +118,7 @@ function App() {
     setSignUpPopupButtonText('Loading...');
     mainApi.register(email, password, username).then((data) => {
       if (data._id) {
+        setUserId({ _id: `${data._id}` });
         setIsSignUpPopupOpen(false);
         setIsSuccessPopupOpen(true);
       } else {
@@ -149,7 +153,11 @@ function App() {
   const downloadInitial = () => newsApi.downloadInitial();
 
   //  handle article delete
-  const handleDelete = (articleId) => mainApi.deleteArticle(articleId);
+  const handleDelete = (articleId) => {
+    mainApi.deleteArticle(articleId).then((res) => {
+      console.log(res);
+    });
+  };
 
   // get and format time
   const convertTime = (d) => {
@@ -208,6 +216,7 @@ function App() {
                   downloadInitial={downloadInitial}
                   setKeywords={setKeywords}
                   keywords={keywords}
+                  userId={userId}
                 />
               </>
 )}
@@ -243,6 +252,7 @@ function App() {
                   setSavedKeywords={setSavedKeywords}
                   handleDelete={handleDelete}
                   savedArticles={savedArticles}
+                  userId={userId}
                   setSavedArticles={setSavedArticles}
                 />
                 )}

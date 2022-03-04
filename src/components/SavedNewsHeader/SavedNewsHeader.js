@@ -3,11 +3,24 @@ import { useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/currentUserContext';
 /* eslint-disable react/prop-types */
 function SavedNewsHeader({ savedKeywords }) {
-  console.log(savedKeywords);
   const currentUser = useContext(CurrentUserContext);
   const titleHandler = (arr, username) => `${username}, you have ${arr.length} saved articles`;
 
-  const keywordLine = (arr) => ` ${arr[0]}, ${arr[1]} and ${arr.length - 2} other`;
+  const keywordLine = (arr) => {
+    if (arr.length > 3) {
+      return ` ${arr[0]}, ${arr[1]} and ${arr.length - 2} other`;
+    }
+    if (arr.length === 3) {
+      return ` ${arr[0]}, ${arr[1]} and 1 other`;
+    }
+    if (arr.length === 2) {
+      return ` ${arr[0]}, ${arr[1]}`;
+    }
+    if (arr.length === 1) {
+      return ` ${arr[0]}`;
+    }
+    return null;
+  };
 
   return (
     <div className="saved-header">

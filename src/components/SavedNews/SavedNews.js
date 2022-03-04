@@ -17,6 +17,7 @@ function SavedNews({
   setIsSavedNewsOpen,
   savedArticles,
   setSavedArticles,
+  userId,
 }) {
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -42,6 +43,8 @@ function SavedNews({
           image={card.image}
           link={card.link}
           handleDelete={handleDelete}
+          userId={userId}
+
         />
       ));
     } return null;
@@ -54,6 +57,7 @@ function SavedNews({
     const keywords = [];
 
     mainApi.getArticles().then((cards) => {
+      console.log(cards);
       cards.forEach((card) => {
         articles.push(card);
         keywords.push(capitalizeFirstLetter(card.keyword));

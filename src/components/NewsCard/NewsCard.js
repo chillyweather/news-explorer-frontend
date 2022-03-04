@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 
@@ -20,6 +21,7 @@ function NewsCard({
   handleDelete,
   isSavedNewsOpen,
   isLoggedIn,
+  // userId,
 }) {
   const [isCardMarked, setIsCardMarked] = useState(false);
   const isMarked = () => (isCardMarked ? 'newscard__save-button_marked' : '');

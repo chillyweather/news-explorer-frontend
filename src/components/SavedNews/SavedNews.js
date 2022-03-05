@@ -16,7 +16,7 @@ function SavedNews({
   handleDelete,
   setIsSavedNewsOpen,
   savedArticles,
-  // savedKeywords,
+  savedKeywords,
   setSavedArticles,
   capitalizeFirstLetter,
   userId,
@@ -60,9 +60,11 @@ function SavedNews({
         articles.push(card);
         keywords.push(capitalizeFirstLetter(card.keyword));
       });
-      setSavedKeywords([...new Set(keywords)]);
       setSavedArticles(articles.reverse());
-      console.log(savedArticles);
+    }).finally(() => {
+      console.log(savedKeywords);
+      setSavedKeywords([...new Set(keywords)]);
+      console.log(savedKeywords);
     });
   }, [isSavedNewsOpen]);
 

@@ -1,3 +1,5 @@
+/* eslint-disable prefer-promise-reject-errors */
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
 import {
@@ -28,17 +30,18 @@ class NewsApi {
       .then((data) => data.articles);
   }
 
-  downloadInitial() {
-    return fetch(
-      `${this._newsUrl}`
-      + '/top-headlines?'
-      + 'country=us&'
-      + `apiKey=${this._apiKey}&`
-      + 'pageSize=18',
-    )
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error('no news for you!'))))
-      .then((data) => data.articles);
-  }
+  // seems like i don't need it anymore...
+  // downloadInitial() {
+  //   return fetch(
+  //     `${this._newsUrl}`
+  //     + '/top-headlines?'
+  //     + 'country=us&'
+  //     + `apiKey=${this._apiKey}&`
+  //     + 'pageSize=18',
+  //   )
+  //     .then((res) => (res.ok ? res.json() : Promise.reject(new Error('no news for you!'))))
+  //     .then((data) => data.articles);
+  // }
 }
 
 const newsApi = new NewsApi({

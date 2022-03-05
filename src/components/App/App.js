@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
@@ -14,6 +15,7 @@ import SignUpPopup from '../SignUpPopup/SignUpPopup';
 import SignInPopup from '../SignInPopup/SignInPopup';
 import SuccessPopup from '../SuccessPopup/SuccessPopup';
 import FailurePopup from '../FailurePopup/FailurePopup';
+import ProtectedRoute from '../../utils/ProtectedRoute';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedNews from '../SavedNews/SavedNews';
 
@@ -55,6 +57,12 @@ function App() {
     setIsSuccessPopupOpen(false);
     setIsFailurePopupOpen(false);
   };
+
+  //  email, name and password state
+  //  for login and registration
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
 
   //  registration state
   const [isRegistered, setIsRegistered] = useState(false);
@@ -106,24 +114,22 @@ function App() {
     if (article) {
       mainApi.saveArticle(article)
         .then((res) => {
+          setIsCardSaved(!isCardSaved);
           console.log(res);
         })
         .catch((err) => console.log(err));
-      setIsCardSaved(!isCardSaved);
-    } else {
-      throw new Error('No article added');
     }
   };
 
   //  registration handler
   const registrationHandler = (
-    email,
-    password,
-    username,
+    mail,
+    pass,
+    uname,
   ) => {
     setSignUpPopupButtonText('Loading...');
     setIsRegistered(false);
-    mainApi.register(email, password, username)
+    mainApi.register(mail, pass, uname)
       .then((data) => {
         if (data._id) {
           setUserId({ _id: `${data._id}` });
@@ -138,7 +144,7 @@ function App() {
         setIsFailurePopupOpen(true);
         console.log(err);
       })
-      .finally(setSignUpPopupButtonText('Sign Up'));
+      .finally(() => setSignUpPopupButtonText('Sign Up'));
   };
 
   // registration form login
@@ -154,9 +160,9 @@ function App() {
   };
 
   //  login handler
-  const loginHandler = (email, password) => {
+  const loginHandler = (mail, pass) => {
     setIsRegistered(true);
-    mainApi.login(email, password)
+    mainApi.login(mail, pass)
       .then((data) => {
         if (data.token) {
           setIsLoggedIn(true);
@@ -165,7 +171,6 @@ function App() {
       }).catch((err) => {
         setIsSignInPopupOpen(false);
         setFailurePopupText('Wrong username or password!');
-        setIsPopupOpen(true);
         setIsFailurePopupOpen(true);
         console.log(err);
       });
@@ -189,11 +194,11 @@ function App() {
   const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
   //  refresh keyword list after delete
-  const refreshKeywords = (arr, elementToDelete) => {
-    const index = arr.findIndex((i) => i === elementToDelete);
-    arr.splice(index, 1);
-    return arr;
-  };
+  // const refreshKeywords = (arr, elementToDelete) => {
+  //   const index = arr.findIndex((i) => i === elementToDelete);
+  //   arr.splice(index, 1);
+  //   return arr;
+  // };
 
   //  handle article delete
   const handleDelete = (article) => {
@@ -202,8 +207,8 @@ function App() {
         console.log(res);
         setSavedArticles((state) => state.filter((c) => c._id !== article._id));
         console.log(savedKeywords);
-        setSavedKeywords(refreshKeywords(savedKeywords, article.keyword));
-        console.log(savedKeywords);
+        // setSavedKeywords(() => refreshKeywords(savedKeywords, article.keyword));
+        // console.log(savedKeywords);
       })
       .catch((err) => {
         setFailurePopupText('Only owner can delete this article');
@@ -228,8 +233,9 @@ function App() {
         mainApi.checkToken()
           .then((data) => {
             setIsLoggedIn(true);
-            setUserName(data.data.name.split(' ')[0]);
-            setButtonText(userName);
+            const name = data.data.name.split(' ')[0];
+            setUserName(name);
+            setButtonText(name);
           })
           .catch((err) => console.log(err));
       }
@@ -279,42 +285,46 @@ function App() {
           <Route
             path="/saved-news"
             element={(
-              <>
-                <Header
-                  isRegistered={isRegistered}
-                  isLoggedIn={isLoggedIn}
-                  buttonText={buttonText}
-                  setButtonText={setButtonText}
-                  toggleSignUpPopup={toggleSignUpPopup}
-                  toggleSignInPopup={toggleSignInPopup}
-                  toggleSavedNewsOpen={setIsSavedNewsOpen}
-                  isSavedNewsOpen
-                  handleLogOut={handleLogOut}
-                />
-                {isLoggedIn && (
-                <SavedNewsHeader
-                  savedKeywords={savedKeywords}
-                  savedArticles={savedArticles}
-                />
-                )}
-                {isLoggedIn && (
-                <SavedNews
-                  convertTime={convertTime}
-                  isCardSaved={isCardSaved}
-                  toggleSaveCard={toggleSaveCard}
-                  isSavedNewsOpen={isSavedNewsOpen}
-                  setIsSavedNewsOpen={setIsSavedNewsOpen}
-                  savedKeywords={savedKeywords}
-                  setSavedKeywords={setSavedKeywords}
-                  handleDelete={handleDelete}
-                  userId={userId}
-                  savedArticles={savedArticles}
-                  setSavedArticles={setSavedArticles}
-                  capitalizeFirstLetter={capitalizeFirstLetter}
-                />
-                )}
-              </>
+              <ProtectedRoute
+                isLoggedIn={isLoggedIn}
+              >
+                <>
+                  <Header
+                    isRegistered={isRegistered}
+                    isLoggedIn={isLoggedIn}
+                    buttonText={buttonText}
+                    setButtonText={setButtonText}
+                    toggleSignUpPopup={toggleSignUpPopup}
+                    toggleSignInPopup={toggleSignInPopup}
+                    toggleSavedNewsOpen={setIsSavedNewsOpen}
+                    isSavedNewsOpen
+                    handleLogOut={handleLogOut}
+                  />
+                  {isLoggedIn && (
+                  <SavedNewsHeader
+                    savedKeywords={savedKeywords}
+                    savedArticles={savedArticles}
+                  />
+                  )}
+                  {isLoggedIn && (
 
+                  <SavedNews
+                    convertTime={convertTime}
+                    isCardSaved={isCardSaved}
+                    toggleSaveCard={toggleSaveCard}
+                    isSavedNewsOpen={isSavedNewsOpen}
+                    setIsSavedNewsOpen={setIsSavedNewsOpen}
+                    savedKeywords={savedKeywords}
+                    setSavedKeywords={setSavedKeywords}
+                    handleDelete={handleDelete}
+                    userId={userId}
+                    savedArticles={savedArticles}
+                    setSavedArticles={setSavedArticles}
+                    capitalizeFirstLetter={capitalizeFirstLetter}
+                  />
+                  )}
+                </>
+              </ProtectedRoute>
           )}
           />
         </Routes>
@@ -322,45 +332,58 @@ function App() {
         <Footer />
         <PopupWithForm
           closePopups={closeAllPopups}
+          closeSignInPopup={setIsSignInPopupOpen}
+          closeSignUpPopup={setIsSignUpPopupOpen}
+          email={email}
+          failurePopupText={failurePopupText}
+          isFailurePopupOpen={isFailurePopupOpen}
+          isMobilePopupOpen={isMobilePopupOpen}
           isOpen={isPopupOpen}
           isRegistered={isRegistered}
+          isSignInPopupOpen={isSignInPopupOpen}
+          isSignUpPopupOpen={isSignUpPopupOpen}
+          isSuccessPopupOpen={isSuccessPopupOpen}
+          loginHandler={loginHandler}
+          password={password}
+          registrationHandler={registrationHandler}
+          resetLogin={resetLogin}
+          resetRegistration={resetRegistration}
+          setEmail={setEmail}
+          setPassword={setPassword}
+          setUsername={setUsername}
           toggleRegistered={setIsRegistered}
-          isMobilePopupOpen={isMobilePopupOpen}
+          toggleSignInPopup={toggleSignInPopup}
+          toggleSignUpPopup={toggleSignUpPopup}
+          toggleSuccessPopup={setIsSuccessPopupOpen}
+          username={username}
+
         >
           {isSignUpPopupOpen && (
           <SignUpPopup
-            closeSignUpPopup={setIsSignUpPopupOpen}
-            toggleSignInPopup={toggleSignInPopup}
             toggleSuccessPopup={setIsSuccessPopupOpen}
-            registrationHandler={registrationHandler}
-            setUserName={setUserName}
             signUpPopupButtonText={signUpPopupButtonText}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            username={username}
+            setUsername={setUsername}
           />
           )}
           {isSignInPopupOpen && (
-          <SignInPopup
-            toggleSignUpPopup={toggleSignUpPopup}
-            closeSignInPopup={setIsSignInPopupOpen}
-            toggleFailurePopup={setIsFailurePopupOpen}
-            loginHandler={loginHandler}
-          />
+            <SignInPopup
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              toggleFailurePopup={setIsFailurePopupOpen}
+            />
           )}
           {isSuccessPopupOpen && (
-          <SuccessPopup
-            toggleRegistered={setIsRegistered}
-            closePopups={closeAllPopups}
-            toggleSignInPopup={toggleSignInPopup}
-            toggleSuccessPopup={setIsSuccessPopupOpen}
-          />
+          <SuccessPopup />
           )}
           {isFailurePopupOpen && (
-          <FailurePopup
-            failurePopupText={failurePopupText}
-            isSavedNewsOpen={isSavedNewsOpen}
-            resetLogin={resetLogin}
-            resetRegistration={resetRegistration}
-            isRegistered={isRegistered}
-          />
+          <FailurePopup />
           )}
         </PopupWithForm>
       </div>

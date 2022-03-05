@@ -16,6 +16,7 @@ function Header({
   toggleMobilePopup,
   toggleSavedNewsOpen,
   buttonText,
+  setPopupButtonText,
 }) {
   // const currentUser = useContext(CurrentUserContext);
 
@@ -109,6 +110,7 @@ function Header({
             if (isLoggedIn) {
               handleLogOut();
             } else {
+              setPopupButtonText('Sign In');
               toggleSignInPopup();
             }
           }}

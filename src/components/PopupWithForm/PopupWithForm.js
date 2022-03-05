@@ -4,6 +4,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 
+// import { useEffect } from 'react';
+
 function PopupWithForm({
   // setEmail,
   // setPassword,
@@ -21,6 +23,8 @@ function PopupWithForm({
   isSuccessPopupOpen,
   loginHandler,
   password,
+  popupButtonText,
+  setPopupButtonText,
   registrationHandler,
   resetLogin,
   resetRegistration,
@@ -61,14 +65,14 @@ function PopupWithForm({
     } return null;
   };
 
-  const submitButtonText = () => {
-    if (isSignInPopupOpen) {
-      return 'Sign In';
-    }
-    if (isSignUpPopupOpen) {
-      return 'Sign Up';
-    } return null;
-  };
+  // const submitButtonText = () => {
+  //   if (isSignInPopupOpen) {
+  //     setPopupButtonText('Sign In');
+  //   }
+  //   if (isSignUpPopupOpen) {
+  //     setPopupButtonText('Sign Up');
+  //   } return null;
+  // };
 
   const showForm = () => {
     if (isSignInPopupOpen || isSignUpPopupOpen) {
@@ -89,7 +93,7 @@ function PopupWithForm({
               type="submit"
               className="popup-form__submit-button"
             >
-              {submitButtonText()}
+              {popupButtonText}
             </button>
           </form>
           <p className="popup__choose-form-text">
@@ -97,9 +101,11 @@ function PopupWithForm({
             <button
               onClick={() => {
                 if (isSignUpPopupOpen) {
+                  setPopupButtonText('Sign In');
                   closeSignUpPopup(false);
                   toggleSignInPopup();
-                } else {
+                } if (isSignInPopupOpen) {
+                  setPopupButtonText('Sign Up');
                   toggleSignUpPopup();
                   closeSignInPopup(false);
                 }
@@ -109,6 +115,7 @@ function PopupWithForm({
             >
               {popupRedirect()}
             </button>
+
           </p>
 
         </>

@@ -128,8 +128,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: 'http://localhost:3001',
-  // baseUrl: 'https://api.infostash.students.nomoreparties.sbs',
+  // baseUrl: 'http://localhost:3001',
+  baseUrl: 'https://api.infostash.students.nomoreparties.sbs',
   authToken: `Bearer ${localStorage.getItem('token')}`,
 });
 

@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-trailing-spaces */
 function About() {
@@ -8,15 +10,9 @@ function About() {
         <div className="about__info-container">
           <h2 className="about__info-title">About me</h2>
           <p className="about__info-content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis lacus
-            ullamcorper faucibus laoreet. Duis eu tellus sed odio congue dapibus. Mauris id porta
-            lorem. Fusce iaculis lacinia tincidunt. Suspendisse dictum ac nisl id posuere. Nunc
-            fermentum rutrum vulputate. Cras mollis sollicitudin nunc, ut congue turpis porttitor
+            Hi! I'm Dmitri. Positive, innovative, results-driven web developer with a background in cartography, design, and vast experience in print production. I'm currently looking for a position where I could constantly learn and fulfill my passion with finding optimal solutions for exiting problems.
           </p>
-          <p className="about__info-content">
-            Nam a turpis vel elit varius
-            molestie. Curabitur ac metus lacus. Proin blandit dui vel eleifend consectetur. 
-          </p>
+          
         </div>
       </div>
     </section>

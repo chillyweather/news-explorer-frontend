@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../../contexts/currentUserContext';
 /* eslint-disable react/prop-types */
 function SavedNewsHeader({ savedKeywords, savedArticles }) {
   const currentUser = useContext(CurrentUserContext);
-  const titleHandler = (arr, username) => `${username}, you have ${arr.length} saved articles`;
+  const titleHandler = (arr) => `${currentUser.data.name}, you have ${arr.length} saved articles`;
 
   const keywordLine = (arr) => {
     if (arr.length > 3) {

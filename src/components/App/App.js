@@ -27,6 +27,9 @@ import mainApi from '../../utils/MainApi';
 function App() {
   const navigate = useNavigate();
 
+  // current user
+  const [currentUser, setCurrentUser] = useState({});
+
   // popup
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -44,7 +47,7 @@ function App() {
   const [isFailurePopupOpen, setIsFailurePopupOpen] = useState(false);
 
   //  sign up popup button
-  const [signUpPopupButtonText, setSignUpPopupButtonText] = useState('Sign Up');
+  const [popupButtonText, setPopupButtonText] = useState('Sign In');
 
   //  failure popup text
   const [failurePopupText, setFailurePopupText] = useState('');
@@ -77,7 +80,7 @@ function App() {
   const [buttonText, setButtonText] = useState('Sign In');
 
   //  user name state
-  const [userName, setUserName] = useState('User');
+  // const [userName, setUserName] = useState('User');
 
   //  cards state
   const [isCardSaved, setIsCardSaved] = useState(false);
@@ -127,7 +130,7 @@ function App() {
     pass,
     uname,
   ) => {
-    setSignUpPopupButtonText('Loading...');
+    setPopupButtonText('Loading...');
     setIsRegistered(false);
     mainApi.register(mail, pass, uname)
       .then((data) => {
@@ -144,7 +147,7 @@ function App() {
         setIsFailurePopupOpen(true);
         console.log(err);
       })
-      .finally(() => setSignUpPopupButtonText('Sign Up'));
+      .finally(() => setPopupButtonText('Sign Up'));
   };
 
   // registration form login
@@ -167,8 +170,12 @@ function App() {
         if (data.token) {
           setIsLoggedIn(true);
           closeAllPopups();
+          mainApi.getUserInfo()
+            .then((res) => setCurrentUser(res))
+            .then(console.log(currentUser));
         }
-      }).catch((err) => {
+      })
+      .catch((err) => {
         setIsSignInPopupOpen(false);
         setFailurePopupText('Wrong username or password!');
         setIsFailurePopupOpen(true);
@@ -231,11 +238,11 @@ function App() {
       const token = localStorage.getItem('token');
       if (token) {
         mainApi.checkToken()
-          .then((data) => {
+          .then(() => {
             setIsLoggedIn(true);
-            const name = data.data.name.split(' ')[0];
-            setUserName(name);
-            setButtonText(name);
+            // const name = data.data.name.split(' ')[0];
+            // setUserName(name);
+            setButtonText(currentUser.data.name);
           })
           .catch((err) => console.log(err));
       }
@@ -245,7 +252,7 @@ function App() {
   }, [isLoggedIn, buttonText]);
 
   return (
-    <CurrentUserContext.Provider value={userName}>
+    <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
 
         <Routes>
@@ -265,6 +272,8 @@ function App() {
                   toggleMobilePopup={toggleMobilePopupState}
                   toggleSavedNewsOpen={setIsSavedNewsOpen}
                   handleLogOut={handleLogOut}
+                  setPopupButtonText={setPopupButtonText}
+
                 />
                 <Main
                   isCardSaved={isCardSaved}
@@ -345,11 +354,13 @@ function App() {
           isSuccessPopupOpen={isSuccessPopupOpen}
           loginHandler={loginHandler}
           password={password}
+          popupButtonText={popupButtonText}
           registrationHandler={registrationHandler}
           resetLogin={resetLogin}
           resetRegistration={resetRegistration}
           setEmail={setEmail}
           setPassword={setPassword}
+          setPopupButtonText={setPopupButtonText}
           setUsername={setUsername}
           toggleRegistered={setIsRegistered}
           toggleSignInPopup={toggleSignInPopup}
@@ -361,7 +372,7 @@ function App() {
           {isSignUpPopupOpen && (
           <SignUpPopup
             toggleSuccessPopup={setIsSuccessPopupOpen}
-            signUpPopupButtonText={signUpPopupButtonText}
+            signUpPopupButtonText={popupButtonText}
             email={email}
             setEmail={setEmail}
             password={password}

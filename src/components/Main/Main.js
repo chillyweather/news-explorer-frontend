@@ -29,6 +29,7 @@ function Main({
         newsCards={newsCards}
         setNewsCards={setNewsCards}
         setKeywords={setKeywords}
+        keywords={keywords}
       />
       {isSearching
         ? (

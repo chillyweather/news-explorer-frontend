@@ -174,6 +174,7 @@ function App() {
   //  logout handler
   const handleLogOut = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('savedSearch');
     setIsLoggedIn(false);
     setButtonText('Sign In');
     navigate('/');

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable prettier/prettier */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // import { useState } from 'react';
 
@@ -12,6 +12,7 @@ function SearchForm({
   // newsCards,
   setNewsCards,
   setKeywords,
+  // keywords,
 }) {
   const [searchText, setSearchText] = useState('');
   const handleChange = (e) => {
@@ -41,6 +42,14 @@ function SearchForm({
     });
   }
 
+  useEffect(() => {
+    const savedSearch = localStorage.getItem('savedSearch');
+    if (!searchText && savedSearch) {
+      setKeywords(savedSearch);
+      findNews(savedSearch);
+    }
+  }, []);
+
   return (
     <section className="search-form">
       <h2 className="search-form__title">What is going on in the world?</h2>
@@ -53,6 +62,7 @@ function SearchForm({
           if (searchText !== '') {
             e.preventDefault();
             setKeywords(searchText);
+            localStorage.setItem('savedSearch', searchText);
             findNews(searchText);
           } else {
             e.preventDefault();

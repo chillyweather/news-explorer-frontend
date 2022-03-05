@@ -6,12 +6,12 @@ import NewsCard from '../NewsCard/NewsCard';
 
 function NewsCardList({
   isCardSaved,
-  // keywords,
+  keywords,
   toggleSaveCard,
   isSavedNewsOpen,
   newsCards,
-  downloadInitial,
-  setNewsCards,
+  // downloadInitial,
+  // setNewsCards,
   isLoggedIn,
   userId,
 }) {
@@ -26,50 +26,51 @@ function NewsCardList({
   };
 
   // get initial 'top news' cards
-  const getInitialCards = () => {
-    const initialCards = [];
-    downloadInitial().then((res) => {
-      res.forEach((card) => {
-        const newCard = {
-          title: card.title,
-          text: card.content,
-          date: card.publishedAt,
-          source: card.source.name,
-          link: card.url,
-          image: card.urlToImage,
-          keyword: 'Hot News',
-        };
-        initialCards.push(newCard);
-      });
-      setNewsCards(initialCards);
-      // setThreeCards(initialCards.slice(0, 3));
-    });
-  };
+  // const getInitialCards = () => {
+  //   const initialCards = [];
+  //   downloadInitial().then((res) => {
+  //     res.forEach((card) => {
+  //       const newCard = {
+  //         title: card.title,
+  //         text: card.content,
+  //         date: card.publishedAt,
+  //         source: card.source.name,
+  //         link: card.url,
+  //         image: card.urlToImage,
+  //         keyword: 'Hot News',
+  //       };
+  //       initialCards.push(newCard);
+  //     });
+  //     setNewsCards(initialCards);
+  //     // setThreeCards(initialCards.slice(0, 3));
+  //   });
+  // };
 
   const renderCards = (cards) => {
     // const searchKeywords = keywords.split(' ');
     if (cards.length === 0) {
-      getInitialCards();
-      return cards.map((card, key = card.url) => (
-        <NewsCard
-          key={key}
-          keyword={card.keyword}
-          card={card}
-          _id={card._id || Math.random()}
-          date={convertTime(card.date)}
-          title={card.title}
-          description={card.text}
-          source={card.source}
-          isCardSaved={isCardSaved}
-          isSavedNewsOpen={isSavedNewsOpen}
-          toggleSaveCard={toggleSaveCard}
-          image={card.image}
-          link={card.link}
-          isLoggedIn={isLoggedIn}
-          userId={userId}
+      return null;
+      // getInitialCards();
+      // return cards.map((card, key = card.url) => (
+      //   <NewsCard
+      //     key={key}
+      //     keyword={card.keyword}
+      //     card={card}
+      //     _id={card._id || Math.random()}
+      //     date={convertTime(card.date)}
+      //     title={card.title}
+      //     description={card.text}
+      //     source={card.source}
+      //     isCardSaved={isCardSaved}
+      //     isSavedNewsOpen={isSavedNewsOpen}
+      //     toggleSaveCard={toggleSaveCard}
+      //     image={card.image}
+      //     link={card.link}
+      //     isLoggedIn={isLoggedIn}
+      //     userId={userId}
 
-        />
-      ));
+      //   />
+      // ));
     }
     return cards.map((card, key = card.url) => (
       <NewsCard
@@ -95,19 +96,40 @@ function NewsCardList({
 
   const buttonText = () => (showAll ? 'Show less' : 'Show more');
 
+  const toggleSectionVisibility = () => {
+    if (keywords) {
+      return (
+        <div className="cardList">
+          <section className="cardList__container">
+            {renderCards(showAll ? newsCards : newsCards.slice(0, 3))}
+          </section>
+          <button
+            className="cardList__button"
+            type="button"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {buttonText()}
+          </button>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
-    <div className="cardList">
-      <section className="cardList__container">
-        {renderCards(showAll ? newsCards : newsCards.slice(0, 3))}
-      </section>
-      <button
-        className="cardList__button"
-        type="button"
-        onClick={() => setShowAll(!showAll)}
-      >
-        {buttonText()}
-      </button>
-    </div>
+    toggleSectionVisibility()
+    // <div className="cardList">
+    //   <section className="cardList__container">
+    //     {renderCards(showAll ? newsCards : newsCards.slice(0, 3))}
+    //   </section>
+    //   <button
+    //     className="cardList__button"
+    //     type="button"
+    //     onClick={() => setShowAll(!showAll)}
+    //   >
+    //     {buttonText()}
+    //   </button>
+    // </div>
   );
 }
 

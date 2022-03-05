@@ -1,27 +1,16 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 
-import { useEffect, useRef } from 'react';
-
-/* eslint-disable jsx-a11y/control-has-associated-label */
 function PopupWithForm({
   isOpen, closePopups, children,
 }) {
-  const popupRef = useRef();
-
-  //   couldn't replicate the error, so that's my 'best guess')))
-  useEffect(() => {
-    document.addEventListener('mousedown', (e) => {
-      if (popupRef.current && !popupRef.current.contains(e.target)) {
-        closePopups();
-      }
-    });
-  });
-
   return (
     <div className={isOpen ? 'modal modal-active' : 'modal'}>
-      <div className="background" />
-      <div ref={popupRef} className="popup">
+      <div className="background" onClick={closePopups} />
+      <div className="popup">
         <button
           type="button"
           onClick={() => {

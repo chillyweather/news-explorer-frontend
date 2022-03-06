@@ -15,10 +15,18 @@ function Header({
   // isMobilePopupOpen,
   toggleMobilePopup,
   toggleSavedNewsOpen,
-  buttonText,
+  // buttonText,
   setPopupButtonText,
 }) {
   // const currentUser = useContext(CurrentUserContext);
+
+  const buttonText = () => {
+    if (!isLoggedIn) {
+      return 'Sign In';
+    // } if (currentUser) {
+    //   return currentUser.data.name;
+    } return 'Log Out';
+  };
 
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
@@ -116,7 +124,7 @@ function Header({
           }}
           className={isSavedNewsOpen ? `header__button header__login-button header__login-button_dark ${mobileWhiteMenuText()} ${mobileWhiteMenuButtonBorder()}` : 'header__button header__login-button'}
         >
-          {buttonText}
+          {buttonText()}
           {isLoggedIn && (
             isSavedNewsOpen
               ? <div className="header__logout-icon header__logout-icon_dark" />

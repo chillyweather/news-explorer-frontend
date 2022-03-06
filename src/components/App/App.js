@@ -77,7 +77,7 @@ function App() {
   const [userId, setUserId] = useState({});
 
   //  header button text state
-  const [buttonText, setButtonText] = useState('Sign In');
+  // const [buttonText, setButtonText] = useState('Sign In');
 
   //  user name state
   // const [userName, setUserName] = useState('User');
@@ -162,6 +162,14 @@ function App() {
     setIsSignInPopupOpen(true);
   };
 
+  //  set current user
+
+  const getUser = () => {
+    mainApi.getUserInfo()
+      .then((res) => setCurrentUser(res))
+      .then(console.log(currentUser));
+  };
+
   //  login handler
   const loginHandler = (mail, pass) => {
     setIsRegistered(true);
@@ -169,10 +177,8 @@ function App() {
       .then((data) => {
         if (data.token) {
           setIsLoggedIn(true);
+          getUser();
           closeAllPopups();
-          mainApi.getUserInfo()
-            .then((res) => setCurrentUser(res))
-            .then(console.log(currentUser));
         }
       })
       .catch((err) => {
@@ -188,7 +194,7 @@ function App() {
     localStorage.removeItem('token');
     localStorage.removeItem('savedSearch');
     setIsLoggedIn(false);
-    setButtonText('Sign In');
+    // setButtonText('Sign In');
     navigate('/');
   };
 
@@ -199,13 +205,6 @@ function App() {
 
   //  capitalize first letter
   const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
-
-  //  refresh keyword list after delete
-  // const refreshKeywords = (arr, elementToDelete) => {
-  //   const index = arr.findIndex((i) => i === elementToDelete);
-  //   arr.splice(index, 1);
-  //   return arr;
-  // };
 
   //  handle article delete
   const handleDelete = (article) => {
@@ -240,16 +239,23 @@ function App() {
         mainApi.checkToken()
           .then(() => {
             setIsLoggedIn(true);
-            // const name = data.data.name.split(' ')[0];
-            // setUserName(name);
-            setButtonText(currentUser.data.name);
           })
           .catch((err) => console.log(err));
       }
     }
 
     handleTokenCheck();
-  }, [isLoggedIn, buttonText]);
+  }, []);
+
+  //  set user info after reload
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     getUser();
+  //     // .then(console.log(currentUser))
+  //     // .catch((err) => console.log(err));
+  //   }
+  // }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -263,8 +269,8 @@ function App() {
                 <Header
                   isRegistered={isRegistered}
                   isLoggedIn={isLoggedIn}
-                  buttonText={buttonText}
-                  setButtonText={setButtonText}
+                  // buttonText={buttonText}
+                  // setButtonText={setButtonText}
                   toggleSignUpPopup={toggleSignUpPopup}
                   toggleSignInPopup={toggleSignInPopup}
                   isSavedNewsOpen={false}
@@ -301,8 +307,8 @@ function App() {
                   <Header
                     isRegistered={isRegistered}
                     isLoggedIn={isLoggedIn}
-                    buttonText={buttonText}
-                    setButtonText={setButtonText}
+                    // buttonText={buttonText}
+                    // setButtonText={setButtonText}
                     toggleSignUpPopup={toggleSignUpPopup}
                     toggleSignInPopup={toggleSignInPopup}
                     toggleSavedNewsOpen={setIsSavedNewsOpen}

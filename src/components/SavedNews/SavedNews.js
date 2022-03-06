@@ -16,10 +16,10 @@ function SavedNews({
   handleDelete,
   setIsSavedNewsOpen,
   savedArticles,
-  savedKeywords,
+  // savedKeywords,
   setSavedArticles,
   capitalizeFirstLetter,
-  userId,
+  // userId,
 }) {
   // const keywordList = [];
   // const [savedArticles, setSavedArticles] = useState([]);
@@ -42,7 +42,7 @@ function SavedNews({
           image={card.image}
           link={card.link}
           handleDelete={handleDelete}
-          userId={userId}
+          // userId={userId}
 
         />
       ));
@@ -62,9 +62,7 @@ function SavedNews({
       });
       setSavedArticles(articles.reverse());
     }).finally(() => {
-      console.log(savedKeywords);
       setSavedKeywords([...new Set(keywords)]);
-      console.log(savedKeywords);
     });
   }, [isSavedNewsOpen]);
 

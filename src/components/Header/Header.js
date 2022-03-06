@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable prettier/prettier */
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-// import { CurrentUserContext } from '../../contexts/currentUserContext';
+import { CurrentUserContext } from '../../contexts/currentUserContext';
 
 function Header({
   // toggleSignUpPopup,
@@ -18,14 +18,14 @@ function Header({
   // buttonText,
   setPopupButtonText,
 }) {
-  // const currentUser = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
   const buttonText = () => {
     if (!isLoggedIn) {
       return 'Sign In';
     // } if (currentUser) {
     //   return currentUser.data.name;
-    } return 'Log Out';
+    } return currentUser.name;
   };
 
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);

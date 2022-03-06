@@ -67,6 +67,12 @@ function App() {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
+  const resetLoginStates = () => {
+    setEmail('');
+    setPassword('');
+    setUsername('');
+  };
+
   //  registration state
   const [isRegistered, setIsRegistered] = useState(false);
 
@@ -74,7 +80,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //  user id state
-  const [userId, setUserId] = useState({});
+  // const [userId, setUserId] = useState({});
 
   //  header button text state
   // const [buttonText, setButtonText] = useState('Sign In');
@@ -135,7 +141,7 @@ function App() {
     mainApi.register(mail, pass, uname)
       .then((data) => {
         if (data._id) {
-          setUserId({ _id: `${data._id}` });
+          // setUserId({ _id: `${data._id}` });
           setIsSignUpPopupOpen(false);
           setIsSuccessPopupOpen(true);
           setIsRegistered(true);
@@ -150,7 +156,7 @@ function App() {
       .finally(() => setPopupButtonText('Sign Up'));
   };
 
-  // registration form login
+  // registration form reset
   const resetRegistration = () => {
     setIsFailurePopupOpen(false);
     setIsSignUpPopupOpen(true);
@@ -164,29 +170,38 @@ function App() {
 
   //  set current user
 
-  const getUser = () => {
-    mainApi.getUserInfo()
-      .then((res) => setCurrentUser(res))
-      .then(console.log(currentUser));
-  };
+  // const getUser = () => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     mainApi.getUserInfo()
+  //       .then((res) => {
+  //         console.log(res);
+  //         setCurrentUser(res.data);
+  //       })
+  //       .catch((err) => console.log(err))
+  //       .finally(() => {
+  //         setIsLoggedIn(true);
+  //         closeAllPopups();
+  //       });
+  //   }
+  // };
 
   //  login handler
   const loginHandler = (mail, pass) => {
     setIsRegistered(true);
     mainApi.login(mail, pass)
       .then((data) => {
-        if (data.token) {
-          setIsLoggedIn(true);
-          getUser();
-          closeAllPopups();
-        }
+        console.log(data);
+        setIsLoggedIn(true);
+        setCurrentUser(data.data);
       })
       .catch((err) => {
         setIsSignInPopupOpen(false);
         setFailurePopupText('Wrong username or password!');
         setIsFailurePopupOpen(true);
         console.log(err);
-      });
+      })
+      .finally(() => closeAllPopups());
   };
 
   //  logout handler
@@ -194,6 +209,8 @@ function App() {
     localStorage.removeItem('token');
     localStorage.removeItem('savedSearch');
     setIsLoggedIn(false);
+    setCurrentUser({});
+    resetLoginStates();
     // setButtonText('Sign In');
     navigate('/');
   };
@@ -232,30 +249,33 @@ function App() {
     return `${month} ${arr[2]}, ${arr[3]}`;
   };
 
-  useEffect(() => {
-    function handleTokenCheck() {
-      const token = localStorage.getItem('token');
-      if (token) {
-        mainApi.checkToken()
-          .then(() => {
-            setIsLoggedIn(true);
-          })
-          .catch((err) => console.log(err));
-      }
-    }
+  // useEffect(() => {
+  //   function handleTokenCheck() {
+  //     const token = localStorage.getItem('token');
+  //     if (token) {
+  //       mainApi.checkToken()
+  //         .then(() => {
+  //           setIsLoggedIn(true);
+  //         })
+  //         .catch((err) => console.log(err));
+  //     }
+  //   }
 
-    handleTokenCheck();
-  }, []);
+  //   handleTokenCheck();
+  // }, []);
 
   //  set user info after reload
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     getUser();
-  //     // .then(console.log(currentUser))
-  //     // .catch((err) => console.log(err));
-  //   }
-  // }, [isLoggedIn]);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      mainApi.getUserInfo()
+        .then((res) => {
+          setCurrentUser(res.data);
+          setIsLoggedIn(true);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -292,7 +312,7 @@ function App() {
                   downloadInitial={downloadInitial}
                   setKeywords={setKeywords}
                   keywords={keywords}
-                  userId={userId}
+                  // userId={userId}
                 />
               </>
 )}
@@ -332,7 +352,7 @@ function App() {
                     savedKeywords={savedKeywords}
                     setSavedKeywords={setSavedKeywords}
                     handleDelete={handleDelete}
-                    userId={userId}
+                    // userId={userId}
                     savedArticles={savedArticles}
                     setSavedArticles={setSavedArticles}
                     capitalizeFirstLetter={capitalizeFirstLetter}

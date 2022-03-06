@@ -13,7 +13,7 @@ function NewsCardList({
   // downloadInitial,
   // setNewsCards,
   isLoggedIn,
-  userId,
+  // userId,
 }) {
   const [showAll, setShowAll] = useState(false);
   // const [threeCards, setThreeCards] = useState([]);
@@ -88,7 +88,7 @@ function NewsCardList({
         image={card.image}
         link={card.link}
         isLoggedIn={isLoggedIn}
-        userId={userId}
+        // userId={userId}
 
       />
     ));

@@ -2,6 +2,12 @@
 /* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
+
+//! still some problems...
+// fixed most problems, but still something wrong with saving currentUser data
+// and 'saved news' throws me away to the homepage after reload page
+// please, give me a kick in the right direction...
+
 import './App.css';
 import { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';

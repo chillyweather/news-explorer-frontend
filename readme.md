@@ -1,3 +1,5 @@
+# News Explorer Front End
+
 View website online at https://infostash.space (note: not deployed yet)
 
 React front end for the News Explorer project. The interface allows users to search through recent news articles (powered by NewsAPI), and save/remove favorite articles to their personal account page (powered by the Node/Express backend API here), as well as handling handling account creation and login. This project incorporates:

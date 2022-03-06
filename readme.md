@@ -12,7 +12,7 @@ React front end for the News Explorer project. The interface allows users to sea
 
 - Front end authentication system for user registration and login
 
-- Locally-stored tokens to 'remember' logged in users
+- Locally-stored web tokens
 
 - Mobile-First Responsive Design
 

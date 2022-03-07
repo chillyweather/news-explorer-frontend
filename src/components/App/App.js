@@ -1,12 +1,8 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
-
-//! still some problems...
-// fixed most problems, but still something wrong with saving currentUser data
-// and 'saved news' throws me away to the homepage after reload page
-// please, give me a kick in the right direction...
 
 import './App.css';
 import { useEffect, useState } from 'react';
@@ -86,17 +82,6 @@ function App() {
   //  login state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  //  user id state
-  // const [userId, setUserId] = useState({});
-
-  //  header button text state
-  // const [buttonText, setButtonText] = useState('Sign In');
-
-  //  user name state
-  // const [userName, setUserName] = useState('User');
-
-  // not found section state
-
   const [notFound, setNotFound] = useState(false);
 
   //  cards state
@@ -136,28 +121,6 @@ function App() {
     setIsSignInPopupOpen(true);
   };
 
-  //  save card
-  const toggleSaveCard = (article) => {
-    if (article) {
-      mainApi.saveArticle(article)
-        .then((res) => {
-          console.log(article);
-          console.log(res);
-          console.log(newsCards);
-          setIsCardSaved(!isCardSaved);
-          console.log(res);
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
-          setNewsCards((state) => state.filter((c) => {
-            console.log(c.title);
-            console.log(article.title);
-            return c.title !== article.title;
-          }));
-        });
-    }
-  };
-
   //  render cards
   const renderCards = (cards) => {
     const convertTime = (d) => {
@@ -190,6 +153,24 @@ function App() {
 
       />
     ));
+  };
+  //  save card
+  const toggleSaveCard = (article) => {
+    if (article) {
+      mainApi.saveArticle(article)
+        .then(() => {
+          setIsCardSaved(!isCardSaved);
+          setNewsCards((state) => state.filter((c) => c.title !== article.title));
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          renderCards(newsCards);
+          localStorage.setItem('searchResults', newsCards);
+          // const ress = localStorage.getItem('searchResults');
+          // console.log(ress);
+          // renderCards(ress);
+        });
+    }
   };
 
   //  registration handler
@@ -229,24 +210,6 @@ function App() {
     setIsFailurePopupOpen(false);
     setIsSignInPopupOpen(true);
   };
-
-  //  set current user
-
-  // const getUser = () => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     mainApi.getUserInfo()
-  //       .then((res) => {
-  //         console.log(res);
-  //         setCurrentUser(res.data);
-  //       })
-  //       .catch((err) => console.log(err))
-  //       .finally(() => {
-  //         setIsLoggedIn(true);
-  //         closeAllPopups();
-  //       });
-  //   }
-  // };
 
   //  login handler
   const loginHandler = (mail, pass) => {
@@ -309,21 +272,6 @@ function App() {
     const arr = date.toDateString().split(' ');
     return `${month} ${arr[2]}, ${arr[3]}`;
   };
-
-  // useEffect(() => {
-  //   function handleTokenCheck() {
-  //     const token = localStorage.getItem('token');
-  //     if (token) {
-  //       mainApi.checkToken()
-  //         .then(() => {
-  //           setIsLoggedIn(true);
-  //         })
-  //         .catch((err) => console.log(err));
-  //     }
-  //   }
-
-  //   handleTokenCheck();
-  // }, []);
 
   //  set user info after reload
   useEffect(() => {

@@ -85,7 +85,7 @@ function App() {
   const [notFound, setNotFound] = useState(false);
 
   //  cards state
-  const [isCardSaved, setIsCardSaved] = useState(false);
+  // const [isCardSaved, setIsCardSaved] = useState(false);
 
   //  found articles state
   const [newsCards, setNewsCards] = useState([]);
@@ -143,7 +143,7 @@ function App() {
         title={card.title}
         description={card.text}
         source={card.source}
-        isCardSaved={isCardSaved}
+        // isCardSaved={isCardSaved}
         isSavedNewsOpen={isSavedNewsOpen}
         toggleSaveCard={toggleSaveCard}
         image={card.image}
@@ -159,7 +159,7 @@ function App() {
     if (article) {
       mainApi.saveArticle(article)
         .then(() => {
-          setIsCardSaved(!isCardSaved);
+          // setIsCardSaved(!isCardSaved);
           setNewsCards((state) => state.filter((c) => c.title !== article.title));
         })
         .catch((err) => console.log(err))
@@ -232,6 +232,7 @@ function App() {
   const handleLogOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('savedSearch');
+    localStorage.removeItem('searchResults');
     setIsLoggedIn(false);
     setCurrentUser({});
     resetLoginStates();
@@ -311,7 +312,7 @@ function App() {
 
                 />
                 <Main
-                  isCardSaved={isCardSaved}
+                  // isCardSaved={isCardSaved}
                   toggleSaveCard={toggleSaveCard}
                   isSavedNewsOpen={isSavedNewsOpen}
                   isSearching={isSearching}
@@ -361,7 +362,7 @@ function App() {
 
                   <SavedNews
                     convertTime={convertTime}
-                    isCardSaved={isCardSaved}
+                    // isCardSaved={isCardSaved}
                     toggleSaveCard={toggleSaveCard}
                     isSavedNewsOpen={isSavedNewsOpen}
                     setIsSavedNewsOpen={setIsSavedNewsOpen}

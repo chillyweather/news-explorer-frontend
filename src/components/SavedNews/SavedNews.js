@@ -55,16 +55,18 @@ function SavedNews({
     const articles = [];
     const keywords = [];
 
-    mainApi.getArticles().then((cards) => {
-      cards.forEach((card) => {
-        articles.push(card);
-        keywords.push(capitalizeFirstLetter(card.keyword));
+    mainApi.getArticles()
+      .then((cards) => {
+        cards.forEach((card) => {
+          articles.push(card);
+          keywords.push(capitalizeFirstLetter(card.keyword));
+        });
+        setSavedArticles(articles.reverse());
+        renderArticles(savedArticles);
+      }).finally(() => {
+        setSavedKeywords([...new Set(keywords)]);
       });
-      setSavedArticles(articles.reverse());
-    }).finally(() => {
-      setSavedKeywords([...new Set(keywords)]);
-    });
-  }, [isSavedNewsOpen]);
+  }, []);
 
   return (
     <div className="saved-news">

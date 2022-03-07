@@ -4,7 +4,7 @@
 import About from '../About/About';
 import SearchForm from '../SearchForm/SearchForm';
 import NewsCardList from '../NewsCardList/NewsCardList';
-// import NotFound from '../NotFound/NotFound';
+import NotFound from '../NotFound/NotFound';
 import Preloader from '../Preloader/Preloader';
 
 function Main({
@@ -31,9 +31,9 @@ function Main({
     if (!savedSearch) {
       return null;
     }
-    // if (savedSearch && newsCards.length === 0) {
-    //   return <NotFound />;
-    // }
+    if (savedSearch && newsCards.length === 0) {
+      return <NotFound />;
+    }
     return (
       <NewsCardList
         newsCards={newsCards}

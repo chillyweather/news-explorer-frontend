@@ -90,12 +90,14 @@ class MainApi {
   }
 
   getArticles() {
+    const token = localStorage.getItem('token');
     const article = fetch(`${this._baseUrl}/articles`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: this._authToken,
+        Authorization: `Bearer ${token}`,
+        // Authorization: this._authToken,
       },
     });
 
@@ -103,12 +105,14 @@ class MainApi {
   }
 
   saveArticle(article) {
+    const token = localStorage.getItem('token');
     const card = fetch(`${this._baseUrl}/articles`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: this._authToken,
+        Authorization: `Bearer ${token}`,
+        // Authorization: this._authToken,
       },
       body: JSON.stringify(article),
     });
@@ -117,11 +121,13 @@ class MainApi {
   }
 
   deleteArticle(article) {
+    const token = localStorage.getItem('token');
     const deletedArticle = fetch(`${this._baseUrl}/articles/${article._id}`, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: this._authToken,
+        Authorization: `Bearer ${token}`,
+        // Authorization: this._authToken,
       },
       method: 'DELETE',
     });
@@ -131,8 +137,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: 'http://localhost:3001',
-  // baseUrl: 'https://api.infostash.students.nomoreparties.sbs',
+  // baseUrl: 'http://localhost:3001',
+  baseUrl: 'https://api.infostash.students.nomoreparties.sbs',
   authToken: `Bearer ${localStorage.getItem('token')}`,
 });
 

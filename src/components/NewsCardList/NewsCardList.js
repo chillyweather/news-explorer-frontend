@@ -2,28 +2,29 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import NewsCard from '../NewsCard/NewsCard';
+// import NewsCard from '../NewsCard/NewsCard';
 
 function NewsCardList({
-  isCardSaved,
+  // isCardSaved,
   keywords,
-  toggleSaveCard,
-  isSavedNewsOpen,
+  // toggleSaveCard,
+  // isSavedNewsOpen,
   newsCards,
   // downloadInitial,
   // setNewsCards,
-  isLoggedIn,
+  // isLoggedIn,
   // userId,
+  renderCards,
 }) {
   const [showAll, setShowAll] = useState(false);
   // const [threeCards, setThreeCards] = useState([]);
 
-  const convertTime = (d) => {
-    const date = new Date(d);
-    const month = date.toLocaleString('default', { month: 'long' });
-    const arr = date.toDateString().split(' ');
-    return `${month} ${arr[2]}, ${arr[3]}`;
-  };
+  // const convertTime = (d) => {
+  //   const date = new Date(d);
+  //   const month = date.toLocaleString('default', { month: 'long' });
+  //   const arr = date.toDateString().split(' ');
+  //   return `${month} ${arr[2]}, ${arr[3]}`;
+  // };
 
   // get initial 'top news' cards
   // const getInitialCards = () => {
@@ -46,53 +47,31 @@ function NewsCardList({
   //   });
   // };
 
-  const renderCards = (cards) => {
-    // const searchKeywords = keywords.split(' ');
-    if (cards.length === 0) {
-      return null;
-      // getInitialCards();
-      // return cards.map((card, key = card.url) => (
-      //   <NewsCard
-      //     key={key}
-      //     keyword={card.keyword}
-      //     card={card}
-      //     _id={card._id || Math.random()}
-      //     date={convertTime(card.date)}
-      //     title={card.title}
-      //     description={card.text}
-      //     source={card.source}
-      //     isCardSaved={isCardSaved}
-      //     isSavedNewsOpen={isSavedNewsOpen}
-      //     toggleSaveCard={toggleSaveCard}
-      //     image={card.image}
-      //     link={card.link}
-      //     isLoggedIn={isLoggedIn}
-      //     userId={userId}
+  // const renderCards = (cards) => {
+  //   if (cards.length === 0) {
+  //     return null;
+  //   }
+  //   return cards.map((card, key = card.url) => (
+  //     <NewsCard
+  //       key={key}
+  //       keyword={card.keyword}
+  //       card={card}
+  //       _id={card._id || Math.random()}
+  //       date={convertTime(card.date)}
+  //       title={card.title}
+  //       description={card.text}
+  //       source={card.source}
+  //       isCardSaved={isCardSaved}
+  //       isSavedNewsOpen={isSavedNewsOpen}
+  //       toggleSaveCard={toggleSaveCard}
+  //       image={card.image}
+  //       link={card.link}
+  //       isLoggedIn={isLoggedIn}
+  //       // userId={userId}
 
-      //   />
-      // ));
-    }
-    return cards.map((card, key = card.url) => (
-      <NewsCard
-        key={key}
-        keyword={card.keyword}
-        card={card}
-        _id={card._id || Math.random()}
-        date={convertTime(card.date)}
-        title={card.title}
-        description={card.text}
-        source={card.source}
-        isCardSaved={isCardSaved}
-        isSavedNewsOpen={isSavedNewsOpen}
-        toggleSaveCard={toggleSaveCard}
-        image={card.image}
-        link={card.link}
-        isLoggedIn={isLoggedIn}
-        // userId={userId}
-
-      />
-    ));
-  };
+  //     />
+  //   ));
+  // };
 
   const buttonText = () => (showAll ? 'Show less' : 'Show more');
 

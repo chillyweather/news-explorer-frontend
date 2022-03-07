@@ -12,9 +12,11 @@ function SearchForm({
   // newsCards,
   setNewsCards,
   setKeywords,
+  setNotFound,
+  searchText,
+  setSearchText,
   // keywords,
 }) {
-  const [searchText, setSearchText] = useState('');
   const handleChange = (e) => {
     setSearchText(e.target.value);
   };
@@ -38,6 +40,7 @@ function SearchForm({
         newsResult.push(newCard);
       });
       setNewsCards(newsResult);
+      if (newsResult.length === 0) { setNotFound(true); }
       setIsSearching(false);
     });
   }

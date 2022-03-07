@@ -24,6 +24,7 @@ import FailurePopup from '../FailurePopup/FailurePopup';
 import ProtectedRoute from '../../utils/ProtectedRoute';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedNews from '../SavedNews/SavedNews';
+import NewsCard from '../NewsCard/NewsCard';
 
 import useKeypress from '../../utils/useKeypress';
 
@@ -94,14 +95,24 @@ function App() {
   //  user name state
   // const [userName, setUserName] = useState('User');
 
+  // not found section state
+
+  const [notFound, setNotFound] = useState(false);
+
   //  cards state
   const [isCardSaved, setIsCardSaved] = useState(false);
+
+  //  found articles state
+  const [newsCards, setNewsCards] = useState([]);
 
   //  saved articles state
   const [savedArticles, setSavedArticles] = useState([]);
 
   //  cards section state
   const [isSavedNewsOpen, setIsSavedNewsOpen] = useState(false);
+
+  //  state of search keyword
+  const [searchText, setSearchText] = useState('');
 
   // preloader state
   const [isSearching, setIsSearching] = useState(false);
@@ -125,15 +136,60 @@ function App() {
     setIsSignInPopupOpen(true);
   };
 
+  //  save card
   const toggleSaveCard = (article) => {
     if (article) {
       mainApi.saveArticle(article)
         .then((res) => {
+          console.log(article);
+          console.log(res);
+          console.log(newsCards);
           setIsCardSaved(!isCardSaved);
           console.log(res);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setNewsCards((state) => state.filter((c) => {
+            console.log(c.title);
+            console.log(article.title);
+            return c.title !== article.title;
+          }));
+        });
     }
+  };
+
+  //  render cards
+  const renderCards = (cards) => {
+    const convertTime = (d) => {
+      const date = new Date(d);
+      const month = date.toLocaleString('default', { month: 'long' });
+      const arr = date.toDateString().split(' ');
+      return `${month} ${arr[2]}, ${arr[3]}`;
+    };
+
+    if (cards.length === 0) {
+      return null;
+    }
+    return cards.map((card, key = card.url) => (
+      <NewsCard
+        key={key}
+        keyword={card.keyword}
+        card={card}
+        _id={card._id || Math.random()}
+        date={convertTime(card.date)}
+        title={card.title}
+        description={card.text}
+        source={card.source}
+        isCardSaved={isCardSaved}
+        isSavedNewsOpen={isSavedNewsOpen}
+        toggleSaveCard={toggleSaveCard}
+        image={card.image}
+        link={card.link}
+        isLoggedIn={isLoggedIn}
+        // userId={userId}
+
+      />
+    ));
   };
 
   //  registration handler
@@ -197,7 +253,6 @@ function App() {
     setIsRegistered(true);
     mainApi.login(mail, pass)
       .then((data) => {
-        console.log(data);
         setIsLoggedIn(true);
         setCurrentUser(data.data);
       })
@@ -274,7 +329,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      mainApi.getUserInfo()
+      mainApi.getUserInfo(token)
         .then((res) => {
           setCurrentUser(res.data);
           setIsLoggedIn(true);
@@ -318,6 +373,13 @@ function App() {
                   downloadInitial={downloadInitial}
                   setKeywords={setKeywords}
                   keywords={keywords}
+                  setNotFound={setNotFound}
+                  notFound={notFound}
+                  searchText={searchText}
+                  setSearchText={setSearchText}
+                  newsCards={newsCards}
+                  setNewsCards={setNewsCards}
+                  renderCards={renderCards}
                   // userId={userId}
                 />
               </>

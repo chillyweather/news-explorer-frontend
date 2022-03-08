@@ -169,9 +169,6 @@ function App() {
         .finally(() => {
           renderCards(newsCards);
           localStorage.setItem('searchResults', newsCards);
-          // const ress = localStorage.getItem('searchResults');
-          // console.log(ress);
-          // renderCards(ress);
         });
     }
   };

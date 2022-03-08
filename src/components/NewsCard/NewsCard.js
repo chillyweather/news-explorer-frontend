@@ -69,7 +69,7 @@ function NewsCard({
           </p>
           <button
             type="button"
-            disabled={!isLoggedIn}
+            // disabled={!isLoggedIn}
             className={
                 isSavedNewsOpen
                   ? 'newscard__remove-button'

@@ -18,7 +18,7 @@ class NewsApi {
 
   find(keyword) {
     return fetch(
-      `${this._newsUrl}`
+      `${this._proxyUrl}`
       + '/everything?'
       + `q=${keyword}&`
       + `apiKey=${this._apiKey}&`

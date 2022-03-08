@@ -23,7 +23,7 @@ function PopupWithForm({
   isSuccessPopupOpen,
   loginHandler,
   password,
-  popupButtonText,
+  // popupButtonText,
   setPopupButtonText,
   registrationHandler,
   resetLogin,
@@ -93,7 +93,7 @@ function PopupWithForm({
               type="submit"
               className="popup-form__submit-button"
             >
-              {popupButtonText}
+              {popupTitle()}
             </button>
           </form>
           <p className="popup__choose-form-text">

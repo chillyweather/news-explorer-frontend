@@ -2,7 +2,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 
-import { useState } from 'react';
+// import { useState } from 'react';
 
 /* eslint-disable react/prop-types */
 function NewsCard({
@@ -21,9 +21,11 @@ function NewsCard({
   handleDelete,
   isSavedNewsOpen,
   isLoggedIn,
+  isCardMarked,
+  // setIsCardMarked,
   // userId,
 }) {
-  const [isCardMarked, setIsCardMarked] = useState(false);
+  // const [isCardMarked, setIsCardMarked] = useState(false);
   const isMarked = () => (isCardMarked ? 'newscard__save-button_marked' : '');
 
   const cardKeyword = (word) => {
@@ -67,6 +69,7 @@ function NewsCard({
           </p>
           <button
             type="button"
+            disabled={!isLoggedIn}
             className={
                 isSavedNewsOpen
                   ? 'newscard__remove-button'
@@ -76,7 +79,7 @@ function NewsCard({
               if (isSavedNewsOpen) {
                 handleDelete(card);
               } else if (isLoggedIn) {
-                setIsCardMarked(!isCardMarked);
+                // setIsCardMarked(true);
                 toggleSaveCard(card);
               }
             }}

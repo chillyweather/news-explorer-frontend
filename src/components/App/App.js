@@ -86,6 +86,7 @@ function App() {
 
   //  cards state
   // const [isCardSaved, setIsCardSaved] = useState(false);
+  const [isCardMarked, setIsCardMarked] = useState(false);
 
   //  found articles state
   const [newsCards, setNewsCards] = useState([]);
@@ -149,6 +150,8 @@ function App() {
         image={card.image}
         link={card.link}
         isLoggedIn={isLoggedIn}
+        isCardMarked={isCardMarked}
+        setIsCardMarked={setIsCardMarked}
         // userId={userId}
 
       />
@@ -329,6 +332,8 @@ function App() {
                   newsCards={newsCards}
                   setNewsCards={setNewsCards}
                   renderCards={renderCards}
+                  isCardMarked={isCardMarked}
+                  setIsCardMarked={setIsCardMarked}
                   // userId={userId}
                 />
               </>

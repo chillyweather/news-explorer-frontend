@@ -24,7 +24,8 @@ function Main({
   newsCards,
   setNewsCards,
   renderCards,
-  // userId,
+  isCardMarked,
+  setIsCardMarked,
 }) {
   const savedSearch = localStorage.getItem('savedSearch');
   const renderNewsCards = () => {
@@ -45,6 +46,8 @@ function Main({
         isLoggedIn={isLoggedIn}
         keywords={keywords}
         renderCards={renderCards}
+        isCardMarked={isCardMarked}
+        setIsCardMarked={setIsCardMarked}
       />
     );
   };

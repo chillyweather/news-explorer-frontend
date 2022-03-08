@@ -5,16 +5,10 @@ import { useState } from 'react';
 // import NewsCard from '../NewsCard/NewsCard';
 
 function NewsCardList({
-  // isCardSaved,
   keywords,
-  // toggleSaveCard,
-  // isSavedNewsOpen,
   newsCards,
-  // downloadInitial,
-  // setNewsCards,
-  // isLoggedIn,
-  // userId,
   renderCards,
+
 }) {
   const [showAll, setShowAll] = useState(false);
 

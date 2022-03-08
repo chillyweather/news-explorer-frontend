@@ -95,7 +95,7 @@
   background-image: url(../../images/svg/bookmark-hover.svg);
 }
 
-.newscard__save-button_marked {
+.newscard__save-button:active {
   background-image: url(../../images/svg/bookmark-saved.svg);
 }
 

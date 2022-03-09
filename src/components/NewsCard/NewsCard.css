@@ -99,6 +99,10 @@
   background-image: url(../../images/svg/bookmark-saved.svg);
 }
 
+.newscard__save-button_marked {
+  background-image: url(../../images/svg/bookmark-saved.svg);
+}
+
 .newscard__save-button_marked:hover {
   background-image: url(../../images/svg/bookmark-saved.svg);
 }

@@ -86,7 +86,7 @@ function App() {
 
   //  cards state
   // const [isCardSaved, setIsCardSaved] = useState(false);
-  const [isCardMarked, setIsCardMarked] = useState(false);
+  // const [isCardMarked, setIsCardMarked] = useState(false);
 
   //  found articles state
   const [newsCards, setNewsCards] = useState([]);
@@ -150,8 +150,10 @@ function App() {
         image={card.image}
         link={card.link}
         isLoggedIn={isLoggedIn}
-        isCardMarked={isCardMarked}
-        setIsCardMarked={setIsCardMarked}
+        handleDelete={handleDelete}
+
+        // isCardMarked={isCardMarked}
+        // setIsCardMarked={setIsCardMarked}
         // userId={userId}
 
       />
@@ -162,12 +164,14 @@ function App() {
     if (article) {
       mainApi.saveArticle(article)
         .then(() => {
+          console.log(article);
+          // setIsCardMarked(!isCardMarked);
           // setIsCardSaved(!isCardSaved);
-          setNewsCards((state) => state.filter((c) => c.title !== article.title));
+          // setNewsCards((state) => state.filter((c) => c.title !== article.title));
         })
         .catch((err) => console.log(err))
         .finally(() => {
-          renderCards(newsCards);
+          // renderCards(newsCards);
           localStorage.setItem('searchResults', newsCards);
         });
     }
@@ -329,8 +333,8 @@ function App() {
                   newsCards={newsCards}
                   setNewsCards={setNewsCards}
                   renderCards={renderCards}
-                  isCardMarked={isCardMarked}
-                  setIsCardMarked={setIsCardMarked}
+                  // isCardMarked={isCardMarked}
+                  // setIsCardMarked={setIsCardMarked}
                   // userId={userId}
                 />
               </>

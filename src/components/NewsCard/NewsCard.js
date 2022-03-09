@@ -2,7 +2,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 
-// import { useState } from 'react';
+import { useState } from 'react';
 
 /* eslint-disable react/prop-types */
 function NewsCard({
@@ -21,11 +21,15 @@ function NewsCard({
   handleDelete,
   isSavedNewsOpen,
   isLoggedIn,
-  isCardMarked,
+  // isCardMarked,
   // setIsCardMarked,
   // userId,
 }) {
-  // const [isCardMarked, setIsCardMarked] = useState(false);
+  const [isCardMarked, setIsCardMarked] = useState(false);
+
+  //  this card id
+  // const [thisCardID, setThisCardID] = useState('');
+
   const isMarked = () => (isCardMarked ? 'newscard__save-button_marked' : '');
 
   const cardKeyword = (word) => {
@@ -46,6 +50,26 @@ function NewsCard({
     return 'Sign In to save articles';
   };
   // console.log(cardId);
+
+  const saveDeleteButtonLook = () => {
+    if (isSavedNewsOpen) {
+      return 'newscard__remove-button';
+    } if (isCardMarked) {
+      return `newscard__save-button ${isMarked()}`;
+    } return 'newscard__save-button';
+  };
+
+  const handleClick = () => {
+    if (isSavedNewsOpen) {
+      handleDelete(card);
+    } if (isLoggedIn && !isCardMarked) {
+      setIsCardMarked(true);
+      toggleSaveCard(card);
+    } if (isLoggedIn && isCardMarked) {
+      setIsCardMarked(false);
+      handleDelete(card);
+    }
+  };
 
   return (
 
@@ -71,17 +95,13 @@ function NewsCard({
             type="button"
             // disabled={!isLoggedIn}
             className={
-                isSavedNewsOpen
-                  ? 'newscard__remove-button'
-                  : `newscard__save-button ${isMarked()}`
+              saveDeleteButtonLook()
+              // isSavedNewsOpen
+                //   ? 'newscard__remove-button'
+                //   : `newscard__save-button ${isMarked()}`
               }
             onClick={() => {
-              if (isSavedNewsOpen) {
-                handleDelete(card);
-              } else if (isLoggedIn) {
-                // setIsCardMarked(true);
-                toggleSaveCard(card);
-              }
+              handleClick();
             }}
           />
         </div>

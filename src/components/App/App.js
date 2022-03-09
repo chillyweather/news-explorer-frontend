@@ -84,6 +84,9 @@ function App() {
 
   const [notFound, setNotFound] = useState(false);
 
+  //  temporary saved cards state
+  // const [tempCards, setTempCards] = useState([]);
+
   //  cards state
   // const [isCardSaved, setIsCardSaved] = useState(false);
   // const [isCardMarked, setIsCardMarked] = useState(false);
@@ -108,6 +111,8 @@ function App() {
 
   //  saved news keyword state
   const [savedKeywords, setSavedKeywords] = useState([]);
+
+  //
 
   // escape key handling
   useKeypress('Escape', closeAllPopups);
@@ -151,6 +156,8 @@ function App() {
         link={card.link}
         isLoggedIn={isLoggedIn}
         handleDelete={handleDelete}
+        findCardByTitleAndDelete={findCardByTitleAndDelete}
+        toggleSignInPopup={toggleSignInPopup}
 
         // isCardMarked={isCardMarked}
         // setIsCardMarked={setIsCardMarked}
@@ -159,19 +166,26 @@ function App() {
       />
     ));
   };
+
+  // find card by title
+  const findCardByTitleAndDelete = (card) => {
+    mainApi.getArticles()
+      .then((res) => res.find((c) => c.title === card.title))
+      .then((data) => mainApi.deleteArticle(data)
+        .then((result) => console.log(result)))
+      .catch((err) => console.log(err));
+  };
+
   //  save card
   const toggleSaveCard = (article) => {
+    // let tempCardList = [];
     if (article) {
       mainApi.saveArticle(article)
-        .then(() => {
-          console.log(article);
-          // setIsCardMarked(!isCardMarked);
-          // setIsCardSaved(!isCardSaved);
-          // setNewsCards((state) => state.filter((c) => c.title !== article.title));
+        .then((res) => {
+          console.log(res);
         })
         .catch((err) => console.log(err))
         .finally(() => {
-          // renderCards(newsCards);
           localStorage.setItem('searchResults', newsCards);
         });
     }
@@ -237,6 +251,7 @@ function App() {
     localStorage.removeItem('token');
     localStorage.removeItem('savedSearch');
     localStorage.removeItem('searchResults');
+    setIsSavedNewsOpen(false);
     setIsLoggedIn(false);
     setCurrentUser({});
     resetLoginStates();
@@ -303,8 +318,6 @@ function App() {
                 <Header
                   isRegistered={isRegistered}
                   isLoggedIn={isLoggedIn}
-                  // buttonText={buttonText}
-                  // setButtonText={setButtonText}
                   toggleSignUpPopup={toggleSignUpPopup}
                   toggleSignInPopup={toggleSignInPopup}
                   isSavedNewsOpen={false}
@@ -316,7 +329,6 @@ function App() {
 
                 />
                 <Main
-                  // isCardSaved={isCardSaved}
                   toggleSaveCard={toggleSaveCard}
                   isSavedNewsOpen={isSavedNewsOpen}
                   isSearching={isSearching}
@@ -333,9 +345,6 @@ function App() {
                   newsCards={newsCards}
                   setNewsCards={setNewsCards}
                   renderCards={renderCards}
-                  // isCardMarked={isCardMarked}
-                  // setIsCardMarked={setIsCardMarked}
-                  // userId={userId}
                 />
               </>
 )}
@@ -345,6 +354,7 @@ function App() {
             element={(
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
+                toggleSignInPopup={toggleSignInPopup}
               >
                 <>
                   <Header
@@ -385,6 +395,7 @@ function App() {
               </ProtectedRoute>
           )}
           />
+
         </Routes>
 
         <Footer />

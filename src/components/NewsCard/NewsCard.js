@@ -21,6 +21,8 @@ function NewsCard({
   handleDelete,
   isSavedNewsOpen,
   isLoggedIn,
+  findCardByTitleAndDelete,
+  toggleSignInPopup,
   // isCardMarked,
   // setIsCardMarked,
   // userId,
@@ -60,6 +62,12 @@ function NewsCard({
   };
 
   const handleClick = () => {
+    if (!isLoggedIn && !isSavedNewsOpen) {
+      toggleSignInPopup();
+    }
+    if (!isSavedNewsOpen && isLoggedIn && isCardMarked) {
+      findCardByTitleAndDelete(card);
+    }
     if (isSavedNewsOpen) {
       handleDelete(card);
     } if (isLoggedIn && !isCardMarked) {
@@ -67,7 +75,7 @@ function NewsCard({
       toggleSaveCard(card);
     } if (isLoggedIn && isCardMarked) {
       setIsCardMarked(false);
-      handleDelete(card);
+      // handleDelete(card);
     }
   };
 
@@ -93,12 +101,8 @@ function NewsCard({
           </p>
           <button
             type="button"
-            // disabled={!isLoggedIn}
             className={
               saveDeleteButtonLook()
-              // isSavedNewsOpen
-                //   ? 'newscard__remove-button'
-                //   : `newscard__save-button ${isMarked()}`
               }
             onClick={() => {
               handleClick();

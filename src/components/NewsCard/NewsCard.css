@@ -32,6 +32,7 @@
   border-radius: 8px;
   margin: auto;
   padding: 0 22px;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -92,6 +93,10 @@
 
 .newscard__save-button:hover {
   background-image: url(../../images/svg/bookmark-hover.svg);
+}
+
+.newscard__save-button:active {
+  background-image: url(../../images/svg/bookmark-saved.svg);
 }
 
 .newscard__save-button_marked {

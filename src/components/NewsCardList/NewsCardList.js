@@ -1,35 +1,53 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
-import NewsCard from '../NewsCard/NewsCard';
+import { useState } from 'react';
+// import NewsCard from '../NewsCard/NewsCard';
 
-function NewsCardList({ isCardSaved, toggleSaveCard, isSavedNewsOpen }) {
+function NewsCardList({
+  keywords,
+  newsCards,
+  renderCards,
+
+}) {
+  const [showAll, setShowAll] = useState(false);
+
+  const buttonText = () => (showAll ? 'Show less' : 'Show more');
+
+  const toggleSectionVisibility = () => {
+    if (keywords) {
+      return (
+        <div className="cardList">
+          <section className="cardList__container">
+            {renderCards(showAll ? newsCards : newsCards.slice(0, 3))}
+          </section>
+          <button
+            className="cardList__button"
+            type="button"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {buttonText()}
+          </button>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
-    <div className="cardList">
-      <section className="cardList__container">
-        <NewsCard
-          isCardSaved={isCardSaved}
-          isSavedNewsOpen={isSavedNewsOpen}
-          toggleSaveCard={toggleSaveCard}
-        />
-        <NewsCard
-          isCardSaved={isCardSaved}
-          isSavedNewsOpen={isSavedNewsOpen}
-          toggleSaveCard={toggleSaveCard}
-        />
-        <NewsCard
-          isCardSaved={isCardSaved}
-          isSavedNewsOpen={isSavedNewsOpen}
-          toggleSaveCard={toggleSaveCard}
-        />
-        <NewsCard
-          isCardSaved={isCardSaved}
-          isSavedNewsOpen={isSavedNewsOpen}
-          toggleSaveCard={toggleSaveCard}
-        />
-      </section>
-      <button className="cardList__button" type="button">
-        Show more
-      </button>
-    </div>
+    toggleSectionVisibility()
+    // <div className="cardList">
+    //   <section className="cardList__container">
+    //     {renderCards(showAll ? newsCards : newsCards.slice(0, 3))}
+    //   </section>
+    //   <button
+    //     className="cardList__button"
+    //     type="button"
+    //     onClick={() => setShowAll(!showAll)}
+    //   >
+    //     {buttonText()}
+    //   </button>
+    // </div>
   );
 }
 

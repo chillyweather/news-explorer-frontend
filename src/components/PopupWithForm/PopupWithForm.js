@@ -1,27 +1,163 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 
-import { useEffect, useRef } from 'react';
+// import { useEffect } from 'react';
 
-/* eslint-disable jsx-a11y/control-has-associated-label */
 function PopupWithForm({
-  isOpen, closePopups, children,
+  // setEmail,
+  // setPassword,
+  children,
+  closePopups,
+  closeSignInPopup,
+  closeSignUpPopup,
+  email,
+  failurePopupText,
+  isFailurePopupOpen,
+  isOpen,
+  isRegistered,
+  isSignInPopupOpen,
+  isSignUpPopupOpen,
+  isSuccessPopupOpen,
+  loginHandler,
+  password,
+  // popupButtonText,
+  setPopupButtonText,
+  registrationHandler,
+  resetLogin,
+  resetRegistration,
+  toggleSignInPopup,
+  toggleSignUpPopup,
+  toggleRegistered,
+  toggleSuccessPopup,
+  username,
 }) {
-  const popupRef = useRef();
+  const handleSubmit = () => {
+    if (isSignUpPopupOpen) {
+      registrationHandler(email, password, username);
+    } if (isSignInPopupOpen) { loginHandler(email, password); }
+  };
 
-  //   couldn't replicate the error, so that's my 'best guess')))
-  useEffect(() => {
-    document.addEventListener('mousedown', (e) => {
-      if (popupRef.current && !popupRef.current.contains(e.target)) {
-        closePopups();
-      }
-    });
-  });
+  const popupTitle = () => {
+    if (isSignInPopupOpen) {
+      return 'Sign In';
+    }
+    if (isSignUpPopupOpen) {
+      return 'Sign Up';
+    }
+    if (isSuccessPopupOpen) {
+      return 'Registration successfully completed!';
+    }
+    if (isFailurePopupOpen) {
+      return `${failurePopupText}`;
+    }
+    return null;
+  };
+
+  const popupRedirect = () => {
+    if (isSignInPopupOpen) {
+      return 'Sign Up';
+    }
+    if (isSignUpPopupOpen) {
+      return 'Sign In';
+    } return null;
+  };
+
+  // const submitButtonText = () => {
+  //   if (isSignInPopupOpen) {
+  //     setPopupButtonText('Sign In');
+  //   }
+  //   if (isSignUpPopupOpen) {
+  //     setPopupButtonText('Sign Up');
+  //   } return null;
+  // };
+
+  const showForm = () => {
+    if (isSignInPopupOpen || isSignUpPopupOpen) {
+      return (
+        <>
+
+          <form
+            className="popup__content"
+          // name={`${name}`}
+            action="#"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
+            {children}
+            <button
+              type="submit"
+              className="popup-form__submit-button"
+            >
+              {popupTitle()}
+            </button>
+          </form>
+          <p className="popup__choose-form-text">
+            or
+            <button
+              onClick={() => {
+                if (isSignUpPopupOpen) {
+                  setPopupButtonText('Sign In');
+                  closeSignUpPopup(false);
+                  toggleSignInPopup();
+                } if (isSignInPopupOpen) {
+                  setPopupButtonText('Sign Up');
+                  toggleSignUpPopup();
+                  closeSignInPopup(false);
+                }
+              }}
+              className="popup__choose-form-button"
+              type="button"
+            >
+              {popupRedirect()}
+            </button>
+
+          </p>
+
+        </>
+      );
+    } return null;
+  };
+
+  const tryConfirmButton = () => {
+    if (isFailurePopupOpen) {
+      return (
+        <button
+          className="popup__choose-form-button popup__confirm-prompt"
+          type="button"
+          onClick={() => (
+            isRegistered
+              ? resetLogin()
+              : resetRegistration())}
+        >
+          Try again
+        </button>
+      );
+    } if (isSuccessPopupOpen) {
+      return (
+        <button
+          className="popup__choose-form-button popup__confirm-prompt"
+          type="button"
+          onClick={() => {
+            toggleRegistered(true);
+            toggleSuccessPopup(false);
+            toggleSignInPopup();
+          }}
+        >
+          Sign In
+        </button>
+      );
+    } return null;
+  };
 
   return (
     <div className={isOpen ? 'modal modal-active' : 'modal'}>
-      <div className="background" />
-      <div ref={popupRef} className="popup">
+      <div className="background" onClick={closePopups} />
+      <div className="popup">
         <button
           type="button"
           onClick={() => {
@@ -29,7 +165,9 @@ function PopupWithForm({
           }}
           className="popup__close-button"
         />
-        {children}
+        <h2 className="popup__title">{popupTitle()}</h2>
+        {showForm()}
+        {tryConfirmButton()}
       </div>
     </div>
   );

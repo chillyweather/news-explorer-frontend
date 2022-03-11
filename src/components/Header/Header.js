@@ -1,18 +1,33 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable prettier/prettier */
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/currentUserContext';
 
 function Header({
-  toggleSignUpPopup,
+  // toggleSignUpPopup,
   toggleSignInPopup,
-  isRegistered,
+  // isRegistered,
+  isLoggedIn,
+  handleLogOut,
   isSavedNewsOpen,
   // isMobilePopupOpen,
   toggleMobilePopup,
   toggleSavedNewsOpen,
+  // buttonText,
+  setPopupButtonText,
 }) {
+  const currentUser = useContext(CurrentUserContext);
+
+  const buttonText = () => {
+    if (!isLoggedIn) {
+      return 'Sign In';
+    // } if (currentUser) {
+    //   return currentUser.data.name;
+    } return currentUser.name;
+  };
+
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   const toggleMobileNavMenu = () => {
@@ -74,6 +89,7 @@ function Header({
               Home
             </button>
           </Link>
+          {isLoggedIn && (
           <Link to="/saved-news">
             <button
               type="button"
@@ -89,6 +105,7 @@ function Header({
               Saved Articles
             </button>
           </Link>
+          )}
         </nav>
 
         <button
@@ -98,13 +115,20 @@ function Header({
               toggleMobilePopup();
             }
             setIsMobileNavOpen(false);
-            if (isRegistered) {
+            if (isLoggedIn) {
+              handleLogOut();
+            } else {
+              setPopupButtonText('Sign In');
               toggleSignInPopup();
-            } else { toggleSignUpPopup(); }
+            }
           }}
           className={isSavedNewsOpen ? `header__button header__login-button header__login-button_dark ${mobileWhiteMenuText()} ${mobileWhiteMenuButtonBorder()}` : 'header__button header__login-button'}
         >
-          {isRegistered ? 'Sign In' : 'Sign Up'}
+          {buttonText()}
+          {isLoggedIn && (
+            isSavedNewsOpen
+              ? <div className="header__logout-icon header__logout-icon_dark" />
+              : <div className="header__logout-icon header__logout-icon_light" />)}
         </button>
       </div>
     </header>

@@ -14,13 +14,6 @@ function Footer() {
               </button>
             </li>
           </Link>
-          <a href="https://practicum.yandex.com/" target="_blank" rel="noreferrer">
-            <li className="footer__navigation-item">
-              <button type="button" className="footer__nav-text">
-                Practicum by Yandex
-              </button>
-            </li>
-          </a>
         </ul>
         <ul className="footer__navigation-icons">
           <a href="https://github.com/chillyweather" target="_blank" rel="noreferrer">
@@ -28,9 +21,9 @@ function Footer() {
               <button type="button" className="footer__nav-logo-git" />
             </li>
           </a>
-          <a href="https://www.facebook.com/dmitri.dmitriev" target="_blank" rel="noreferrer">
+          <a href="https://www.linkedin.com/in/dmitridmitriev/" target="_blank" rel="noreferrer">
             <li className="footer__navigation-item">
-              <button type="button" className="footer__nav-logo-fb" />
+              <button type="button" className="footer__nav-logo-li" />
             </li>
           </a>
         </ul>

@@ -33,6 +33,10 @@ function App() {
   // current user
   const [currentUser, setCurrentUser] = useState({});
 
+  //
+  //  ---> popups <---
+  //
+
   // popup
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -64,8 +68,21 @@ function App() {
     setIsFailurePopupOpen(false);
   };
 
+  const toggleSignUpPopup = () => {
+    setIsPopupOpen(true);
+    setIsSignUpPopupOpen(true);
+  };
+
+  const toggleSignInPopup = () => {
+    setIsPopupOpen(true);
+    setIsSignInPopupOpen(true);
+  };
+
+  //
+  //  ---> login, registration, etc. <---
+  //
+
   //  email, name and password state
-  //  for login and registration
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -82,14 +99,12 @@ function App() {
   //  login state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  //
+  //  ---> component states <---
+  //
+
+  // 'not found' section state
   const [notFound, setNotFound] = useState(false);
-
-  //  temporary saved cards state
-  // const [tempCards, setTempCards] = useState([]);
-
-  //  cards state
-  // const [isCardSaved, setIsCardSaved] = useState(false);
-  // const [isCardMarked, setIsCardMarked] = useState(false);
 
   //  found articles state
   const [newsCards, setNewsCards] = useState([]);
@@ -112,20 +127,8 @@ function App() {
   //  saved news keyword state
   const [savedKeywords, setSavedKeywords] = useState([]);
 
-  //
-
   // escape key handling
   useKeypress('Escape', closeAllPopups);
-
-  const toggleSignUpPopup = () => {
-    setIsPopupOpen(true);
-    setIsSignUpPopupOpen(true);
-  };
-
-  const toggleSignInPopup = () => {
-    setIsPopupOpen(true);
-    setIsSignInPopupOpen(true);
-  };
 
   //  render cards
   const renderCards = (cards) => {
@@ -149,7 +152,6 @@ function App() {
         title={card.title}
         description={card.text}
         source={card.source}
-        // isCardSaved={isCardSaved}
         isSavedNewsOpen={isSavedNewsOpen}
         toggleSaveCard={toggleSaveCard}
         image={card.image}
@@ -158,16 +160,11 @@ function App() {
         handleDelete={handleDelete}
         findCardByTitleAndDelete={findCardByTitleAndDelete}
         toggleSignInPopup={toggleSignInPopup}
-
-        // isCardMarked={isCardMarked}
-        // setIsCardMarked={setIsCardMarked}
-        // userId={userId}
-
       />
     ));
   };
 
-  // find card by title
+  // find card by title (remove just saved cards while being on the main page)
   const findCardByTitleAndDelete = (card) => {
     mainApi.getArticles()
       .then((res) => res.find((c) => c.title === card.title))
@@ -255,10 +252,10 @@ function App() {
     setIsLoggedIn(false);
     setCurrentUser({});
     resetLoginStates();
-    // setButtonText('Sign In');
     navigate('/');
   };
 
+  //  news search
   const handleSearch = (keyword) => newsApi.find(keyword);
 
   //  download initial top news
@@ -274,8 +271,6 @@ function App() {
         console.log(res);
         setSavedArticles((state) => state.filter((c) => c._id !== article._id));
         console.log(savedKeywords);
-        // setSavedKeywords(() => refreshKeywords(savedKeywords, article.keyword));
-        // console.log(savedKeywords);
       })
       .catch((err) => {
         setFailurePopupText('Only owner can delete this article');
@@ -360,8 +355,6 @@ function App() {
                   <Header
                     isRegistered={isRegistered}
                     isLoggedIn={isLoggedIn}
-                    // buttonText={buttonText}
-                    // setButtonText={setButtonText}
                     toggleSignUpPopup={toggleSignUpPopup}
                     toggleSignInPopup={toggleSignInPopup}
                     toggleSavedNewsOpen={setIsSavedNewsOpen}
@@ -378,14 +371,12 @@ function App() {
 
                   <SavedNews
                     convertTime={convertTime}
-                    // isCardSaved={isCardSaved}
                     toggleSaveCard={toggleSaveCard}
                     isSavedNewsOpen={isSavedNewsOpen}
                     setIsSavedNewsOpen={setIsSavedNewsOpen}
                     savedKeywords={savedKeywords}
                     setSavedKeywords={setSavedKeywords}
                     handleDelete={handleDelete}
-                    // userId={userId}
                     savedArticles={savedArticles}
                     setSavedArticles={setSavedArticles}
                     capitalizeFirstLetter={capitalizeFirstLetter}

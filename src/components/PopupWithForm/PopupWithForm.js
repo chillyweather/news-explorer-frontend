@@ -23,7 +23,6 @@ function PopupWithForm({
   isSuccessPopupOpen,
   loginHandler,
   password,
-  // popupButtonText,
   setPopupButtonText,
   registrationHandler,
   resetLogin,
@@ -64,15 +63,6 @@ function PopupWithForm({
       return 'Sign In';
     } return null;
   };
-
-  // const submitButtonText = () => {
-  //   if (isSignInPopupOpen) {
-  //     setPopupButtonText('Sign In');
-  //   }
-  //   if (isSignUpPopupOpen) {
-  //     setPopupButtonText('Sign Up');
-  //   } return null;
-  // };
 
   const showForm = () => {
     if (isSignInPopupOpen || isSignUpPopupOpen) {

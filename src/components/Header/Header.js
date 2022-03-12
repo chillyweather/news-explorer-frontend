@@ -58,7 +58,7 @@ function Header({
             : 'header__logo'
 }
           >
-            NewsExplorer
+            InfoStash
           </p>
         </Link>
         {/* hamburger menu */}

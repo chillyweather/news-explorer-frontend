@@ -36,18 +36,6 @@ function NewsCardList({
 
   return (
     toggleSectionVisibility()
-    // <div className="cardList">
-    //   <section className="cardList__container">
-    //     {renderCards(showAll ? newsCards : newsCards.slice(0, 3))}
-    //   </section>
-    //   <button
-    //     className="cardList__button"
-    //     type="button"
-    //     onClick={() => setShowAll(!showAll)}
-    //   >
-    //     {buttonText()}
-    //   </button>
-    // </div>
   );
 }
 

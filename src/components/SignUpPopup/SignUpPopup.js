@@ -1,17 +1,9 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react/prop-types */
 // import { useState } from 'react';
 import { checkEmail, checkPassword, checkUsername } from '../../utils/inputValidation';
 
-/* eslint-disable react/prop-types */
 function SignUpPopup({
-  // handleRegister,
-  // closeSignUpPopup,
-  // toggleSignInPopup,
-  // toggleSuccessPopup,
-  // registrationHandler,
-  // setUserName,
-  // signUpPopupButtonText,
-  // closePopups,
   email,
   setEmail,
   password,
@@ -31,21 +23,8 @@ function SignUpPopup({
     setUsername(e.target.value);
   };
 
-  // const handleSubmit = () => {
-  //   registrationHandler(email, password, username);
-  // };
-
   return (
     <>
-      {/* <form
-        className="popup__content"
-        // name={`${name}`}
-        action="#"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-      > */}
       <label className="popup-form__label" htmlFor="register-email">
         Email
         <input
@@ -85,26 +64,6 @@ function SignUpPopup({
         />
       </label>
       {checkUsername(username)}
-      {/* <button
-          type="submit"
-          className="popup-form__submit-button"
-        >
-          {signUpPopupButtonText}
-        </button>
-      </form>
-      <p className="popup__choose-form-text">
-        or
-        <button
-          onClick={() => {
-            closeSignUpPopup(false);
-            toggleSignInPopup();
-          }}
-          className="popup__choose-form-button"
-          type="button"
-        >
-          Sign In
-        </button> */}
-      {/* </p> */}
     </>
   );
 }

@@ -16,14 +16,9 @@ function SavedNews({
   handleDelete,
   setIsSavedNewsOpen,
   savedArticles,
-  // savedKeywords,
   setSavedArticles,
   capitalizeFirstLetter,
-  // userId,
 }) {
-  // const keywordList = [];
-  // const [savedArticles, setSavedArticles] = useState([]);
-
   const renderArticles = (cards) => {
     if (cards) {
       return cards.map((card, key = card.url) => (
@@ -42,8 +37,6 @@ function SavedNews({
           image={card.image}
           link={card.link}
           handleDelete={handleDelete}
-          // userId={userId}
-
         />
       ));
     } return null;

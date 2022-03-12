@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react/prop-types */
 // import { useState } from 'react';
 import { checkEmail } from '../../utils/inputValidation';
 
-/* eslint-disable react/prop-types */
 function SignInPopup(
   {
     email,

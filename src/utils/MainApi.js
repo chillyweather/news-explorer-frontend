@@ -67,7 +67,6 @@ class MainApi {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
-        // Authorization: this._authToken,
       },
     }).then((res) => {
       if (res.ok) {
@@ -80,7 +79,6 @@ class MainApi {
   getUserInfo(token) {
     const userInfo = fetch(`${this._baseUrl}/users/me`, {
       headers: {
-        // Authorization: this._authToken,
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
@@ -97,7 +95,6 @@ class MainApi {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
-        // Authorization: this._authToken,
       },
     });
 
@@ -112,7 +109,6 @@ class MainApi {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
-        // Authorization: this._authToken,
       },
       body: JSON.stringify(article),
     });
@@ -127,7 +123,6 @@ class MainApi {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
-        // Authorization: this._authToken,
       },
       method: 'DELETE',
     });
@@ -138,7 +133,8 @@ class MainApi {
 
 const mainApi = new MainApi({
   // baseUrl: 'http://localhost:3001',
-  baseUrl: 'https://api.infostash.students.nomoreparties.sbs',
+  // baseUrl: 'https://api.infostash.students.nomoreparties.sbs',
+  baseUrl: 'https://api.infostashserver.students.nomoreparties.sbs',
   authToken: `Bearer ${localStorage.getItem('token')}`,
 });
 

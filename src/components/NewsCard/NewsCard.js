@@ -6,15 +6,12 @@ import { useState } from 'react';
 
 /* eslint-disable react/prop-types */
 function NewsCard({
-  // key,
-  // cardId,
   keyword,
   card,
   date,
   title,
   source,
   description,
-  // isCardSaved,
   toggleSaveCard,
   image,
   link,
@@ -23,14 +20,8 @@ function NewsCard({
   isLoggedIn,
   findCardByTitleAndDelete,
   toggleSignInPopup,
-  // isCardMarked,
-  // setIsCardMarked,
-  // userId,
 }) {
   const [isCardMarked, setIsCardMarked] = useState(false);
-
-  //  this card id
-  // const [thisCardID, setThisCardID] = useState('');
 
   const isMarked = () => (isCardMarked ? 'newscard__save-button_marked' : '');
 
@@ -51,7 +42,6 @@ function NewsCard({
     }
     return 'Sign In to save articles';
   };
-  // console.log(cardId);
 
   const saveDeleteButtonLook = () => {
     if (isSavedNewsOpen) {
@@ -75,7 +65,6 @@ function NewsCard({
       toggleSaveCard(card);
     } if (isLoggedIn && isCardMarked) {
       setIsCardMarked(false);
-      // handleDelete(card);
     }
   };
 

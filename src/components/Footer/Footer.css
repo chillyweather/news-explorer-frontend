@@ -69,10 +69,10 @@
   border: none;
 }
 
-.footer__nav-logo-fb {
+.footer__nav-logo-li {
   width: 24px;
   height: 24px;
-  background-image: url(../../images/svg/iconmonstr-facebook-6.svg);
+  background-image: url(../../images/svg/linkedin.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;

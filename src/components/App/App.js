@@ -366,6 +366,7 @@ function App() {
                   <SavedNewsHeader
                     savedKeywords={savedKeywords}
                     savedArticles={savedArticles}
+                    capitalizeFirstLetter={capitalizeFirstLetter}
                   />
                   )}
                   {isLoggedIn && (

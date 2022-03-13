@@ -1,11 +1,12 @@
+/* eslint-disable prettier/prettier */
 // import { useEffect, useState } from 'react';
 /* eslint-disable react/prop-types */
 import { useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/currentUserContext';
 
-function SavedNewsHeader({ savedKeywords, savedArticles }) {
+function SavedNewsHeader({ savedKeywords, savedArticles, capitalizeFirstLetter }) {
   const currentUser = useContext(CurrentUserContext);
-  const titleHandler = (arr) => `${currentUser.name}, you have ${arr.length} saved articles`;
+  const titleHandler = (arr) => `${capitalizeFirstLetter(currentUser.name)}, you have ${arr.length} saved articles`;
 
   const keywordLine = (arr) => {
     if (arr.length > 3) {

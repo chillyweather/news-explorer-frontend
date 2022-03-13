@@ -248,6 +248,7 @@ function App() {
     localStorage.removeItem('token');
     localStorage.removeItem('savedSearch');
     localStorage.removeItem('searchResults');
+    setSavedArticles([]);
     setIsSavedNewsOpen(false);
     setIsLoggedIn(false);
     setCurrentUser({});

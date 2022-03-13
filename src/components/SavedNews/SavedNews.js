@@ -2,10 +2,11 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 import {
-  useEffect,
+  useEffect, useContext,
 } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import mainApi from '../../utils/MainApi';
+import { CurrentUserContext } from '../../contexts/currentUserContext';
 
 function SavedNews({
   isCardSaved,
@@ -19,6 +20,8 @@ function SavedNews({
   setSavedArticles,
   capitalizeFirstLetter,
 }) {
+  const currentUser = useContext(CurrentUserContext);
+
   const renderArticles = (cards) => {
     if (cards) {
       return cards.map((card, key = card.url) => (
@@ -51,8 +54,10 @@ function SavedNews({
     mainApi.getArticles()
       .then((cards) => {
         cards.forEach((card) => {
-          articles.push(card);
-          keywords.push(capitalizeFirstLetter(card.keyword));
+          if (currentUser._id === card.owner) {
+            articles.push(card);
+            keywords.push(capitalizeFirstLetter(card.keyword));
+          } return null;
         });
         setSavedArticles(articles.reverse());
         renderArticles(savedArticles);

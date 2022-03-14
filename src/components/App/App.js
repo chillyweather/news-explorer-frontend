@@ -233,14 +233,14 @@ function App() {
       .then((data) => {
         setIsLoggedIn(true);
         setCurrentUser(data.data);
+        closeAllPopups();
       })
       .catch((err) => {
         setIsSignInPopupOpen(false);
         setFailurePopupText('Wrong username or password!');
         setIsFailurePopupOpen(true);
         console.log(err);
-      })
-      .finally(() => closeAllPopups());
+      });
   };
 
   //  logout handler

@@ -112,6 +112,9 @@ function App() {
   //  saved articles state
   const [savedArticles, setSavedArticles] = useState([]);
 
+  //  sort menu state
+  const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
+
   //  cards section state
   const [isSavedNewsOpen, setIsSavedNewsOpen] = useState(false);
 
@@ -128,7 +131,10 @@ function App() {
   const [savedKeywords, setSavedKeywords] = useState([]);
 
   // escape key handling
-  useKeypress('Escape', closeAllPopups);
+  useKeypress('Escape', () => {
+    closeAllPopups;
+    setIsSortMenuOpen(false);
+  });
 
   //  render cards
   const renderCards = (cards) => {
@@ -367,6 +373,8 @@ function App() {
                     savedKeywords={savedKeywords}
                     savedArticles={savedArticles}
                     capitalizeFirstLetter={capitalizeFirstLetter}
+                    setIsSortMenuOpen={setIsSortMenuOpen}
+                    isSortMenuOpen={isSortMenuOpen}
                   />
                   )}
                   {isLoggedIn && (

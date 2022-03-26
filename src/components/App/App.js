@@ -115,6 +115,9 @@ function App() {
   //  sort menu state
   const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
 
+  //  sorting order state
+  const [sortingOrder, setSortingOrder] = useState('');
+
   //  cards section state
   const [isSavedNewsOpen, setIsSavedNewsOpen] = useState(false);
 
@@ -375,6 +378,8 @@ function App() {
                     capitalizeFirstLetter={capitalizeFirstLetter}
                     setIsSortMenuOpen={setIsSortMenuOpen}
                     isSortMenuOpen={isSortMenuOpen}
+                    sortingOrder={sortingOrder}
+                    setSortingOrder={setSortingOrder}
                   />
                   )}
                   {isLoggedIn && (

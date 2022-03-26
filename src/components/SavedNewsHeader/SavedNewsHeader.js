@@ -2,7 +2,7 @@
 /* eslint-disable prettier/prettier */
 // import { useEffect, useState } from 'react';
 /* eslint-disable react/prop-types */
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/currentUserContext';
 import SortMenu from '../SortMenu/SortMenu';
 
@@ -12,6 +12,8 @@ function SavedNewsHeader({
   capitalizeFirstLetter,
   setIsSortMenuOpen,
   isSortMenuOpen,
+  setSortingOrder,
+  sortingOrder,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const titleHandler = (arr) => `${capitalizeFirstLetter(currentUser.name)}, you have ${arr.length} saved articles`;
@@ -32,6 +34,10 @@ function SavedNewsHeader({
     return null;
   };
 
+  useEffect(() => {
+    setIsSortMenuOpen(false);
+  }, []);
+
   return (
     <div className="saved-header">
       <p className="saved-header__section-name">Saved articles</p>
@@ -46,7 +52,13 @@ function SavedNewsHeader({
           type="button"
           onClick={() => setIsSortMenuOpen(!isSortMenuOpen)}
         />
-        {isSortMenuOpen && <SortMenu />}
+        {isSortMenuOpen && (
+        <SortMenu
+          setIsSortMenuOpen={setIsSortMenuOpen}
+          sortingOrder={sortingOrder}
+          setSortingOrder={setSortingOrder}
+        />
+        )}
       </div>
     </div>
   );

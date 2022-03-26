@@ -6,7 +6,7 @@ import { useRef, useEffect } from 'react';
 
 function SortMenu({
   setIsSortMenuOpen,
-  // sortingOrder,
+  sortingOrder,
   setSortingOrder,
 }) {
   const ref = useRef(null);
@@ -16,6 +16,8 @@ function SortMenu({
       setIsSortMenuOpen(false);
     }
   };
+
+  const setCheckMark = (sortBy) => ((sortingOrder === sortBy) ? 'checkmark checkmark_visible' : 'checkmark');
 
   useEffect(() => {
     document.addEventListener('click', detectOutsideClick);
@@ -34,6 +36,7 @@ function SortMenu({
               setIsSortMenuOpen(false);
             }}
           >
+            <p className={setCheckMark('Latest')}>✓ </p>
             Latest
           </li>
           <li
@@ -43,6 +46,7 @@ function SortMenu({
               setIsSortMenuOpen(false);
             }}
           >
+            <p className={setCheckMark('Oldest')}>✓ </p>
             Oldest
           </li>
           <li
@@ -52,6 +56,7 @@ function SortMenu({
               setIsSortMenuOpen(false);
             }}
           >
+            <p className={setCheckMark('Keyword (A-Z)')}>✓ </p>
             Keyword (A-Z)
           </li>
           <li
@@ -61,6 +66,7 @@ function SortMenu({
               setIsSortMenuOpen(false);
             }}
           >
+            <p className={setCheckMark('Keyword (Z-A)')}>✓ </p>
             Keyword (Z-A)
           </li>
         </ul>

@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
@@ -19,6 +20,7 @@ function SavedNews({
   savedArticles,
   setSavedArticles,
   capitalizeFirstLetter,
+  sortingOrder,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -45,6 +47,29 @@ function SavedNews({
     } return null;
   };
 
+  const sortList = (array) => {
+    if (sortingOrder === 'Oldest') {
+      return array.sort((a, b) => {
+        const date1 = new Date(a.date);
+        const date2 = new Date(b.date);
+        return date1 - date2;
+      });
+    }
+    if (sortingOrder === 'Latest') {
+      return array.sort((a, b) => {
+        const date1 = new Date(a.date);
+        const date2 = new Date(b.date);
+        return date2 - date1;
+      });
+    }
+    if (sortingOrder === 'Keyword (A-Z)') {
+      return array.sort((a, b) => a.keyword.localeCompare(b.keyword));
+    }
+    if (sortingOrder === 'Keyword (Z-A)') {
+      return array.sort((a, b) => b.keyword.localeCompare(a.keyword));
+    }
+  };
+
   useEffect(() => {
     setIsSavedNewsOpen(true);
 
@@ -59,12 +84,12 @@ function SavedNews({
             keywords.push(capitalizeFirstLetter(card.keyword));
           } return null;
         });
-        setSavedArticles(articles.reverse());
+        setSavedArticles(sortList(articles)); // here we'll add sorting
         renderArticles(savedArticles);
       }).finally(() => {
         setSavedKeywords([...new Set(keywords)]);
       });
-  }, []);
+  }, [sortingOrder]);
 
   return (
     <div className="saved-news">

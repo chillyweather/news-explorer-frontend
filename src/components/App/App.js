@@ -116,7 +116,7 @@ function App() {
   const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
 
   //  sorting order state
-  const [sortingOrder, setSortingOrder] = useState('');
+  const [sortingOrder, setSortingOrder] = useState('Latest');
 
   //  cards section state
   const [isSavedNewsOpen, setIsSavedNewsOpen] = useState(false);
@@ -395,6 +395,7 @@ function App() {
                     savedArticles={savedArticles}
                     setSavedArticles={setSavedArticles}
                     capitalizeFirstLetter={capitalizeFirstLetter}
+                    sortingOrder={sortingOrder}
                   />
                   )}
                 </>

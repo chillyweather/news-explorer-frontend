@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable consistent-return */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
@@ -84,11 +85,18 @@ function SavedNews({
             keywords.push(capitalizeFirstLetter(card.keyword));
           } return null;
         });
-        setSavedArticles(sortList(articles)); // here we'll add sorting
+        setSavedArticles(sortList(articles));
+        localStorage.setItem('savedArticles', JSON.stringify(articles));
         renderArticles(savedArticles);
       }).finally(() => {
         setSavedKeywords([...new Set(keywords)]);
       });
+  }, []);
+
+  useEffect(() => {
+    const cards = JSON.parse(localStorage.getItem('savedArticles'));
+    setSavedArticles(sortList(cards));
+    renderArticles(savedArticles);
   }, [sortingOrder]);
 
   return (

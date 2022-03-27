@@ -116,7 +116,7 @@ function App() {
   const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
 
   //  sorting order state
-  const [sortingOrder, setSortingOrder] = useState('Latest');
+  const [sortingOrder, setSortingOrder] = useState('Last Added');
 
   //  cards section state
   const [isSavedNewsOpen, setIsSavedNewsOpen] = useState(false);
@@ -254,9 +254,7 @@ function App() {
 
   //  logout handler
   const handleLogOut = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('savedSearch');
-    localStorage.removeItem('searchResults');
+    localStorage.clear();
     setSavedArticles([]);
     setIsSavedNewsOpen(false);
     setIsLoggedIn(false);

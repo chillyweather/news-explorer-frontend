@@ -32,12 +32,32 @@ function SortMenu({
           <li
             className="sortMenu__list-item"
             onClick={() => {
+              setSortingOrder('Last Added');
+              setIsSortMenuOpen(false);
+            }}
+          >
+            <p className={setCheckMark('Last Added')}>✓ </p>
+            Date added (Latest first)
+          </li>
+          <li
+            className="sortMenu__list-item"
+            onClick={() => {
+              setSortingOrder('First Added');
+              setIsSortMenuOpen(false);
+            }}
+          >
+            <p className={setCheckMark('First Added')}>✓ </p>
+            Date added (Oldest first)
+          </li>
+          <li
+            className="sortMenu__list-item"
+            onClick={() => {
               setSortingOrder('Latest');
               setIsSortMenuOpen(false);
             }}
           >
             <p className={setCheckMark('Latest')}>✓ </p>
-            Latest
+            Date published (Latest first)
           </li>
           <li
             className="sortMenu__list-item"
@@ -47,7 +67,7 @@ function SortMenu({
             }}
           >
             <p className={setCheckMark('Oldest')}>✓ </p>
-            Oldest
+            Date published (Oldest first)
           </li>
           <li
             className="sortMenu__list-item"

@@ -53,3 +53,24 @@
 .sortMenu__list-item:hover {
   background-color: rgba(206, 206, 206, 0.486);
 }
+
+@media screen and (max-width: 600px) {
+  .sortMenu__container {
+    right: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+
+  }
+
+  .sortMenu__title {
+    padding-left: 29px;
+    font-size: 18px;
+    line-height: 36px;
+  }
+
+  .sortMenu__list-item {
+    background-color: #f5f5f5;
+    font-size: 18px;
+    line-height: 36px;
+  }
+}

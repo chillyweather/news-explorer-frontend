@@ -49,6 +49,20 @@ function SavedNews({
   };
 
   const sortList = (array) => {
+    if (sortingOrder === 'Last Added') {
+      return array.sort((a, b) => {
+        const id1 = parseInt(a._id, 16);
+        const id2 = parseInt(b._id, 16);
+        return id2 - id1;
+      });
+    }
+    if (sortingOrder === 'First Added') {
+      return array.sort((a, b) => {
+        const id1 = parseInt(a._id, 16);
+        const id2 = parseInt(b._id, 16);
+        return id1 - id2;
+      });
+    }
     if (sortingOrder === 'Oldest') {
       return array.sort((a, b) => {
         const date1 = new Date(a.date);
@@ -95,8 +109,10 @@ function SavedNews({
 
   useEffect(() => {
     const cards = JSON.parse(localStorage.getItem('savedArticles'));
-    setSavedArticles(sortList(cards));
-    renderArticles(savedArticles);
+    if (cards) {
+      setSavedArticles(sortList(cards));
+      renderArticles(savedArticles);
+    }
   }, [sortingOrder]);
 
   return (

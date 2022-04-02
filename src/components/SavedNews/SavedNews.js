@@ -49,17 +49,18 @@ function SavedNews({
   };
 
   const sortList = (array) => {
+    //  comparing card creation date by extracting dates from MongoDB _id
     if (sortingOrder === 'Last Added') {
       return array.sort((a, b) => {
-        const id1 = parseInt(a._id, 16);
-        const id2 = parseInt(b._id, 16);
+        const id1 = parseInt(a._id.substring(0, 8), 16);
+        const id2 = parseInt(b._id.substring(0, 8), 16);
         return id2 - id1;
       });
     }
     if (sortingOrder === 'First Added') {
       return array.sort((a, b) => {
-        const id1 = parseInt(a._id, 16);
-        const id2 = parseInt(b._id, 16);
+        const id1 = parseInt(a._id.substring(0, 8), 16);
+        const id2 = parseInt(b._id.substring(0, 8), 16);
         return id1 - id2;
       });
     }

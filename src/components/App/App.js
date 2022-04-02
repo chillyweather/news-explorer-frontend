@@ -173,6 +173,16 @@ function App() {
     ));
   };
 
+  //  render saved keywords
+
+  const handleSavedKeywords = () => {
+    const newKeywords = [];
+    savedArticles.forEach((article) => {
+      newKeywords.push(capitalizeFirstLetter(article.keyword));
+    });
+    setSavedKeywords([...new Set(newKeywords)]);
+  };
+
   // find card by title (remove just saved cards while being on the main page)
   const findCardByTitleAndDelete = (card) => {
     mainApi.getArticles()
@@ -270,15 +280,24 @@ function App() {
   const downloadInitial = () => newsApi.downloadInitial();
 
   //  capitalize first letter
-  const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+  const capitalizeFirstLetter = (string) => {
+    const keywordsArray = string.split(' ');
+    const result = keywordsArray.map(
+      (keyword) => {
+        const firstLetter = (keyword.charAt(0).toUpperCase());
+        const otherLetters = (keyword.slice(1));
+        return (`${firstLetter}${otherLetters}`);
+      },
+    );
+    return result.join(' ');
+  };
+  // const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
   //  handle article delete
   const handleDelete = (article) => {
     mainApi.deleteArticle(article)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         setSavedArticles((state) => state.filter((c) => c._id !== article._id));
-        console.log(savedKeywords);
       })
       .catch((err) => {
         setFailurePopupText('Only owner can delete this article');
@@ -295,6 +314,12 @@ function App() {
     const arr = date.toDateString().split(' ');
     return `${month} ${arr[2]}, ${arr[3]}`;
   };
+
+  //  refresh list of keywords
+
+  useEffect(() => {
+    handleSavedKeywords();
+  }, [savedArticles]);
 
   //  set user info after reload
   useEffect(() => {

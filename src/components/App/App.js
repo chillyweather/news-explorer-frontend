@@ -319,6 +319,7 @@ function App() {
 
   useEffect(() => {
     handleSavedKeywords();
+    localStorage.setItem('savedArticles', JSON.stringify(savedArticles));
   }, [savedArticles]);
 
   //  set user info after reload

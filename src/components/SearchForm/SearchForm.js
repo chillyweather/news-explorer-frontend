@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 /* eslint-disable prettier/prettier */
 
@@ -27,6 +28,8 @@ function SearchForm({
     const newsResult = [];
     setIsSearching(true);
     handleSearch(keyword).then((res) => {
+      const savedArticles = JSON.parse(localStorage.getItem('savedArticles'));
+      const links = Array.from(savedArticles, (x) => x.link);
       res.forEach((card) => {
         const newCard = {
           title: card.title,
@@ -39,7 +42,8 @@ function SearchForm({
         };
         newsResult.push(newCard);
       });
-      setNewsCards(newsResult);
+      //  filter search results from cards already saved
+      setNewsCards(newsResult.filter((card) => !links.includes(card.link)));
       if (newsResult.length === 0) { setNotFound(true); }
       setIsSearching(false);
     });

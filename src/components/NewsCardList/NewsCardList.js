@@ -8,7 +8,6 @@ function NewsCardList({
   keywords,
   newsCards,
   renderCards,
-
 }) {
   const [showAll, setShowAll] = useState(false);
 
